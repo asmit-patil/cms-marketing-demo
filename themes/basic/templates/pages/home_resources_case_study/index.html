@@ -1,0 +1,95 @@
+{% extends "layouts/default.html" %} {% block content %} {% include "partials/header_global_black.html" %} {% set sub = get('home_resources_case_studies_subheader')%} {% set contact = get('home_contact_us_business')%}
+<div class="main-wrapper casestudy-landing">
+    <div class="col-md-12">
+        <div class="subnav-head subnav-scroll clearfix">
+            <!-- Nav tabs -->
+            <div class="sub-nav-wrapper">
+                <ul class="action-menu">
+                    <li><a href="{{sub.sub_nav_section.url}}"><img alt="{{sub.sub_nav_section.logo.title}}" src="{{AssetUrl(sub.sub_nav_section.logo)}}"/></a></li>
+                    <li><a href="{{sub.sub_nav_section.link}}">{{sub.sub_nav_section.title}}</a> <span class="breadcrum"></span></li>
+                </ul>
+                <ul class="sub-nav-btn">
+                    <li><a href="{{SeoUrl(entry.download_section.link)}}"><span class="icon pdf-icon"></span>{{entry.download_section.title}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="secondary-hero-banner hero-banner-wrap fixed-sub-menu">
+        <div class="banner-wrap text-center" title="{{entry.header_section.background_image.title}}">
+            <div class="banner-content clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 partner-info">
+                            <div class="headers">
+                                <h1>{{entry.header_section.title}}</h1>
+                            </div>
+                            <div class="header-desc">
+                                <p>{{entry.header_section.desc}}</p>
+                            </div>
+                            <div class="row units-wrap">
+                                {% for info in entry.header_section.units %}
+                                <div class="col-md-4 unit">
+                                    <span class="count">{{info.unit_value}}</span>
+                                    <p>{{info.unit_desc}}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 partner-profile">
+                            <!-- <h3>{{entry.header_section.case_study_section.title}}</h3> -->
+                            <div class="info-wrap">
+                                <div class="center-img">
+                                    <img alt="{{entry.header_section.case_study_section.image.title}}" src="{{ AssetUrl(entry.header_section.case_study_section.image)}}" />
+                                </div>
+                                <div class="about-header">
+                                    {% for info in entry.header_section.case_study_section.profile_info_section %}
+                                    <div class="profile-info">
+                                        <p class="title">{{info.title}}</p>
+                                        {{info.desc}}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="secondary-pages-content">
+        {% for info in entry.information_section.information %}
+        <div class="info-para">
+            <div class="container">
+                <section class="partner-section">
+                    <h3>{{info.title}}</h3>
+                    <p>{{info.desc}}</p>
+                </section>
+            </div>
+        </div>
+        {% if info.quote %}
+        <div class="partner-quote-section">
+            <div class="container">
+                {{info.quote}}
+            </div>
+        </div>
+        {% endif %} {% endfor %}
+        <div class="container social-media-wrap"></div>   
+</div>
+</div>
+<div class="sticky-container">
+    {% include "partials/social-sharing.html" %}
+</div>
+<script type="text/javascript">
+$(window).scroll(function() {
+    if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+        $('.subnav-scroll').css('position', 'fixed');
+        // console.log('in');
+    } else {
+        $('.subnav-scroll').css('position', 'absolute');
+    }
+});
+// if(location.pathname.indexOf("case-studies") !== -1){
+//  $('.navbar-right .cta-tertiary').addClass('cta-primary').removeClass('cta-tertiary');
+// }
+</script>
+{% include "partials/footer_global.html" %} {% endblock %}

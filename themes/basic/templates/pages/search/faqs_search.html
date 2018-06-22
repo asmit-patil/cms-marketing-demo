@@ -1,0 +1,92 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+{% include "partials/header_global_white.html" %}
+{% set posts = entry.posts %}
+{% set count = entry.count %}
+{% set banner = get('faqs')%}
+<div class="main-wrapper transparent-header">
+    <section class="secondary-hero-banner"  style="background-image:url({{getAssetUrl(banner.banner_section.background_image)}});">
+      <div class="banner-wrap text-center">
+          <div class="banner-content">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                        <div class="headers">
+                          <h1>{{banner.banner_section.title}}</h1>
+                        </div>
+                        <div class="header-desc">
+                          <p>{{banner.banner_section.desc}}</p>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>
+
+      <section class="search-section-wrap tab-section-wrap fixed-sub-menu">
+        <div class="col-md-12">
+            <div class="subnav-head clearfix subnav-scroll">
+              <!-- Nav tabs -->
+              <div class="sub-nav-wrapper">
+                  <ul class="action-menu">
+                      <li><a href="{{banner.sub_nav_section.link}}"><img alt="{{banner.sub_nav_section.logo.title}}" src="{{getAssetUrl(banner.sub_nav_section.logo)}}"></a></li>
+                      <li><a href="{{banner.sub_nav_section.url}}">{{banner.sub_nav_section.title}}</a></li>                   
+                  </ul>   
+                  <ul class="search-wrap">
+                    <li class="search-input">
+                      <form class="search-form search-form-faq" action="javascript:void(0)">        
+                          <span class="search-icon">
+                            <i class="icon-search-icon"></i>
+                          </span>               
+                          <input id="searchfilter" class="form-control" type="text" placeholder="search all questions">
+                      </form>
+                    </li>
+                  </ul>
+              </div>
+            </div>
+        </div> 
+        <div class="container">
+            <div class="row">         
+                <div class="col-md-8 col-md-offset-2 tab-content news-tab-content">
+                    <h2 class="page-title">{{count}} results for <span class="result-name">{{entry.query | escape}}</span></h2>
+                    	<div class="post-wrap">
+                        {% set searchcount = 0 %} {% if posts.length %}
+      									{% for post in posts  %}              
+                           <div class="news-article">
+                              <div class="search">
+                                  <div class="question-wrap">                              
+                                    <h4 class="question"><a href="javascript:void(0)">{{post.question}}</a></h4>
+                                    <p>{{post.answer}}</p>
+                                  </div>                           
+                              </div>
+                          </div>                  
+      									{% endfor %}	
+                        {% else %}
+                            <div>
+                                <h3 class="post-title">No Results Found!</h3></div>
+                            {% endif %}				
+							       </div>
+            </div>
+          </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+    // $(window).scroll(function() {
+    //     if ($(window).scrollTop() >= ($('.secondary-hero-banner').height()+ 130)) {
+    //         $('.subnav-scroll').css('position','fixed');
+    //     } else {
+    //         $('.subnav-scroll').css('position','absolute');
+    //     }
+    // });
+      $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+            $('.subnav-scroll').css('position','fixed');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    });
+</script>
+{% include "partials/footer_global.html" %}
+{% endblock %}

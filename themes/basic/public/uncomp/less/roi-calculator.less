@@ -1,0 +1,436 @@
+.roi-calc-wrap {
+    background: url("/assets/bltcf604d2a2040b674/roi-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center; 
+    padding: 50px 0 100px;
+
+    counter-reset: my-sec-counter;
+
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  color: #A6A6BB;
+	}
+	::-moz-placeholder { /* Firefox 19+ */
+	  color: #A6A6BB;
+	}
+	:-ms-input-placeholder { /* IE 10+ */
+	  color: #A6A6BB;
+	}
+	:-moz-placeholder { /* Firefox 18- */
+	  color: #A6A6BB;
+	}
+	
+	//Custom checkbox btn styles
+	[type="checkbox"]:checked,
+	[type="checkbox"]:not(:checked) {
+	    position: absolute;
+	    left: -9999px;
+	}
+	[type="checkbox"]:checked + label,
+	[type="checkbox"]:not(:checked) + label
+	{
+	    position: relative;
+	    padding-left: 28px;
+	    cursor: pointer;
+	    line-height: 20px;
+	    margin-left: 0;
+	    color: #666;
+	    margin-bottom: 12px;
+	}
+	[type="checkbox"]:checked + label:before,
+	[type="checkbox"]:not(:checked) + label:before {
+	    content: '';
+	    position: absolute;
+	    left: 0;
+	    top: 0;
+	    width: 18px;
+	    height: 18px;
+	    border: 1px solid #ddd;
+	    background: @white;
+	}
+	[type="checkbox"]:checked + label:after,
+	[type="checkbox"]:not(:checked) + label:after {
+	    content: "\2713";
+	    font-weight: bold;
+	    color: @dark-gray;
+	    width: 12px;
+	    height: 12px;
+	    position: absolute;
+	    top: 0px;
+	    left: 2px;
+	    border-radius: 100%;
+	    -webkit-transition: all 0.2s ease;
+	    transition: all 0.2s ease;
+	}
+	[type="checkbox"]:not(:checked) + label:after {
+	    opacity: 0;
+	    -webkit-transform: scale(0);
+	    transform: scale(0);
+	}
+	[type="checkbox"]:checked + label:after {
+	    opacity: 1;
+	    -webkit-transform: scale(1);
+	    transform: scale(1);
+	}
+
+
+	//Custom radio btn styles
+	[type="radio"]:checked,
+	[type="radio"]:not(:checked) {
+	    position: absolute;
+	    left: -9999px;
+	}
+	[type="radio"]:checked + label,
+	[type="radio"]:not(:checked) + label
+	{
+	    position: relative;
+	    padding-left: 28px;
+	    cursor: pointer;
+	    line-height: 20px;
+	    margin-left: 0;
+	    color: #666;
+	    margin-bottom: 12px;
+	}
+	[type="radio"]:checked + label:before,
+	[type="radio"]:not(:checked) + label:before {
+	    content: '';
+	    position: absolute;
+	    left: 0;
+	    top: 0;
+	    width: 18px;
+	    height: 18px;
+	    border: 1px solid #ddd;
+	    border-radius: 100%;
+	    background: @white;
+	}
+	[type="radio"]:checked + label:after,
+	[type="radio"]:not(:checked) + label:after {
+	    content: '';
+	    width: 10px;
+	    height: 10px;
+	    background: @dark-gray;
+	    position: absolute;
+	    top: 4px;
+	    left: 4px;
+	    border-radius: 100%;
+	    -webkit-transition: all 0.2s ease;
+	    transition: all 0.2s ease;
+	}
+	[type="radio"]:not(:checked) + label:after {
+	    opacity: 0;
+	    -webkit-transform: scale(0);
+	    transform: scale(0);
+	}
+	[type="radio"]:checked + label:after {
+	    opacity: 1;
+	    -webkit-transform: scale(1);
+	    transform: scale(1);
+	}
+	.mktoForm {
+		font-family: @baseFontFamily;
+		width: 100%!important;
+		.mktoErrorArrow {
+			display: none!important;
+		}
+		.mktoRequiredField .mktoAsterix, 
+		.mktoError, .mktoError .mktoErrorMsg {
+			display: none;
+		}
+		.mktoGutter {
+			height: 0;
+		}
+		.mktoFormCol,.mktoFieldWrap {
+			float: none;
+		}
+		.mktoFieldWrap {
+			.mktoLabel {
+				&:before {
+					height: 50px;
+    				float: left;
+    				margin-right: 5px;
+				}
+			}
+		}
+		.mktoFormRow {
+			padding: 15px 0;
+			opacity: 0.3;
+			cursor: default;
+			pointer-events: none;
+			&:nth-child(1) {
+				pointer-events: all;
+			}
+			&:nth-child(2) {
+				opacity: 1;
+				pointer-events: all;
+			}
+			&.active {
+				opacity: 1;
+				cursor: pointer;
+				pointer-events: all;				
+			}
+			&.addmargin{
+				// margin-top: 60px;
+				opacity: 0.5;
+				// margin-bottom: 300px;
+			}			 
+			.mktoFieldDescriptor {
+				&:nth-child(2) {
+					.mktoFieldWrap {
+						margin-left: 30px;
+						label {
+							margin-bottom: 0;
+							margin-top: -15px;
+							font-size: 14px;
+    						margin-left: 30px;
+    						padding-left: 0;
+							&:before {
+								content:" ";
+								height: 0;
+							    float: none;
+							    margin-right: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+		.mktoLabel {
+			width: 100%!important;
+			color: @white;
+			font-size: 18px;
+			font-weight: 600!important;
+			margin-bottom: 25px;			
+			position: relative;
+			padding-left: 30px;
+    		&:before {
+    			counter-increment: my-sec-counter;
+    			content: counter(my-sec-counter) ". ";
+    			position: absolute;
+    			left: 0;
+    		}
+		}
+		.mktoRadioList, .mktoCheckboxList {
+			width: 100%!important;
+			padding-left: 30px;
+			label {
+				color: @white;
+			    font-size: 14px;
+			    font-weight: 600;
+			}
+		}
+		.mktoTextField, .mktoEmailField {
+			background: @white;
+		    font-size: 15px;
+		    line-height: 1.42857143;
+		    color: @cs-black;
+		    letter-spacing: normal;
+		    border: 2px solid #bcbcbe;
+		    height: 40px;
+		    padding: 6px 12px;
+		    border-radius: 4px;
+		    width: 60%!important;
+		    margin-left: 30px;
+		}
+		.mktoEmailField.mktoInvalid, 
+		.mktoField.mktoInvalid, 
+		.mktoTextField.mktoInvalid,  
+		.mktoForm .mktoEmailField.mktoInvalid, 
+		.mktoForm .mktoField.mktoInvalid, 
+		.mktoForm .mktoTextField.mktoInvalid, 
+		.mktoForm .textarea.mktoField.mktoInvalid {
+		    border-color: @cs-yellow;
+		    // background: @cs-red;
+		    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+		    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+		}
+		.mktoButtonWrap {
+			margin: 40px 0 0 30px !important;
+			display: inline-block;
+		}
+		.mktoButton {
+			border: 0!important;
+			display: inline-block!important;
+			box-shadow: 0 2px 3px 0 rgba(32,32,37,.2)!important;
+			line-height: 20px!important;
+			padding: 12px 14px!important;
+			font-size: 15px!important;
+			border-radius: 4px!important;
+			text-transform: uppercase!important;
+			background: #25c2a3!important;
+			color: @white!important;
+			outline: none!important;
+		}
+		#AdditionalProperties {
+			background: 0 0;
+		    border-color: @white;
+		    outline: 0;
+		    border-width: 2px;
+		    border-top: 0;
+		    height: 0;
+		    border-right: 0;
+		    border-left: 0;
+		    line-height: 1.2;
+		    font-size: 14px;
+		    color: @white;
+		    width: 50%!important;
+		    padding: 15px 0 20px;
+		    border-radius: 0;
+		}
+	}
+	.questions-wrap {
+	    padding: 50px 0;
+	    h3 {
+	    	color: @white;
+	    }
+	    li {
+	    	color: @white;
+	    }
+	    h3 {
+	    	margin-bottom: 8px;
+	    }
+	    ol {
+	    	list-style-type: decimal;
+	    }
+	    li {
+	    	input[type=text] {
+	    		margin-left: 15px;
+	    	}
+	    	span {
+	    		input[type=text] {
+		    		margin-left: 0;
+		    		margin-right: 20px;
+		    	}
+	    	}
+	    }
+	    ul:first-child {
+		  padding-left: 30px;
+		}
+	    .question {
+	    	padding: 20px 0;
+	    }
+	    input[type=radio], input[type=checkbox] { 
+			margin-right: 8px;
+	    }
+	    input[type=text] {
+			background: transparent;
+			border: 0;
+			border-bottom: 1px solid @white;
+			&:focus {
+				outline: 0;
+			}
+		}
+	}
+	.result {
+		color: @white;
+		.title {
+			color: @white;
+			font-size: 28px;
+			font-weight: 300;
+			margin: 30px 0;
+			text-align: center;
+		}
+		.ratio {
+			i {
+				font-size: 14px;
+    			vertical-align: super;
+			}
+			p {
+				font-size: 28px;
+				margin: 0 0 40px;
+				font-weight: 300;
+				color: @white;
+			}
+		}
+		.tooltip {
+			// background: @white;
+			// border: 1px solid #ddd;
+			.tooltip-inner {
+				padding: 5px 15px;
+			    // min-width: 200px;
+			    font-size: 14px;
+			    text-align: left;
+			}
+		}
+		.result-cards {
+		    background: @white;
+		    border-radius: 4px;
+		    // min-height: 245px;
+		    margin-bottom: 25px;
+		    padding: 24px 28px;
+			b {
+				font-size: 20px;
+				font-weight: 600;
+				margin: 0 0 20px;
+				color: @light-gray;
+				display: block;
+				text-align: center;
+			}
+			p {
+				color: @light-gray;
+				font-size: 14px;
+				font-weight: 300;
+				line-height: 1.4;
+				margin-bottom: 15px;
+				position: relative;
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+			.result-value {
+				// font-size: 16px;
+				// font-weight: 600;
+				float: right;
+				i {
+					vertical-align: middle;
+				}
+			}
+			.tooltip {
+				width: 100%;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	.roi-calc-wrap {
+		.result-cards {
+			.result-value {
+				display: block;
+				float: none;
+			}
+		}
+	}
+}
+@media only screen and (max-width: 1024px) {
+	.roi-calc-wrap {
+		.col-md-6 {
+			width: 100%;
+		}
+		.result {
+			.result-cards {
+				.result-value {
+					float: right;
+				}
+				.tooltip {
+					width: 150px;
+				}
+			}
+		}
+	}
+}
+@media only screen and (max-width: 480px) {
+	.roi-calc-wrap {
+		.mktoForm {
+			.mktoTextField, .mktoEmailField {
+				width: 100% !important;
+				margin-left: 0;
+			}
+		}
+		.result-cards {
+			.result-value {
+				float: none;
+			}
+		}
+	}	
+}

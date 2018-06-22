@@ -1,0 +1,101 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+{% include "partials/blog_header.html" %}  
+{% set banner = get('blog_home')%} 
+{% set posts = entry.catposts %} 
+{% set categories = entry.category %}
+<div class="main-wrapper transparent-header">
+    <section class="secondary-hero-banner" title={{banner.banner_section.background_image.title}} style="background-image:url({{getAssetUrl(banner.banner_section.background_image)}});">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <div class="headers">
+                                <h1>{{banner.banner_section.title}}</h1>
+                            </div>
+                            <div class="header-desc">
+                                <p>{{banner.banner_section.desc}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--hero-banner -->
+    <div class="blog-container fixed-sub-menu">
+        {% include 'partials/category.html' %}
+        <div class="tab-content-wrap blog-content">
+            <div class="container">
+                <!-- <div class="goto-home">
+                                <a href="/"><i class="icon-arrow-left"></i><span>Blog Home</span></a>
+                        </div> -->
+                <div class="author-archive tab-content current">
+                    <!-- <h2 class="page-title">Category Archives : <span class="author-name">{{categories}} ({{entry.catcount}})</span></h2> -->
+                    <div class="post-wrap article-wrap">
+                        <div class="container">
+                            {% set count = 0%} {% set arr_len = helpers.MathCeil(posts.length) %}
+                            <div class="row">
+                                {% for post in posts %} 
+                                {% set count = count + 1%} 
+                                {% if (loop.index0 < 10) %} 
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <article class="item blog-post clearfix">
+                                        <div class="col-lg-5 col-md-5 col-sm-5">
+                                            <div class="post-content">
+                                                <div class="lazy-loader">
+                                                    <a href={{(post.url)}}>
+                                                            <img alt="{{post.image.title}}" src="{{(getAssetUrl(post.image))}}" class="grid-thumbnail">
+                                                        </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 col-md-7 col-sm-7">
+                                            <div class="post-content">
+                                                <h3 class="post-title"><a title="{{post.title}}" href={{post.url}} class="title-refer">
+                                                    <span>{{post.title}}</span></a></h3>
+                                                <p class="post-data">
+                                                    <span class="post-date">
+                                                    <time datetime="{{moment(post.date).format('MM/DD/YYYY')}}">{{moment(post.date).format('MMM Do YYYY')}}</time>,                                        </span> {% for author in post.author %}
+                                                    <span class="post-author"><a title="{{author.title}}" href={{appendBlogUrl("/author/"+replacespace(author.title))}} rel="author"><span itemprop="name">{{author.title}}</span></a>
+                                                    </span>
+                                                    {% if not loop.last %},{% endif %} {% endfor%}
+                                                    <p>{{post.body | truncate(140,false,'...')}}
+                                                        <span class="read-more"><a href={{(post.url)}}>Read More</a></span>
+                                                    </p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                {% endif %} 
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% if count > 9 %}
+                    <div class="load-more-wrap text-center">
+                        <button class="category-loadmore loadmore cta cta-primary">Load more posts</button>
+                    </div>
+                    {% endif %}
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </div>
+                <!--<div class="sharethis">
+                    <span class="st_twitter_large" displayText="Tweet"></span>
+                    <span class="st_facebook_large" displayText="Facebook"></span>
+                    <span class="st_googleplus_large" displayText="Google +"></span>
+                    <span class="st_email_large" displayText="Email"></span>
+                </div> -->
+            </div>
+        </div>
+    <!--blog -->
+    </div>
+</div>
+{% include "partials/footer_global.html" %} 
+{% endblock %}

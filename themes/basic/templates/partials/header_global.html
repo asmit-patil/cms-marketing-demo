@@ -1,0 +1,111 @@
+{% set header = get("header_global") %} 
+{% if (entry.url == '/') or (entry.url == "/developers") or (entry.url.indexOf("case-studies") !== -1) %}
+<header class="header clearfix">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{SeoUrl(header.logo_section.link)}}"><img alt="{{header.logo_section.logo.title}}" src="{{AssetUrl(header.logo_section.logo)}}"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right main">
+                {% for nav in header.nav_section.nav_menu %}
+                {% set new_tab = helpers.checkTarget(nav.open_in_a_new_tab) %}
+                {% if nav.sub_menu.length > 0 %}
+                <li class="dropdown main-menu-link-{{nav.title}}">
+                   {% if nav.title == 'Company' and nav.title == 'Developers' %}
+                    <a {{new_tab}} href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" title="{{nav.title}}">{{nav.title}} <span class="caret"></span></a>
+                    {% else %}
+                    <a {{new_tab}} href="{{nav.link}}" class="dropdown-toggle" data-toggle="dropdown" title="{{nav.title}}">{{nav.title}} <span class="caret"></span></a>
+                    {% endif %}
+                      <ul class="dropdown-menu">
+                          {% for sub in nav.sub_menu %}
+                         <li><a href="{{SeoUrl(sub.link)}}">{{sub.title}} </a></li>
+                          {% endfor %}
+                      </ul>
+                </li>
+                {%  elif nav.title == "Try for Free" %}
+                 <li class="dropdown"><a  {{new_tab}} class="cta cta-primary" href="{{SeoUrl(nav.link)}}">{{nav.title}}</a></li>
+                {% else  %}
+                <li  class="dropdown main-menu"><a {{new_tab}} class="dropdown-toggle" href="{%- if nav.title == 'Log in' -%} {{nav.link}}{%- else -%}{{SeoUrl(nav.link)}}{%- endif -%}">{{nav.title}}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+</header>
+{% else %}
+<header class="header inner-pg-header">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{SeoUrl(header.logo_section.link)}}"><img alt="{{header.logo_section.logo.title}}" src="{{AssetUrl(header.logo_section.logo)}}"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right main">
+                {% for nav in header.nav_section.nav_menu %}
+                {% set new_tab = helpers.checkTarget(nav.open_in_a_new_tab) %}                
+                {% if nav.sub_menu.length > 0 %}
+                <li class="dropdown main-menu-link-{{nav.title}}">
+                 {% if nav.title == 'Company' and nav.title == 'Developers' %}
+                    <a {{new_tab}} href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" title="{{nav.title}}">{{nav.title}} <span class="caret"></span></a>
+                    {% else %}
+                    <a {{new_tab}} href="{{nav.link}}" class="dropdown-toggle" data-toggle="dropdown" title="{{nav.title}}">{{nav.title}} <span class="caret"></span></a>
+                    {% endif %}
+                      <ul class="dropdown-menu sub-menu" data-attr="company">
+                          {% for sub in nav.sub_menu %}
+                         <li><a href="{{SeoUrl(sub.link)}}">{{sub.title}} </a></li>
+                          {% endfor %}
+                      </ul>
+                </li>
+                {%  elif nav.title == "Try for Free" %}
+                 <li class="dropdown"><a {{new_tab}} class="cta cta-primary" href="{{SeoUrl(nav.link)}}">{{nav.title}}</a></li>
+                {% else  %}
+                <li class="dropdown main-menu"><a {{new_tab}} class="dropdown-toggle" href="{%- if nav.title == 'Log in' -%} {{nav.link}}{%- else -%}{{SeoUrl(nav.link)}}{%- endif -%}">{{nav.title}}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+</header>
+{% endif %}
+<script type="text/javascript">
+  //developer menu click able 
+ // $('a').click(function(){
+ //        var getUrl = $(this).attr("href");
+ //        if(getUrl == '/developers'){
+ //           window.open("/developers","_self");
+ //        }
+ //    });
+//developer menu click able 
+$('.navbar-toggle').click(function(){
+  if ($('.navbar-header').hasClass('gray-color')) {
+    // $('.navbar-header').delay(1000).removeClass('gray-color');
+    window.setTimeout(function(){$('.navbar-header').removeClass('gray-color');}, 300);
+    // $('.navbar').delay(1000).removeClass('gray-color');
+    window.setTimeout(function(){$('.navbar').removeClass('gray-color');}, 300);
+  } else {
+    $('.navbar-header').addClass('gray-color');
+    $('.navbar').addClass('gray-color');
+  }
+});
+//   $('.navbar-collapse').on('shown.bs.collapse', function() {
+// $('.navbar-header,.navbar-collapse').css('background-color','grey');
+// });
+//   $('.navbar-collapse').on('hide.bs.collapse', function() {
+// $('.navbar-header,.navbar-collapse').css('background-color','');
+// });
+</script>

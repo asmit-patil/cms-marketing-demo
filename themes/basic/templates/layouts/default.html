@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+    <title>{{entry.title | escape}}</title>
+    {% include "partials/meta.html" %}{% include "partials/_header.html" %}
+    <script type="text/javascript" src="/static/js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/vendor/angular.min.js"></script>
+    <script src="//app-sj21.marketo.com/js/forms2/js/forms2.min.js"></script>
+    <!---page-hiding snippet -- > 
+    <style>.async-hide { opacity: 0 !important}</style><script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*newDate; h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')}; (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;})(window,document.documentElement,'async-hide','dataLayer',4000,{'GTM-M9PM7JD':true});
+    </script>
+    <!---page-hiding snippet -- >    
+    {%- include "partials/google.html" -%}
+    <!-- sharethis setting -->
+    <script type="text/javascript">
+    var switchTo5x = true;
+    </script>
+    <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+     <meta name="google-site-verification" content="eE3MTDDXYNPz7M90qVCi3VP4SEdCiZP2u_T9eRh935I" /> 
+</head>
+<body>
+    {%- block content -%}{%- endblock -%} 
+    {%- include "partials/cookies-note.html" -%}
+    {%- include "partials/_footer.html" -%}    
+    <!-- sharethis new code -->
+    <script type="text/javascript">
+       stLight.options({publisher: "e72829c7-5c98-4c5f-bd1c-4b678000bb90", doNotHash: false, doNotCopy: true, hashAddressBar: false,shorten: false,servicePopup:true}); 
+    </script>  
+    <script>(function (c, p, d, u, id, i) {
+          id = ''; // Optional Custom ID for user in your system
+          u = 'https://tracking.g2crowd.com/attribution_tracking/conversions/' + c + '.js?p=' + encodeURI(p) + '&e=' + id;
+          i = document.createElement('script');
+          i.type = 'application/javascript';
+          i.src = u;
+          d.getElementsByTagName('head')[0].appendChild(i);
+        }("1187", document.location.href, document));
+    </script>
+      {%- if entry.url == "/cmscritic-thank-you" -%}
+      <script type="text/javascript" src="//cdn.wishpond.net/connect.js?merchantId=602264&writeKey=a67c10d93510" async></script>
+      {%- endif -%} 
+</body>
+</html>

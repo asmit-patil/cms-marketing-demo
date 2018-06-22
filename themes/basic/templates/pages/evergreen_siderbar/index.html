@@ -1,0 +1,160 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+{% include "partials/header_global.html" %}
+<div class="main-wrapper row transparent-header new-evergreen-wrap">
+     <section class="secondary-hero-banner" title="{{entry.banner_section.background_image.title}}" style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <h1>{{entry.banner_section.title}}</h1>
+                            <p>{{entry.banner_section.desc}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="evergreen-container">
+        <div class="evergreen-innerwrap clearfix">
+            <section class="evergreen-sidebar">
+                <ul>
+                    {% for list in entry.sidebar_section %}
+                    <li class="menu"><a class="menu-option" data-id="#{{list.title | lower | replace(" ", "-")}}" data-href="{{list.link}}">{{list.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section class="secondary-pages-content"> 
+                {% for content in entry.content_section %}
+                <div id="{{content.title| lower | replace(" ", "-")}}" class="content-textblock">
+                    <h2>{{content.title}}</h2>
+                    {{content.content}}             
+                </div>
+                {% endfor %}
+            </section>
+        </div>
+    </div>
+</div> 
+<script type="text/javascript">
+    $('.header .navbar-right').hide(); 
+    // $(".evergreen-sidebar").addClass("fixed");
+    //             history.pushState(null, null, url);
+    //         $("html, body").animate({
+    //             scrollTop: $("section").offset().top
+    //         },'slow');
+    // $(window).load(function () {
+    //      var section = $(this).attr("href") 
+    //         var url = $(this).attr("data-href")
+    //         $(".evergreen-sidebar").addClass("fixed");
+    //             history.pushState(null, null, url);
+    //             // window.history.replaceState(null, null,url);                
+    //         $("html, body").animate({
+    //             scrollTop: $(section).offset().top
+    //         },'slow');  
+    // });      
+    $(".evergreen-sidebar li").find("a").click(function() {
+            // e.preventDefault();}}
+            var id = $(this).attr("data-id") 
+            var url = $(this).attr("data-href")
+            var title = url.split('-').join(' ').toUpperCase();
+            // console.log(title,"title=====")
+            $(".evergreen-sidebar").addClass("fixed");
+                history.pushState(null, title, '/choose-a-cms'+url);
+                // history.replaceState(null, title,'/choose-a-cms'+url);
+                scrollTop(id);
+            // $("html, body").animate({
+            //     scrollTop: $(section).offset().top
+            // },'slow');          
+    });
+    function scrollTop(id){
+      $("html, body").animate({
+                scrollTop: $(id).offset().top
+            },'slow'); 
+    }
+    $(window).scroll(function () {
+        if($(this).scrollTop() == 0){
+              $(".evergreen-sidebar").removeClass("fixed")
+        }
+    });
+      //add active class to sidebar active menu
+     // $(".evergreen-sidebar .menu a").each(function(){
+     //        if ($(this).attr("href") == window.location.pathname){
+     //            $(this).addClass("active");
+     //        }
+     //    });
+    // $('html, body').animate({
+    //     scrollTop: $('.evergreen-innerwrap').offset().top
+    // }, 1500); 
+
+    //   $('.evergreen-sidebar').animate({
+    //     scrollTop: $('.evergreen-sidebar .menu .active').offset().top
+    // },1500);
+
+    // $(function() {
+    //     var newHash      = "",
+    //         $mainContent = $(".evergreen-container"),
+    //         $pageWrap    = $(".evergreen-wrap"),
+    //         baseHeight   = 0,
+    //         $el;
+            
+    //     $pageWrap.height($pageWrap.height());
+    //     baseHeight = $pageWrap.height() - $mainContent.height();
+        
+    //     $(".evergreen-sidebar").delegate("a", "click", function() {
+    //         window.location.hash = $(this).attr("href");
+    //         return false;
+    //     });
+        
+    //     $(window).bind('hashchange', function(){
+        
+    //         newHash = window.location.hash.substring(10);
+            
+    //         if (newHash) {
+    //             $mainContent
+ //                .find(".evergreen-container .secondary-pages-content")
+ //                .fadeOut(200, function() {
+ //                    $mainContent.hide().load(newHash + ".evergreen-container .secondary-pages-content", function() {
+ //                        $mainContent.fadeIn(200, function() {
+ //                            $pageWrap.animate({
+ //                                height: baseHeight + $mainContent.height() + "px"
+ //                            });
+ //                        });
+ //                        $(".evergreen-sidebar a").removeClass("current");
+ //                        $(".evergreen-sidebar a[href="+newHash+"]").addClass("current");
+ //                    });
+ //                });
+
+    //         };
+    //     });
+        
+    //     $(window).trigger('hashchange');
+    // });
+
+
+
+
+
+
+        // $('.evergreen-sidebar').animate({
+        //  scrollTop: $('.evergreen-sidebar .menu .active').offset().top
+        // },2000);
+        // var _location = location.pathname;
+        // var _locationIndex = _location.substring(_location.indexOf('/') + 1);
+        // var anchorLinks = document.getElementsByClassName('menu-option');
+
+        // for (var k = 0; k < anchorLinks.length; k++) {
+        //  var _anchorHref = (anchorLinks[k].href);
+        //  var _anchorHrefIndex = _anchorHref.substring(_anchorHref.indexOf('/') + 1);
+        //  var target = $(_anchorHrefIndex);
+        //  if (_locationIndex == _anchorHrefIndex) {
+        //      if (target.length) {
+        //          $('html,body').animate({
+        //          scrollTop: target.offset().top - 80
+        //          }, 500, function () {
+        //          });
+        //      }
+        //  }
+        // }
+</script>
+{% endblock %}

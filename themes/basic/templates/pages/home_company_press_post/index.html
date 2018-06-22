@@ -1,0 +1,60 @@
+{% extends "layouts/default.html" %}
+{% set banner = get('home_company_press') %} 
+{% block content %} 
+{% include "partials/header_global_black.html" %}
+<div class="main-wrapper">
+    <section class="tab-section-wrap press-post">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab-pane {% if loop.index == 1 %} active {% endif %}" id="news-{{loop.index}}">
+                    <div class="col-md-12">
+                            <div class="subnav-head subnav-scroll clearfix">
+                                <!-- Nav tabs -->
+                                <div class="sub-nav-wrapper">
+                                    <ul class="action-menu">
+                                        <li><a href="{{banner.press_subnav_section.link}}"><img alt="{{banner.press_subnav_section.logo.title}}" src="{{AssetUrl(banner.press_subnav_section.logo)}}"></a></li>
+                                        <li><a href="{{banner.press_subnav_section.url}}">{{banner.press_subnav_section.title}}</a> <span class="breadcrum"></span></li>                      
+                                    </ul>   
+                                    <ul class="search-wrap">
+                                      <li class="search-input">                      
+                                        <form class="search-form search-form-press" action="javascript:void(0)">
+                                            <span class="search-icon">
+                                                <i class="icon-search-icon"></i>
+                                            </span> 
+                                            <input id="searchfilter" class="form-control" type="text" placeholder="search all press">
+                                        </form>
+                                      </li>
+                                    </ul>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12 news-details">
+                                <h1 class="title">{{entry.title}}</h1>
+                                <p class="date">{{moment(entry.date).format("MMMM D")}}, {{moment(entry.date).format("YYYY")}}</p>
+                                    <div class="press-details">                
+                                        {{entry.post}}
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="sticky-container">
+    {% include "partials/social-sharing.html" %}
+</div>
+<script type="text/javascript">
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.header-dark').height())) {
+            $('.subnav-scroll').css('position','fixed');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    });
+</script>
+{% include "partials/footer_global.html" %} 
+{% endblock %}

@@ -1,0 +1,8 @@
+{%- set ga = get("google_analytics") -%}
+{%- if env_server == "production" -%}
+{{ga.production}}
+{%- elif env_server == "staging" -%}
+{{ga.staging}}
+{%- else -%}
+{{ga.development}}
+{%- endif -%}

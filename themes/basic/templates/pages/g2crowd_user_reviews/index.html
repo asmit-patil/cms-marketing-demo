@@ -1,0 +1,118 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+<div class="orphan-g2crowd-wrapper">
+	<section class="header-wrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 logo-section">
+					<a href="{{entry.header_section.link}}">
+						<img alt="{{entry.header_section.logo.title}}" src="{{(AssetUrl(entry.header_section.logo))}}" class="img-responsive">
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<h1>{{entry.header_section.header_content.title}}</h1>
+					<hr/>
+					<h2>{{entry.header_section.header_content.subtitle}}</h2>
+					<p class="mt">{{entry.header_section.header_content.description}}</p>
+					<div class="cta-action mt">
+						<a class="btn btn-lg btn-trans" href="{{entry.header_section.header_content.cta.link}}">{{entry.header_section.header_content.cta.title}}</a>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<img alt="{{entry.header_section.header_content.image.title}}" src="{{(AssetUrl(entry.header_section.header_content.image))}}" class="img-responsive">
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="feature-wrap">
+		<div class="container">
+			<div class="row text-center">
+				<h2>{{entry.features.title}}</h2>
+				{% for feature in entry.features.feature_list %}
+				<div class="col-md-4 text-center mt">
+					<img alt="{{feature.image.title}}" src="{{(AssetUrl(feature.image))}}" class="img-responsive">
+					<h3>{{feature.title}}</h3>
+					<p>{{feature.description}}</p>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+	<section class="discover-wrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<img alt="{{entry.discovery.image.title}}" src="{{(AssetUrl(entry.discovery.image))}}" class="img-responsive">
+				</div>
+				<div class="col-md-6">
+					<h2>{{entry.discovery.title}}</h2>
+					<p class="mt">{{entry.discovery.description}}</p>
+					<div class="cta-action mt">
+						<a class="btn btn-lg btn-trans" href="{{entry.discovery.cta.link}}">{{entry.discovery.cta.title}}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="text-center">
+		<div class="container">
+			<h2>{{entry.testimonials.title}}</h2>
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12 mt">
+					<script>
+                        // <![CDATA[
+                        (function() {
+                            var on = window.addEventListener ? function(m, c) { window.addEventListener(m, c, false); } : function(m, c) { window.attachEvent('on' + m, c); },
+                                r = function(e) {
+                                    if (e.origin !== "https://www.g2crowd.com") { return; }
+                                    var d = document.getElementById('g2-crowd-widget-testimonial-2806');
+                                    if (d) { d.style.height = e.data };
+                                    r = function() {};
+                                };
+                            on('message', r);
+                        }());
+                        // ]]>
+                        </script>
+                        <iframe frameborder="0" height="650" id="g2-crowd-widget-testimonial-2806" scrolling="no" src="https://www.g2crowd.com/products/contentstack/testimonials/2806.embed" style="width=100%;min-height=100%;overflow: hidden;" width="100%"></iframe>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="text-center">
+		<div class="container">
+			<h2>{{entry.form_section.title}}</h2>
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12 form-section mt">
+					<div class="col-md-6">
+						<img alt="{{entry.form_section.image.title}}" src="{{(AssetUrl(entry.form_section.image))}}" class="img-responsive">
+					</div>
+					<div class="col-md-6">
+						<script src="//app-sj21.marketo.com/js/forms2/js/forms2.min.js"></script>
+	                  	<form id="mktoForm_1031"></form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div> 
+<script>
+MktoForms2.loadForm("//app-sj21.marketo.com", "489-WNI-383", 1031, function(form){
+	form.getFormElem().find('select').closest('.mktoFormCol').addClass('selectcol-wrapper');
+	form.getFormElem().find('select').after('<i class="icon icon-down"></i>');
+	$('#Industry').on('change', function() {
+		form.getFormElem().find('select').after('<i class="icon icon-down"></i>');
+	});
+	form.onSubmit(function() {
+		form.getFormElem().find('select').after('<i class="icon icon-down"></i>');   
+ 		visitorIDtrack(); 
+	});    
+});
+</script>
+{% endblock %}

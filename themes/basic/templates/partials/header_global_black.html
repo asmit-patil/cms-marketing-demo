@@ -1,0 +1,37 @@
+{% set header = get("header_global_black") %} 
+<header class="header header-dark clearfix">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{header.logo_section.link}}"><img alt="{{header.logo_section.logo.title}}" src="{{AssetUrl(header.logo_section.logo)}}"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right main">
+                {% for nav in header.nav_section.nav_menu %}
+                {% set new_tab = helpers.checkTarget(nav.open_in_a_new_tab) %}                
+                {% if nav.sub_menu.length > 0 %}
+                <li class="dropdown main-menu-link-{{nav.title}}">
+                    <a {{new_tab}} href="{% if nav.title == 'Company' %} {{nav.link}} {% else %} javascript:void(0) {% endif %}" class="dropdown-toggle" data-toggle="dropdown" title="{{nav.title}}">{{nav.title}} <span class="caret"></span></a>
+                      <ul class="dropdown-menu sub-menu">
+                          {% for sub in nav.sub_menu %}
+                         <li><a href="{{SeoUrl(sub.link)}}">{{sub.title}} </a></li>
+                          {% endfor %}
+                      </ul>
+                </li>
+                {%  elif nav.title == "Try for Free" %}
+                 <li class="dropdown"><a  {{new_tab}} class="cta cta-primary" href="{{SeoUrl(nav.link)}}">{{nav.title}}</a></li>
+                {% else  %}
+                <li class="dropdown main-menu"><a  {{new_tab}} class="dropdown-toggle" href="{%- if nav.title == 'Log in' -%} {{nav.link}}{%- else -%}{{SeoUrl(nav.link)}}{%- endif -%}">{{nav.title}}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+</header>

@@ -1,0 +1,102 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+{% include "partials/blog_header.html" %} 
+{% set banner = get('blog_home')%} 
+{% set posts = entry.posts %} 
+{% set author = entry.author %}
+{% set details = entry.authordetails %}
+<div class="main-wrapper blog-single-entry transparent-header">
+  <section class="secondary-hero-banner author-banner" title="{{banner.banner_section.background_image.title}}"  style="background-image:url({{AssetUrl(banner.banner_section.background_image)}});">
+    <div class="banner-wrap text-center">
+      <div class="banner-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+              <div class="row">
+                <div class="col-md-3 author-logo">
+                  {% if details[0].profile_image %}
+                  <img width="200px" alt="{{details[0].profile_image.title}}" src="{{AssetUrl(details[0].profile_image)}}">
+                  {% endif %}
+                </div>
+                <div class="col-md-9 col-sm-12 col-xs-12 text-left author-content">
+                  <h1>{{details[0].title}}</h1>
+                  <p>{{details[0].about_author}}</p>
+                  <ul class="clearfix">
+                    {% for social in details[0].social_section.social %}
+                    <li><a title="{{social.title}}" target="_blank" href="{{social.href}}">{{social.title}}</a></li>   {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--hero-banner -->
+  <div class="blog-container">
+    {#{% include 'partials/category.html' %}#}
+    <div class="blog-content by-author">
+      <div class="container">              
+        <div class="author-archive">
+          <!-- <h2 class="page-title">{{entry.acount}} Post for Author : <span class="author-name">{{author | escape }}</span></h2> -->
+          <h2 class="page-title text-center">Blog posts by {{author | escape }}</h2>
+          <div class="post-wrap author">
+            {% set count = 0%} {% for post in posts %} {% if loop.index0
+            < 10%}
+             <article class="item blog-post clearfix">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="post-content">                  
+                  <div class="lazy-loader">
+                    <a href={{(post.url)}}>
+                      <img alt="{{post.image.title}}" src="{{(AssetUrl(post.image))}}" class="grid-thumbnail img-responsive">
+                    </a>                                               
+                  </div> 
+                </div>          
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="post-content">
+                  <h3 class="post-title"><a title="{{post.title}}" href={{SeoUrl(post.url)}} class="title-refer">
+                    <span>{{post.title}}</span></a></h3>
+                    <p class="post-data">
+                      <span class="post-date"><time datetime="{{moment(post.date).format('MM/DD/YYYY')}}">{{moment(post.date).format('MMM Do YYYY')}}, </time></span>{% for author in post.author %}<span class="post-author"><a title="{{author.title}}" href={{appendBlogUrl("/author/"+replacespace(author.title))}} rel="author"><span itemprop="name">{{author.title}}</span></a></span>
+                      {% if not loop.last %},{% endif %} {% endfor%}
+                      <p>{{post.body | truncate(140,false,'...')}}
+                        <span class="read-more"><a href={{SeoUrl(post.url)}}>Read More</a></span>           
+                      </p>
+                    </p>
+                    </div> 
+                  </div>
+                </article>
+              {% endif %} {% set count = count + 1%} {% endfor %}
+            </div>
+            {% if count > 9 %}
+            <div class="load-more-wrap text-center">
+              <button class="author-loadmore loadmore cta cta-primary btn-medium">Load more posts</button>
+            </div>
+            {% endif %}
+            <div class="spinner">
+              <div class="rect1"></div>
+              <div class="rect2"></div>
+              <div class="rect3"></div>
+              <div class="rect4"></div>
+              <div class="rect5"></div>
+            </div>
+          </div>               
+        </div>
+        <!--container -->
+      </div>
+      <!--blog -->
+    </div>
+  </div>
+  <script type="text/javascript">
+    $(window).scroll(function() {
+      if ($(window).scrollTop() >= ($('.header-dark').height())) {
+        $('.subnav-scroll').css('position','fixed');
+      } else {
+        $('.subnav-scroll').css('position','absolute');
+      }
+    });
+  </script>
+  {% include "partials/footer_global.html" %}
+  {% endblock %}

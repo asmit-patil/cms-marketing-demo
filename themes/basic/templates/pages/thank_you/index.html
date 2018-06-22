@@ -1,0 +1,95 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+{# {% if canonical.indexOf('/developer') == 0 %} #}
+{% include "partials/header_global_black.html" %}
+<div class="main-wrapper">
+     {% if entry.webinar_section.desc.length %}
+    <div class="webinar-thankyou text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1>{{entry.webinar_section.add_webinar[0].title}}</h1>
+                    <div class="thank-content">
+                        {{entry.webinar_section.desc}}
+                    </div>
+                    <div class="video-iframe">
+                        <span class="play-icon">
+                            <img alt="play-icon" src="/assets/blt931b19ff311ccdfb/play-icon.png" />
+                        </span>
+                         <div class="video-bg" style="background-image:url({{AssetUrl(entry.webinar_section.add_webinar[0].webinar_details.background_image)}});">
+                            <div class="dark-overlay"></div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="thank-you-wrap">
+        <div class="thank-you-content">
+            <div class="container">
+                <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <div id="thank" class="thank-content-wrap">
+                                <p class="text-center icon-correct">
+                                    <img alt="{{entry.message_section.image.title}}" src="{{getAssetUrl(entry.message_section.image)}}">
+                                </p>
+                                <h2>{{entry.message_section.heading_title}} <span class="uname"></span></h2>
+                            </div>
+                            <div class="thank-msg" style="display: none">{{entry.message_section.desc}}</div> 
+                            <div class="tryfree-msg" style="display: none">{{entry.message_section.tryfree}}</div>                   
+                            <p class="action-link">
+                                <a href="{{entry.message_section.cta.href}}" class="cta cta-primary" alt="{{entry.message_section.cta.title}}">{{entry.message_section.cta.title}}</a>
+                            </p>                    
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>   
+    {% endif %}    
+</div>
+{#{% else %}
+{% include "partials/header.html" %}
+<div class="main-wrapper">
+    <div class="thank-you-wrap">
+        <div class="thank-you-content">
+            <div class="container">
+                <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <div id="thank" class="thank-content-wrap">
+                                <p class="text-center icon-correct">
+                                    <img alt="{{entry.message_section.image.title}}" src="{{getAssetUrl(entry.message_section.image)}}">
+                                </p>
+                                <h2>{{entry.message_section.heading_title}}<span class="uname">&nbsp;</span></h2>
+                            </div>
+                            <p>{{entry.message_section.desc}}</p>                   
+                            <p class="action-link">
+                                <a href="{{entry.message_section.cta.href}}" class="cta cta-primary" alt="{{entry.message_section.cta.title}}">{{entry.message_section.cta.title}}</a>
+                            </p>                    
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>    
+</div>
+{% endif %} 
+{% if canonical.indexOf('/developer') == 0 %}
+{% include "partials/footer_developer.html" %}
+{% else %} #}
+<script type="text/javascript">
+$(document).ready(function() {        
+         var a = localStorage.getItem("newname")
+         if(localStorage.getItem("newname") == 'Free trial' ){
+                $('.tryfree-msg').show();
+             }
+            else{
+                $('.thank-msg').show(); 
+            }
+     localStorage.removeItem("newname");
+    });
+        
+
+</script>
+{% include "partials/footer_global.html" %}
+{% endblock %}
+

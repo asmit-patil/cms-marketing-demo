@@ -1,0 +1,49 @@
+{% set footer = get("footer_global")%} 
+{# And then render footer values using the {{footer.field_name}} #}
+<footer class="footer-section">
+    <div class="container">
+        <div class="footer-wrap clearfix">
+            <ul class="footer-menu-wrap">
+                <li>
+                    <a class ="inactiveLink" title="Contentstack" href="{{SeoUrl(footer.footer_section.link)}}">
+                    <img alt="{{footer.footer_section.logo.title}}" src="{{AssetUrl(footer.footer_section.logo)}}">
+                    </a>
+                </li>
+            </ul>
+            {% for footer in footer.footer_section.nav %} 
+            {% if footer.sub_nav.length > 0 %}
+            <ul class="footer-menu-wrap">
+                {% if footer.title == "Connect" %}
+                <li><a href="{{SeoUrl(footer.link)}}" class="title inactiveLink">{{footer.title}}</a></li>
+                <ul>
+                    {% for sub in footer.sub_nav %}
+                    {% set new_tab = helpers.checkTarget(sub.open_in_a_new_tab)%}
+                    <li><a href="{{sub.link}}" {{new_tab}}>{{sub.title}}</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <li><a href="{{footer.link}}" class="title inactiveLink">{{footer.title}}</a></li>
+                <ul>
+                    {% for sub in footer.sub_nav %}
+                    {% set new_tab = helpers.checkTarget(sub.open_in_a_new_tab)%}
+                    <li><a href="{{sub.link}}" {{new_tab}}>{{sub.title}}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </ul>
+            {% else %}
+            <li><a href="{{footer.link}}">{{footer.title}}</a></li>
+            {% endif %} 
+            {% endfor %}
+        </div>
+        <div class="legal-wrap col-md-12">
+            <p>{{footer.copyright_section.copyright_text}}</p>
+            <ul class="footer-links">
+                {% for legal in footer.copyright_section.nav %}
+                {% set new_tab = helpers.checkTarget(legal.open_in_a_new_tab)%}
+                <li><a href="{{SeoUrl(legal.link)}}" {{new_tab}}>{{legal.title}}</a></li>
+                {% endfor %}
+            </ul>            
+        </div>
+    </div>
+</footer>

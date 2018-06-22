@@ -1,0 +1,15 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+{% include "partials/header_global_black.html" %} 
+	<div class="terms-content-wrap legal-business">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">				
+					{{entry.content}}
+				</div>
+			</div>
+		</div>
+	</div>
+{% include "partials/footer_global.html" %}
+{% endblock %}
+

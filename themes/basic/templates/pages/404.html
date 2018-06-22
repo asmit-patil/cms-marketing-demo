@@ -1,0 +1,33 @@
+{% extends "layouts/default.html" %} 
+{% set not_found = get('404') %} 
+{% block content %} 
+<div class="not-found">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 four-zero-four text-center">
+                <p class="text-center">
+                    <img alt="{{not_found.title}}" src="{{AssetUrl(not_found.image)}}"/>
+                </p>
+                <h2>{{not_found.error_no}}</h2>
+                <p class="error-desc">{{not_found.error_desc}}</p>
+                <p>{{not_found.header_text}}</p>
+                <div class="action-links">
+                    {% for cta in entry.link %}
+                        {% if loop.index == 1%}
+                            <a title="{{cta.title}}" href="{{cta.link}}">{{cta.title}}</a> 
+                        {% else %}
+                            <a title="{{cta.title}}" href="{{cta.link}}">{{cta.title}}</a> 
+                        {% endif %} 
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    $('.drop-down-text').hide();
+    $('.bus').hide()
+});
+</script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+{% include "partials/header_global.html" %}
+<div class="main-wrapper transparent-header partner-signup">
+    <section class="secondary-hero-banner" title="{{entry.banner_section.background_image.title}}" style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <div class="headers">
+                                <h1>{{entry.banner_section.title}}</h1>
+                            </div>
+                            <div class="headers-desc">
+                                <p>{{entry.banner_section.desc}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="signup-wrap">
+        <div class="container">
+        	<div class="row">
+                <div class="content-block clearfix">
+					{{entry.desc}}
+                </div>
+                <div class="col-md-12 col-xs-12 text-center cards-wrap">
+                	{% for cards in entry.signup.partners %}
+                	<div class="card">
+                		<h3>{{cards.title}}</h3>
+                		{{cards.desc}}
+                		<div class="action-link text-center">                                
+                            <a href="{{SeoUrl(cards.cta.link)}}" class="cta cta-primary">{{cards.cta.title}}</a>
+                        </div>
+                	</div>
+                	{% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "partials/footer_global.html" %} 
+{% endblock %}

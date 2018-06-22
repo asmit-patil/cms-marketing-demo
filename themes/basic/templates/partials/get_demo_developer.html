@@ -1,0 +1,89 @@
+{% set entry = get('get_demo') %}
+{% set contact = get('home_contact_us_business')%}
+    <div class="action-links">
+        <button id="signup" title="Request a demo" class="cta cta-primary">{{entry.contact_us_section.button_text}}</button>
+        <span class="thank-you-new hidden">
+            <div class="col-md-12 text-center">
+                <div id="home-thank" class="thank-content-wrap">
+                    <p class="text-center icon-correct">
+                        <img width="50px" alt="{{entry.contact_us_section.thank_you.image.title}}" src="{{AssetUrl(entry.contact_us_section.thank_you.image)}}">
+                    </p>
+                    <h2>{{entry.contact_us_section.thank_you.title}} <span class="uname"></span></h2>
+                </div>
+                <p>{{entry.contact_us_section.thank_you.text}}</p>           
+            </div>
+        </span>
+        <span class="thank-you-try hidden">
+          <div class="col-md-12 text-center">
+              <div id="home-thank2" class="thank-content-wrap">
+                  <p class="text-center icon-correct">
+                      <img width="50px" alt="{{entry.contact_us_section.thank_you.image.title}}" src="{{AssetUrl(entry.contact_us_section.thank_you.image)}}">
+                  </p>
+                  <h2>{{entry.contact_us_section.thank_you.title}} <span class="uname"></span></h2>
+              </div>
+              <p>{{entry.contact_us_section.thank_you.tryfree_text}}</p>
+          </div>
+        </span>
+        <div id="contact-global" class="contact-us-form text-left" style="display: none">         
+            <div class="features-demo-form">
+                <form id="mktoForm_1035" class="demo-mkt-form"></form>                
+            </div>
+        </div>
+        <iframe id="iframe_contactus_new" name="iframe_contactus_new" class="hidden"></iframe>
+    </div>
+    <p class="text-center cta-text">{{entry.contact_us_section.contact_text.title}} <a href="{{SeoUrl(entry.contact_us_section.contact_text.cta.href)}}" class="action-links">{{entry.contact_us_section.contact_text.cta.title}}</a></p>
+<script>
+  MktoForms2.loadForm("//app-sj21.marketo.com", "489-WNI-383", 1035, function(form) {
+    form.getFormElem().find('select').closest('.mktoFormCol').addClass('selectcol-wrapper');
+    form.getFormElem().find('select').after('<i class="icon icon-down"></i>');
+    form.getFormElem().find('textarea').closest('.mktoFieldDescriptor').addClass('textareacol-wrapper');
+      $('#signup').on('click', function() {
+    $('#Contact_Us_Subject__c').val('Free trial');
+    var value = $('#Contact_Us_Subject__c').val();
+    if (value == 'Free trial') {
+        $('#Contact_Us__c').hide();
+    }
+       $('#Industry').on('change',function(){
+           form.getFormElem().find('select').after('<i class="icon icon-down"></i>');
+        });
+    $('#Contact_Us_Subject__c').on('change', function() {
+        form.getFormElem().find('select').after('<i class="icon icon-down"></i>');
+        var newvalue = $(this).val();
+        if (newvalue == 'Free trial') {
+            $('#Contact_Us__c').hide();
+            $('.mktoButtonWrap .mktoButton').text('get started')
+        } else {
+            $('#Contact_Us__c').show();
+            $('.mktoButtonWrap .mktoButton').text('submit')
+        }
+    });
+});
+    form.onSubmit(function() {
+        form.getFormElem().find('select').after('<i class="icon icon-down"></i>');
+        var thankvalue = $('#Contact_Us_Subject__c').val();
+        var setFirstName = form.getFormElem().find('input[name=FirstName]').val();
+        var setFirstNameHome = function() {
+            localStorage.setItem("hname", setFirstName);
+            localStorage.setItem("tname", thankvalue);
+        };
+        setFirstNameHome();
+        visitorIDtrack();
+    });
+    form.onSuccess(function(values, followUpUrl) {
+        form.getFormElem().hide();
+        var a = localStorage.getItem("tname")
+        if (a == 'Free trial') {
+            var tyPagepaget = document.getElementsByClassName('thank-you-try');
+            tyPagepaget[0].classList.remove('hidden');
+            $('#home-thank2').find('span.uname').text(localStorage.getItem("hname"));
+            return false;
+        } else {
+            var tyPagepaget = document.getElementsByClassName('thank-you-new');
+            tyPagepaget[0].classList.remove('hidden');
+            $('#home-thank').find('span.uname').text(localStorage.getItem("hname") || "");
+            return false;
+
+        }
+    });
+});
+</script>

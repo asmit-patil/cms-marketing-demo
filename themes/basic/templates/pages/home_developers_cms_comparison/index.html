@@ -1,0 +1,148 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+{% include "partials/header_global.html" %} 
+{% set contact = get('home_contact_us_developer')%}
+
+<div class="main-wrapper transparent-header cms-comparsion-wrap">
+    <section class="secondary-hero-banner" title="{{entry.banner_section.background_image.title}}" style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <div class="headers">                                
+                                <h1>{{entry.banner_section.title}}</h1>
+                            </div>
+                            <div class="header-desc">
+                                <p>{{entry.banner_section.desc}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="tab-section-wrap fixed-sub-menu">
+        <div class="col-md-12">
+            <div class="subnav-head subnav-scroll clearfix">
+                <!-- Nav tabs -->
+                <div class="sub-nav-wrapper">
+		        	<ul class="action-menu">
+		                <li><a href="{{entry.sub_nav_section.url}}"><img alt="{{entry.sub_nav_section.logo.title}}" src="{{AssetUrl(entry.sub_nav_section.logo)}}"/></a></li>
+		                <li><a href="{{SeoUrl(entry.sub_nav_section.sub_nav.menu.href)}}">{{entry.sub_nav_section.sub_nav.menu.title}}</a> / <span class="breadcrum">{{entry.sub_nav_section.sub_nav.sub_menu.title}}</span></li>
+		            </ul>
+                    <ul class="tab-sub-nav one-pager-anchor">
+                        {% for sub in entry.sub_nav_section.sub_nav %}
+                        <li {% if loop.index==1 %} class="active" {% endif %}><a href="{{sub.link}}">{{sub.title}}</a></li>
+                        {% endfor %}
+                    </ul>
+                   <!--  <ul class="visible-xs visible-sm hidden-md hidden-lg">
+                        <button type="button" class="navbar-toggle">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </ul> -->
+                </div>
+            </div>
+        </div>
+        <section class="section-row intro-wrap clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">                        
+                        {% if entry.cms_section.old_image and entry.cms_section.new_image %}
+                        <div class="cd-image-wrapper">
+                          <figure class="cd-image-container">
+                            <img src="{{AssetUrl(entry.cms_section.old_image)}}" alt="{{entry.cms_section.old_image.title}}">
+                            <span class="cd-image-label original-label" data-type="original">{{entry.cms_section.old_image_title}}</span>
+                            <div class="cd-resize-img"> <!-- the resizable image on top -->
+                              <img src="{{AssetUrl(entry.cms_section.new_image)}}" alt="{{entry.cms_section.new_image.title}}">
+                              <span class="cd-image-label" data-type="modified">{{entry.cms_section.new_image_title}}</span>
+                            </div>
+                            <span class="cd-handle"></span>
+                        </figure>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                        <h3>{{entry.cms_section.title}}</h3>
+                        {{entry.cms_section.desc}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-row gray-bg clearfix">
+            <div class="container">
+                <div class="row">
+                	<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                        <div class="table-responsive">                                
+    	                    <table class="comparision-table">
+    						    <thead>
+    						        <tr>
+    	                                {% for heading in entry.cms_comparison_section.comparison_section.compare_title %}
+    						            <th>{{heading.title}}</th>
+    	                                {% endfor %}
+    						        </tr>
+    						    </thead>
+    						    <tbody>
+    	                            {% for features in entry.cms_comparison_section.comparison_section.comparison %}
+    						        <tr>
+    						            <td><span>{{features.text}}</span></td>
+    	                                {% for feature in features.points %}	
+    						            <td><span>{{feature.title}}</span></td>
+    	                                {% endfor %}
+    						        </tr>
+    	                            {% endfor %}
+    						    </tbody>
+    						</table>
+                        </div>
+					</div>
+
+					<!-- <div class="col-md-12">
+
+						<div class="column-set-1">
+						{% for features in entry.cms_comparison_section.comparison_section.comparison %}
+							<h4 class="heading">{{features.text}}</h4>
+						{% endfor %}
+						</div>						
+						<div class="column-set-2">
+							{% for features in entry.cms_comparison_section.comparison_section.comparison %}
+								<div class="desc">
+									{% for feature in features.points %}
+									<p>{{feature.title}}</p>
+									{% endfor %}
+								</div>
+							{% endfor %}
+						</div>
+					</div> -->
+                </div>
+            </div>
+        </section>
+		<section class="section-row contact-us clearfix">
+            <div class="container">
+                <div class="row">
+					<div class="col-md-8 col-md-offset-2 col-xs-12 text-center">
+					    <h2 class="text-center head-text">{{entry.demo_section.title}}</h2>
+					     {% include "partials/get_demo_developer.html" %}
+					</div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script>
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+            $('.subnav-scroll').css('position','fixed');
+        // console.log('in');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    });
+</script>
+<script type="text/javascript" src="/static/js/vendor/jquery.mobile.custom.min.js"></script>
+<script type="text/javascript" src="/static/js/vendor/draggable.slide.js"></script>
+{% include "partials/footer_global.html" %} {% endblock %}

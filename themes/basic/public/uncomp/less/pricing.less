@@ -1,0 +1,167 @@
+.pricing-wrap {
+	padding: 65px 0 110px;
+    .container {
+        width: 960px;
+    }
+    .box-wrap {
+        display: -webkit-flex; 
+        display: -ms-flexbox; 
+        display: flex; 
+        overflow: hidden;
+    }
+    .pricing-inner {
+        background: #f2f2f2;
+        padding: 45px 20px 42px;
+        height: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+                align-items: center;
+    }
+    h1 {
+    	margin: 0 auto 40px;
+        font-size: 35px;
+        // width: 50%;
+        line-height: 1.2;
+    }
+    p+p {
+        margin: .75em 0 0;
+    }
+    h3 {
+    	margin-bottom: 15px;
+        font-size: 27px;
+    }
+    .pricing-info {
+        max-width: 260px;
+        margin: 0 auto 40px;
+        width: 100%;
+        // -webkit-flex-grow: 1;
+        // -ms-flex-positive: 1;
+        // flex-grow: 1;
+        padding: 0 5px;
+    }
+    .pricing-cost {
+        font-size: 40px;
+        line-height: 61px;
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    .pricing-cost-sub, .pricing-cost-freq {
+        opacity: .5;
+        font-size: 14px;
+        letter-spacing: .05em;
+    }
+    .pricing-cost-freq,.pricing-cost-sub {
+        font-weight: 400;
+        line-height: 30px;
+        display: block
+    }
+    .pricing-cost-freq {
+        font-size: 16px;
+        text-transform: lowercase;
+    }
+    .pricing-cost {
+        font-size: 40px;
+        line-height: 61px;
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    .pricing-cost-amt {
+        left: -4px;
+        position: relative;
+    }
+    .pricing-cost-dollar {
+        font-weight: 300;
+        font-size: 20px;
+        vertical-align: text-top;
+        line-height: 40px;
+    }
+    .pricing-action {
+        // position: absolute;
+        // bottom: 0;
+        // right: 0;
+        // left: 0;
+    }
+    .pricing-item {
+        padding: 0 10px;
+    }
+    .pricing-item .cta {
+        width: 100%;
+        max-width: 260px;
+    }
+    .pricing-footnote {
+        font-size: 13px;
+        padding: 12px 0;
+    }
+}
+
+/***** Media query start *****/
+
+@media screen and (min-width: 0) and (max-width: 991px) {
+    .pricing-wrap {
+        .container {
+            width: 750px;
+        }
+        .box-wrap {
+            display: block;
+        }
+        .pricing-inner {
+            .pricing-info, .pricing-desc {
+                height: auto !important;
+            }
+        }
+        .pricing-cost {
+            font-size: 30px;
+        }
+        .pricing-cost-dollar {
+            line-height: 35px;
+            font-size: 18px;
+        }
+        .pricing-item {
+            margin: 0 auto 25px;
+            max-width: 420px;
+            float: none;          
+        }
+    }
+}
+@media screen and (min-width: 0) and (max-width: 768px) {
+    .pricing-wrap {
+        h1 {
+            font-size: 26px;
+        }
+        h3 {
+            font-size: 20px;
+        }
+        .container {
+            width:100%;
+        }
+    }
+}
+@media screen and (min-width: 0) and (max-width: 640px) {
+    .pricing-wrap {
+        h1 {
+            font-size: 22px;
+        }
+        .pricing-inner {
+            padding: 20px;
+        }
+        .pricing-item {
+            padding: 0 15px;
+        }
+        .pricing-cost {
+            font-size: 25px;
+        }
+        .pricing-cost-dollar {
+            line-height: 29px;
+            font-size: 15px;
+        }
+    }
+}

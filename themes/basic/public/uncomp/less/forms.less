@@ -1,0 +1,150 @@
+label {
+	margin: 0 0 10px;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #a6a6a8;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #a6a6a8;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #a6a6a8;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #a6a6a8;
+}
+button[disabled], 
+html input[disabled] {
+	opacity: 0.5;
+}
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none; 
+ }
+
+select::-ms-expand {
+    display: none;
+}
+
+select + i.icon {
+    float: right;
+    margin-top: -26px;
+    margin-right: 10px;
+    /* this is so when you click on the chevron, your click actually goes on the dropdown menu */
+    background: url('https://www.contentstack.com/assets/blt97d41ad17f59dddb/arrow_down.png');
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: top;
+    pointer-events: none;
+    /* everything after this is just to cover up the original arrow */
+    /* (for browsers that don't support the syntax used above) */
+    background-color: transparent;
+    padding-right: 5px;
+}
+select option{
+   padding-right: 21px;
+}
+.main-wrapper .field-wrap .form-group.textarea-wrap {
+	width: 100%;
+}
+.main-wrapper {
+	label {
+		color: #4d4d51;
+		font-size: 13px;
+		font-weight: 600;
+		line-height: 16px;
+		letter-spacing: 0.008em;
+	}
+	input, select, textarea {
+		font-size: 15px;
+		// font-weight: 600;
+		color: @cs-black;
+		line-height: 16px;
+		letter-spacing: normal;
+	}
+	.form-control {
+		border: 2px solid #bcbcbe;
+		height: 40px;
+		&:focus {
+			background: #FAFCFF;
+			border: 2px solid @cs-blue;
+			box-shadow: none;
+		}
+	}
+	.form-group {
+		// display: inline-block;
+		margin: 0 0 15px;
+		// margin: 0 15px 0 0;
+		// width: 100%;
+		&:last-child {
+			margin-right: 0;
+		}
+		textarea {
+			height: 140px;
+			resize: none;
+		}
+	}
+	.has-error {
+		input, select, textarea {
+			background: #FEF7F6;
+			border: 2px solid @cs-red;
+		}
+		label {
+			color: @cs-red;
+		}
+	}
+}
+.dev-home-wrap {
+	label {
+		color: #8f8f98;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 16px;
+		letter-spacing: -0.006em;
+	}
+	input, select {
+		font-size: 15px;
+		font-weight: 500;
+		line-height: 16px;
+		letter-spacing: -0.01em;
+	}
+	.form-control {
+		background: #202025;
+		border: 2px solid #4d4d51;
+		height: 40px;
+		color: @white;
+		&:focus {
+			border: 2px solid @cs-green;
+			box-shadow: none;
+		}
+	}
+	.field-wrap {
+	    margin-bottom: 25px;
+	    .form-group {
+			width: 100%;
+	    }
+	}
+	.form-group {
+		display: inline-block;
+		margin: 0 15px 0 0;
+		width: 100%;
+		&:last-child {
+			margin-right: 0;
+		}
+		textarea {
+			height: 70px;
+			resize: none;
+		}
+	}
+	.has-error {
+		input, select, textarea {
+			border: 2px solid @cs-red;
+		}
+		label {
+			color: @cs-red;
+		}
+	}
+}

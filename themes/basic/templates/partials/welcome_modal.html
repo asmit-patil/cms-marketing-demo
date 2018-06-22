@@ -1,0 +1,18 @@
+{% set modal = get("welcome_modal") %}
+ <div id="contentstack-landing-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content text-center" style="background-image: url({{getAssetUrl(modal.welcome_section.background_image)}});">
+        <h2>{{modal.welcome_section.title}}</h2>
+        <p>{{modal.welcome_section.desc}}</p>
+        <div class="action-links">
+        {% for cta in modal.welcome_section.cta %}
+        {% if loop.index == 1%}
+          <a title="{{cta.title}}" id="{{cta.css_id}}" class="cta cta-primary-outline business" href="{{cta.link}}">{{cta.title}}</a>
+          {% else %}
+          <a title="{{cta.title}}" id="{{cta.css_id}}" class="cta cta-secondary-outline developer" href="{{cta.link}}">{{cta.title}}</a>
+          {% endif %}
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>

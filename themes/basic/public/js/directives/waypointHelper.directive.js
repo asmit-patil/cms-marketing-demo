@@ -1,0 +1,1 @@
+function WaypointHelper(){return{restrict:"A",link:function(e,t,n){new Waypoint.Sticky({element:$("#header2")[0],stuckClass:"sticky-subnav-header"}),new Waypoint.Sticky({element:t,stuckClass:"sticky-pricing-header"})}}}angular.module("savingCalculator").directive("waypointHelper",WaypointHelper);

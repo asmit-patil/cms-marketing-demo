@@ -1,0 +1,9 @@
+_logs/
+_content/
+node_modules/
+.idea/
+package-lock.json
+themes/basic/public/bower_components
+
+themes/basic/public/static/sitemap.xml
+themes/basic/templates/pages/developer_page_new/index1.html

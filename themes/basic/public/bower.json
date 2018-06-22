@@ -1,0 +1,31 @@
+{
+  "name": "roi_calculator",
+  "homepage": "https://github.com/raweng/built.io_website",
+  "authors": [
+    "Vikrant Raut <vikrant.raut@raweng.com>",
+    "Dipti Patil <dipti.patil@raweng.com>",
+    "Chetan Salvi <chetan.salvi@raweng.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "nouislider": "^8.2.1",
+    "angular": "^1.4.9",
+    "jquery": "^2.2.0",
+    "highcharts": "^4.2.3",
+    "angular-nouislider": "https://github.com/cusalvi/angular-nouislider.git#1431f6c51cb789a2d19f67b0dd5c7f7b395671af",
+    "lodash": "^4.5.1"
+  },
+  "resolutions": {
+    "nouislider": "~6.2.0",
+    "angular": "~1.2.6",
+    "jquery": "~2.1.0"
+  }
+}

@@ -1,0 +1,89 @@
+.main-wrapper {	
+	.contact-us-wrap {
+		margin-top: 100px;
+		padding-top: 0!important; 
+		padding-bottom: 180px;
+		h2 {
+		    margin: 0 0 15px;
+		}
+		h4 {
+		    font-weight: bold;
+		    margin: 0 0 20px;
+		}
+		.contact-us-form {
+		    margin: 55px 0 0;
+		    .row {
+		        &:first-of-type {
+		            // margin-bottom: 40px;
+		        }
+		    }
+		}
+		.textarea-wrap {
+			margin-top: 25px;
+		}
+		.your-business {
+		    padding-left: 0;
+		    border-left: 1px solid rgba(255, 255, 255, 0.5);
+		    .field-wrap {
+		        &:first-of-type {
+		            .form-group {
+		                // width: 47%;
+		                // width: 47.8%;
+		                &:last-child {
+		                    margin-right: 0;
+		                }
+		            }
+		        }
+		        &:last-child {
+		            margin-bottom: 0;
+		        }
+		    }
+		}
+		.your-info {
+		    border-right: 2px solid #ccc;
+		    padding-right: 30px;
+		}
+		#contact-business {
+			.your-business {
+				padding-left: 0;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 0) and (max-width: 991px) {
+	.main-wrapper {
+		.contact-us-wrap {
+			h4 {
+				font-weight: 300;
+				font-size: 18px;
+			}
+			.your-info {
+				border-right: 0;
+				padding-right: 15px;
+			}
+			.your-business {
+				padding-left: 15px;
+				h4 {
+					margin-top: 20px;
+				}
+				.field-wrap {
+					&:first-of-type {
+						.form-group {
+							width: 100%;
+							margin-bottom: 15px;
+						}
+					}
+				}
+			}
+			.contact-us-form {
+				margin: 30px 0 0;
+			}
+			#contact-business {
+				.your-info {
+					padding-right: 0;
+				}
+			}
+		}
+	}
+}

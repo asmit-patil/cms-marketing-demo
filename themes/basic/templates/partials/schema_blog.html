@@ -1,0 +1,25 @@
+<!-- OG SEO -->
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="EN_US" />
+<meta property="fb:profile_id" content="449094025544155" />
+<meta property="og:site_name" content="Contentstack Blog" />
+<meta property="og:url" content="{{SeoUrl(entry.url)}}" /> 
+<meta property="og:title" content="{{entry.title}}" />
+<meta property="og:description" content="{{entry.seo.description}}" />
+{%- if entry.image %}
+<meta property="og:image" content="{{AssetUrl(entry.image)}}" />
+{%- else %}
+<meta property="og:image" content="https://www.contentstack.com/contentstack-logo-200x200.png" />
+{%- endif %}
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "name": "{{entry.title}}",
+      "url": "{{SeoUrl(entry.url)}}",
+      "image": "https://www.contentstack.com/static/images/contentstack-logo-200.png",
+      "datePublished": "{{moment(entry.date).format('DD MMMM YYYY')}}",
+      "articleSection": ["{% for cat in entry.category %}{{cat.title}}{% endfor %}"],
+      "author": ["{% for authors in entry.author %}{{authors.title}}{% endfor %}"]
+    }
+</script>

@@ -1,0 +1,120 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+{% include "partials/header_global.html" %}
+<div class="main-wrapper">
+  <section class="hero-banner">    
+    {% for ban in entry.banner_section.banner %}
+    <div class="banner-wrap text-left" style="background-image:url({{getAssetUrl(ban.background_image)}});">
+      <div class="banner-content">      
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">                    
+              <h1>{{ban.title}}</h1>
+              <p>{{ban.desc}}</p>
+              <div class="action-links">
+              {% for cta in ban.cta %}
+                <a title="{{cta.title}}" href="{{cta.link}}" class="cta cta-primary">{{cta.title}}</a>
+              {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="customers">
+    <div class="container text-center">
+      <p class="section-title">{{entry.customer_section.title}}</p>
+      <h2 class="section-heading">{{entry.customer_section.sub_title}}</h2>
+      <div class="row">
+        {% for feature in entry.customer_section.features %}
+        {% if loop.index == 1 %}
+        <div class="col-md-3 col-sm-3 col-xs-12">
+          <h3 class="col-heading">{{feature.title}}</h3>
+          <p class="col-info">{{feature.sub_title}}</p>
+        </div>
+        {% else %}
+        <div class="col-md-3 col-sm-3 col-xs-12">
+          <h3 class="col-heading">{{feature.title}}</h3>
+          <p class="col-info">{{feature.sub_title}}</p>
+        </div>
+        {% endif %}
+        {% endfor %}        
+      </div>
+      <div class="row icons-grid">
+       {% set arr_len = entry.customer_section.customers_logo.length %}  
+       {% for cust  in entry.customer_section.customers_logo %}      
+        <div class="col-md-2 col-sm-3 col-xs-12">
+          <img alt="{{cust.logo.title}} class="img-responsive" src="{{getAssetUrl(cust.logo)}}">
+          <p></p>
+        </div>
+          {% if (loop.index < arr_len) and loop.index % 4 === 0 %} 
+      </div>
+      <div class="row icons-grid"> 
+      {% endif %}      
+        {% endfor %}        
+    </div>
+  </section>
+  <section class="platforms-support">
+    <div class="container text-center">
+      <p class="section-title">{{entry.platforms_section.title}}</p>
+      <h2 class="section-heading">{{entry.platforms_section.sub_title}}</h2>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3"> 
+          <p>{{entry.platforms_section.text}}</p>
+        </div>
+      </div>
+      <div class="img-gallery row">
+      {% for plat in entry.platforms_section.platforms_image %}
+        <div class="col-md-2 col-sm-2 col-xs-12">
+          <img alt="{{plat.image.title}} class="img-responsive" src="{{getAssetUrl(plat.image)}}">
+          <p class="text-center">{{plat.title}}</p>
+        </div>
+        {% endfor %}   
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+      <div class="container text-center">
+        <p class="section-title">{{entry.content_creation_section.title}}</p>
+      <h2 class="section-heading">{{entry.content_creation_section.sub_title}}</h2>
+        {% for content in entry.content_creation_section.content %}
+        <div class="row flex-parent feature-row">
+          <div class="col-md-7 col-sm-12 col-xs-12 flex-child graphic">
+            <img alt="{{content.image.title}} class="img-responsive" src="{{getAssetUrl(content.image)}}">
+          </div>
+          <div class="col-md-5 col-sm-12 col-xs-12 text-left flex-child content">
+            <h3>{{content.title}}</h3>
+            <p class="info">{{content.desc}}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+  <section class="specs-section">
+    <div class="container text-center">
+      <p class="section-title">{{entry.management_section.title}}</p>
+      <h2 class="section-heading">{{entry.management_section.sub_title}}</h2>
+    {% for manage in entry.management_section.manage %}
+      <div class="row flex-parent feature-row">
+        <div class="col-md-7 flex-child graphic">
+          <img alt="{{manage.image.title}}" class="img-responsive" src="{{getAssetUrl(manage.image)}}">
+        </div>
+        <div class="col-md-5 text-left flex-child content">
+          <h4 class="info-heading">{{manage.title}}</h4>
+          <p class="info">{{manage.desc}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+ {% include "pages/home_business/business.html" %}
+ {% include "partials/welcome_modal.html" %}
+</div>
+{% include "partials/footer_global.html" %}
+{% endblock %}
+

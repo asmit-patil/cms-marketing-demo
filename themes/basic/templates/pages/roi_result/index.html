@@ -1,0 +1,190 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+{% include "partials/header_global_black.html" %} 
+<section class="roi-calc-wrap" ng-app="MyApp">
+  <div class="container result" ng-controller="MyController">
+    <div class="title">{{entry.result_section.title}}</div>
+    <div class="row">
+      <div class="col-md-12 text-center ratio">          
+        <!-- <b>ROI</b>  -->
+        <p ng-show="data.roi != null">{{entry.result_section.sub_title}} [[data.roi | number : 1]] : 1 <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.time_saved_section.text1}}"></i></p>
+        <p ng-show="data.roi == null">{{entry.result_section.sub_title}} N/A
+          {% if entry.result_section.tooltip_text.length %} 
+          <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.result_section.tooltip_text}}"></i>
+          {% endif %}
+        </p>
+      </div>
+      <div class="col-md-8 col-md-offset-2 result-wrap">        
+        <div class="col-md-6 card-wrap">
+          <div class="result-cards" style="background:url({{AssetUrl(entry.time_saved_section.background_image)}}) no-repeat 115% 115% #fff;">
+            <b>{{entry.time_saved_section.title}}</b> 
+            <p>{{entry.time_saved_section.title1}} 
+              <span class="result-value">20% 
+                {% if entry.time_saved_section.text1.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.time_saved_section.text1}}"></i>
+                {% endif %}
+              </span>              
+            </p>
+            <p ng-show="data.devlopment_time != null">{{entry.time_saved_section.title2}} 
+              <span class="result-value">[[data.devlopment_time]] hours/month 
+                {% if entry.time_saved_section.text2.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.time_saved_section.text2}}"></i>
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.devlopment_time == null">{{entry.time_saved_section.title2}} 
+              <span class="result-value">N/A 
+                {% if entry.time_saved_section.text2.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.time_saved_section.text2}}"></i>
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.contenteditor_time != null">{{entry.time_saved_section.title3}} 
+              <span class="result-value">[[data.contenteditor_time]] hours/month
+                {% if entry.time_saved_section.text3.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.time_saved_section.text3}}"></i>
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.contenteditor_time == null">{{entry.time_saved_section.title3}} 
+              <span class="result-value">N/A 
+                {% if entry.time_saved_section.text3.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.time_saved_section.text3}}"></i>
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.timetopublishcontent != null">{{entry.time_saved_section.title4}} 
+              <span class="result-value">[[data.timetopublishcontent]] hours/month 
+                {% if entry.time_saved_section.text4.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.time_saved_section.text4}}"></i>
+                {% endif %}
+              </span>
+            </p>  
+            <p ng-show="data.timetopublishcontent == null">{{entry.time_saved_section.title4}} 
+              <span class="result-value">N/A 
+                {% if entry.time_saved_section.text4.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.time_saved_section.text4}}"></i>
+                {% endif %}
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 card-wrap">
+          <div class="result-cards" style="background:url({{AssetUrl(entry.money_saved_section.background_image)}}) no-repeat 115% 115% #fff;">
+            <b>{{entry.money_saved_section.title}}</b> 
+            <p ng-show="data.developer_resources != null">{{entry.money_saved_section.title1}} 
+              <span class="result-value">[[data.developer_resources | currency:undefined:0]]
+                {% if entry.money_saved_section.text1.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.money_saved_section.text1}}"></i>
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.developer_resources == null">{{entry.money_saved_section.title1}} 
+              <span class="result-value">N/A 
+                {% if entry.money_saved_section.text1.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.money_saved_section.text1}}"></i>
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.content_manager_resources != null">{{entry.money_saved_section.title2}} 
+              <span class="result-value">[[data.content_manager_resources  | currency:undefined:0]] 
+                {% if entry.money_saved_section.text2.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.money_saved_section.text2}}"></i>
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.content_manager_resources == null">{{entry.money_saved_section.title2}} 
+              <span class="result-value">N/A 
+                {% if entry.money_saved_section.text2.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.money_saved_section.text2}}"></i>
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.ongoing_infrastructure != null">{{entry.money_saved_section.title3}} 
+              <span class="result-value">[[data.ongoing_infrastructure  | currency:undefined:0]] 
+                {% if entry.money_saved_section.text3.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.money_saved_section.text3}}"></i>
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.ongoing_infrastructure == null">{{entry.money_saved_section.title3}} 
+              <span class="result-value">N/A 
+                {% if entry.money_saved_section.text3.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.money_saved_section.text3}}"></i>
+                {% endif %}
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 card-wrap">
+          <div class="result-cards" style="background:url({{AssetUrl(entry.money_gained_section.background_image)}}) no-repeat 115% 115% #fff;">
+            <b>{{entry.money_gained_section.title}}</b> 
+            <p ng-show="data.money_gain != null">{{entry.money_gained_section.title1}} 
+              <span class="result-value">[[data.money_gain | currency:undefined:0]] 
+                {% if entry.money_gained_section.text1.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.money_gained_section.text1}}"></i>
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.money_gain == null">{{entry.money_gained_section.title1}} 
+              <span class="result-value">N/A 
+                {% if entry.money_gained_section.text1.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.money_gained_section.text1}}"></i>
+                {% endif %}
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 card-wrap">
+          <div class="result-cards" style="background:url({{AssetUrl(entry.resources_gained_section.background_image)}}) no-repeat 115% 115% #fff;">
+            <b>{{entry.resources_gained_section.title}}</b> 
+            <p ng-show="data.devresgain != null">{{entry.resources_gained_section.title1}}
+              <span class="result-value">[[data.devresgain]] 
+                {% if entry.resources_gained_section.text1.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.resources_gained_section.text1}}"></i>            
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.devresgain == null">{{entry.resources_gained_section.title1}} 
+              <span class="result-value">N/A   
+                {% if entry.resources_gained_section.text1.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.resources_gained_section.text1}}"></i>            
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.coneditresgain != null">{{entry.resources_gained_section.title2}} 
+              <span class="result-value">[[data.coneditresgain | number: 2]] 
+                {% if entry.resources_gained_section.text2.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.resources_gained_section.text2}}"></i>
+                {% endif %}
+              </span>
+            </p>
+            <p ng-show="data.coneditresgain == null">{{entry.resources_gained_section.title2}} 
+              <span class="result-value">N/A 
+                {% if entry.resources_gained_section.text2.length %}
+                <i class="icon-question-circle" data-toggle="tooltip" data-placement="top" title="{{entry.resources_gained_section.text2}}"></i>
+                {% endif %}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 
+<script type="text/javascript">
+  $(function () {
+    $('.result-cards [data-toggle="tooltip"], .result .ratio p [data-toggle="tooltip"]').tooltip()
+  })
+
+  var app = angular.module('MyApp',[]);
+  app.config(function($interpolateProvider) {
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+  })
+  app.controller('MyController', function($scope) {        
+  $scope.data =  JSON.parse(localStorage.getItem('result'));
+  });     
+</script> 
+{% include "partials/footer_global.html" %}
+{% endblock %}

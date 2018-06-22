@@ -1,0 +1,59 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+{% include "partials/header_global.html" %}  
+<script type="text/javascript">
+    window.savingCalCms = {{entry | json}};
+</script>
+<div class="main-wrapper transparent-header saving-calculator" ng-app="savingCalculator">
+  <div class="secondary-hero-banner" style="background-image: url({{ AssetUrl(entry.header_section.background_image) }});">
+    <div class="banner-wrap text-center">
+        <div class="banner-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                        <div class="headers">
+                            <h1>{{entry.header_section.title}}</h1>
+                        </div>
+                        <div class="header-desc">
+                            <p>{{entry.header_section.desc}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="secondary-pages-content fixed-sub-menu" ng-controller="savingCal">
+      <div class="col-md-12">
+          <div class="subnav-head subnav-scroll clearfix" id="header2">
+              <!-- Nav tabs -->
+              <div class="sub-nav-wrapper">
+                <ul class="action-menu">
+                    <li><a href="{{entry.sub_nav_section.url}}"><img alt="{{entry.sub_nav_section.logo.title}}" src="{{AssetUrl(entry.sub_nav_section.logo)}}"/></a></li>
+                    <li><a href="{{SeoUrl(entry.sub_nav_section.sub_nav.menu.href)}}">{{entry.sub_nav_section.sub_nav.menu.title}}</a> / <span class="breadcrum">{{entry.sub_nav_section.sub_nav.sub_menu.title}}</span></li>
+                </ul>
+              </div>
+          </div>
+      </div>
+    <!-- <div ng-include="'/static/static/app/partials/savings_calculator/_savingsCalculator.html'"></div> -->
+    <div ng-include="'/app/partials/savings_calculator/savingsCalculator.html'"></div>
+  </div>
+</div>
+<script type="text/javascript">
+      $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+            $('.subnav-scroll').css('position','fixed');
+            if($(window).width() < 992){
+              $('.cost-comparison-header').addClass('sticky-pricing-header');              
+            }
+            else{
+              $('.cost-comparison-header').removeClass('sticky-pricing-header');  
+            }
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+            $('.cost-comparison-header').removeClass('sticky-pricing-header');
+        }
+    });
+</script>
+{% include "partials/footer_global.html" %} 
+{% endblock %}

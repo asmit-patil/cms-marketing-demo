@@ -1,0 +1,158 @@
+{% extends "layouts/default.html" %} 
+{% block content %}
+{% set header = get('blog_header')%} 
+{% set banner = get('blog_home')%} 
+{% set title = entry.title %}
+<header class="header blog-header header-dark clearfix">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{SeoUrl(header.logo_section.link)}}"><img alt="{{header.logo_section.logo.title}}" src="{{AssetUrl(header.logo_section.logo_black)}}"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <!-- <ul class="nav navbar-nav main">
+                {% for nav in header.nav_section.nav_menu %}
+                {% set new_tab = helpers.checkTarget(nav.open_in_a_new_tab) %}
+                {% if nav.sub_menu.length > 0 %}
+                <li class="dropdown">
+                    <a {{new_tab}} href="{% if nav.title == 'Company' %} {{nav.link}} {% else %} javascript:void(0) {% endif %}" class="dropdown-toggle" data-toggle="dropdown" title="{{nav.title}}">{{nav.title}} <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                          {% for sub in nav.sub_menu %}
+                         <li><a href="{{SeoUrl(sub.link)}}">{{sub.title}} </a></li>
+                          {% endfor %}
+                      </ul>
+                </li>
+                {% else  %}
+                <li  class="dropdown main-menu"><a {{new_tab}} class="dropdown-toggle" href="{%- if nav.title == 'Log in' -%} {{nav.link}}{%- else -%}{{SeoUrl(nav.link)}}{%- endif -%}">{{nav.title}}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul> -->
+
+           <div class="navbar-form navbar-right">
+              <form id="mktoForm_1037" class="clearfix blog-mkto-form"></form>              
+            </div>
+        </div>
+      </div>
+    </nav>
+</header> 
+<div class="main-wrapper blog-single-entry">
+    <div class="blog-container" id="test">
+        {% include 'partials/category.html' %}
+        <div class="container">
+        <!--singlepost-->
+	        <div class="blog-thumbnail clearfix">
+	                <div class="col-lg-8 col-md-7 col-sm-12 blog-meta-info">
+	                    <h1 class="disqus-comment-count post-title" data-disqus-identifier="article_1_identifier" >{{entry.title}}</h1>
+	                    <p class="post-data">
+	                        <span class="post-date"><time datetime="{{moment(entry.date).format('MM/DD/YYYY')}}" >{{moment(entry.date).format('MMM Do YYYY')}}</time>,
+	                        </span>{% for author in entry.author %}<span class="post-author" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href={{appendBlogUrl("/author/"+replacespace(author.title))}} rel="author"><span itemprop="name">{{author.title}}</a></span> {% if not loop.last %},{% endif %} {% endfor%}
+	                    </p>
+	                    <div class="category-list">
+	                        {% for cat in entry.category %}
+	                        <a href={{appendBlogUrl( "/category/"+ replacespace(cat.title))}} class="category">{{cat.title}}</a> {% endfor %}
+	                    </div>
+	                </div>
+	                <div itemprop="image" itemscope itemtype="http://schema.org/ImageObject" class="col-lg-4 col-md-5 col-sm-12 padding-zero thumbnail-img">
+	                    <img class="img-responsive" alt="{{entry.image.title}}" src="{{AssetUrl(entry.image)}}">
+	                    <span itemprop="url" style="display:none;">{{host}}{{getAssetUrl(entry.image)}}</span>
+	                    <meta itemprop='width' content='522' />
+	                    <meta itemprop='height' content='348' />
+	                </div>
+	        </div>
+        
+            <main class="single-post">             
+                <div  class="single-wrap clearfix">                
+                    <div class="post-content clearfix" itemprop="mainEntityofPage">
+                        <div class="container">  
+                            <!-- <div class="col-md-2 col-sm-12 col-xs-12">
+                                {#{% include "partials/social-sharing.html" %}#}                               
+                            </div> -->          
+                            <div class="col-md-12 col-sm-12 col-xs-12">     
+                                <p>{{(entry.body)}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- end single post -->
+            <!-- comment section -->
+           <!--  <div class="comments-section">
+                <div class="container">
+                    <div id="disqus_thread"></div>
+                    <script>                   
+                    (function() { // DON'T EDIT BELOW THIS LINE
+                        var d = document,
+                            s = d.createElement('script');
+
+                        s.src = '//builtio.disqus.com/embed.js';
+
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                </div>
+            </div> -->
+            <!--end comment section -->
+        </div>        
+    </div>
+</div>
+
+<div class="sticky-container">
+    {% include "partials/social-sharing.html" %}
+</div>
+
+{% if entry.related_posts_section.related_posts.length != 0 %}
+<div class="popular-post-section featured-gray-block">
+    <div class="container">
+        <div class="section-title">
+            <h2 class="text-center">Related Posts</h2>
+        </div>
+        <div class="row"> 
+            {% for pop in entry.related_posts_section.related_posts %}    
+            {% if pop.add_post[0].title | lower != title | lower %}
+            <a href="{{pop.add_post[0].url}}" class="col-md-4 col-sm-4 col-xs-12">
+                <div class="pp-tile">
+                    <div class="tile-bg" title="{{pop.add_post[0].image.title}}" style="background-image: url('{{getAssetUrl(pop.add_post[0].image)}}');"> 
+                    </div>
+                    <div class="tile-content">
+                        <h5>{{ pop.add_post[0].title | truncate(75,false,'...')}}</h5>
+                        <p class="author">{{pop.add_post[0].author[0].title}}</p>
+                    </div>
+                </div>
+            </a>            
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+<script type="text/javascript">
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.blog-header').height())) {
+            $('.subnav-scroll').css('position','fixed');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    });
+</script>
+<script>MktoForms2.loadForm("//app-sj21.marketo.com", "489-WNI-383", 1037,function(form){
+  form.getFormElem().find('input[type="email"]').closest('.mktoFormRow').addClass('mkto-email-wrapper');
+  form.getFormElem().find('#Email').css({'color':'black','border-color':'#d6cccc'})
+  form.getFormElem().find('#Email').on('focus',function(){
+    $(this).css('border-bottom','1px solid black');
+  })
+    form.getFormElem().find('#Email').on('focusout',function(){
+    $(this).css('border-bottom','1px solid #fff');
+    $(this).css({'border-color':'#d6cccc','border-width':'0 0 2px'});
+  })
+});
+</script>
+{% include "partials/footer_global.html" %} 
+{% endblock %}

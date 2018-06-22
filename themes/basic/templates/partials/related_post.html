@@ -1,0 +1,28 @@
+{% set related = get('blog_related_posts') %}
+<!-- related posts -->
+{% set count = 1 %}   
+<div class="popular-post-section featured-gray-block">
+    <div class="container">
+        <div class="section-title">
+            <h2 class="text-center">{{related.title}}</h2>
+        </div>
+        <div class="row flex-parent"> 
+            {% for pop in related.related_posts_section.related_posts %}    
+            {% if pop.add_post[0].title | lower != title | lower and count <= 3 %}
+            {% set count = increment(count)%}
+            <a href="{{pop.add_post[0].url}}" class="col-md-4 col-sm-4 col-xs-12 flex-child">
+                <div class="pp-tile">
+                    <div class="tile-bg" style="background-image: url('{{getAssetUrl(pop.add_post[0].image)}}');"> 
+                    </div>
+                    <div class="tile-content">
+                        <h5>{{ pop.add_post[0].title | truncate(60,false,'...')}}</h5>
+                        <p class="author">{{pop.add_post[0].author[0].title}}</p>
+                    </div>
+                </div>
+            </a>            
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- related posts -->

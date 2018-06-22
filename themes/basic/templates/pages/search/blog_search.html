@@ -1,0 +1,95 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+{% include "partials/blog_header.html" %} 
+{% set banner = get('blog_home')%} 
+{% set posts =entry.posts %} 
+{% set author = entry.author %} 
+{% set count = entry.count %}
+<div class="main-wrapper transparent-header">
+    <section class="secondary-hero-banner" style="background-image:url({{getAssetUrl(banner.banner_section.background_image)}});">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <div class="headers">
+                                <h1>{{banner.banner_section.title}}</h1>
+                            </div>
+                            <div class="header-desc">
+                                <p>{{banner.banner_section.desc}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--hero-banner -->
+    <div class="blog-container fixed-sub-menu">
+        {% include 'partials/category.html' %}
+        <div class="blog-content by-author search-section-wrap">
+            <div class="container">
+                <div class="author-archive">
+                    <h2 class="page-title">{{count}} Results for <span class="result-name">{{entry.query | escape}}</span></h2>
+                    <div class="post-wrap">
+                        {% set searchcount = 0 %} 
+                        {% if posts.length %} 
+                        {% for post in posts %}
+                        {% set searchcount = searchcount+1 %} 
+                        {% if searchcount < 11 %} 
+                         <article class="post" itemscope itemtype="http://schema.org/Article">
+                            <h3 class="post-title"><a href={{post.url}} class="title-refer"><span itemprop="headline mainEntityOfPage">{{post.title}}</span></a></h3>
+                            <p class="post-data">
+                                <span class="post-date"><time datetime="{{moment(post.date).format('MM/DD/YYYY')}}" itemprop="datePublished dateModified">{{moment(post.date).format('MMM Do YYYY')}}</time>,</span> {% for author in post.author %}
+                                <span class="post-author" itemprop="author" itemscope itemtype="https://schema.org/Person"><a href={{appendBlogUrl("/author/"+replacespace(author.title))}} rel="author"><span itemprop="name">{{author.title}}</span></a>
+                                </span>
+                                {% if not loop.last %},{% endif %} {% endfor%}
+                            </p>
+                            <div class="post-content">                            
+                                <span>{{post.body | truncate(140,true,'...')}}</span>
+                                <span class="read-more"><a href={{post.url}}>Read More</a></span>
+                            </div>                           
+                            </article>
+                            {% endif %} {% endfor %} {% else %}
+                            <div>
+                                <h3 class="post-title">No Results Found!</h3></div>
+                            {% endif %}
+                    </div>
+                    {% if searchcount > 10 %}
+                    <div class="load-more-wrap text-center">
+                        <button class="search-loadmore cta cta-primary">Load more posts</button>
+                    </div>
+                    {% endif %}
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </div>
+            </div>
+            <!--container -->
+        </div>
+        <!--blog -->
+    </div>
+</div>
+<script type="text/javascript">
+    // $(window).scroll(function() {
+    //     if ($(window).scrollTop() >= ($('.secondary-hero-banner').height()+ 130)) {
+    //         $('.subnav-scroll').css('position','fixed');
+    //     } else {
+    //         $('.subnav-scroll').css('position','absolute');
+    //     }
+    // });
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+            $('.subnav-scroll').css('position','fixed');
+        // console.log('in');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    });
+</script>
+{% include "partials/footer_global.html" %} 
+{% endblock %}

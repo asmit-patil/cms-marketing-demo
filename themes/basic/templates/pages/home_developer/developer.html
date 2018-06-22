@@ -1,0 +1,36 @@
+{% set developer = get("header_developer_subpage")%}
+<section class="language-support">
+    <div class="container">
+        <div class="text-block row">
+            <div class="col-md-offset-2 col-md-8">
+                <p class="section-title">{{developer.integration_section.title}}</p>
+                <h2>{{developer.integration_section.sub_title}}</h2>
+                <p>{{developer.integration_section.desc}}</p>
+            </div>
+        </div>
+        <div class="img-gallery row">
+            {% for lang in developer.integration_section.integrations_logo %}
+            <div class="col-md-2 col-sm-2 col-xs-12">
+                <div class="service-logos">
+                    <img class="img-responsive" src="{{getAssetUrl(lang.logo)}}">
+                </div>
+                <p>{{lang.title}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="sign-up">
+    <div class="container">
+        <div class="text-block">
+            <div class="content">
+                <h2>{{developer.try_free_section.title}}</h2>
+                <p>{{developer.try_free_section.desc}}</p>
+                {% for cta in developer.try_free_section.cta %}
+                <a title="{{cta.title}}" href="{{cta.link}}" class="cta cta-secondary">{{cta.title}}</a> 
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+</div>

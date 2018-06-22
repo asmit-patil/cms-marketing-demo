@@ -1,0 +1,143 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+{% include "partials/header_global_black.html" %} 
+<!-- <script type="text/javascript">
+   window.data = {{entry.question_section | json}}
+</script> -->
+<!-- <section>
+    <div class="container" ng-app="roiCalculator">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" ng-controller="roiController">
+                <form class="questions-wrap">
+                    <ol>
+                       <li ng-repeat="item in items">
+                            <div class="question" data-ng-init="questionIndex = $index" ng-repeat="question in item">
+                                <h3>[[questionIndex+1]] [[question.title]]</h3>  
+                                <ul data-ng-init="optionIndex = $index" ng-repeat="qs in question.options_value">                 
+                                    <li><input type="radio" ng-click="checkContent(content)" name="radio_[[questionIndex]]" value="[[qs.value]]" ng-model="content">[[qs.title]]
+                                        <ul ng-repeat="sub in qs.sub_options">
+                                            <li ng-if="optionIndex == valueIndex && newers == true"><input type="checkbox" name="1" value="[[sub.title]]"/>[[sub.title]]</li>
+                                        </ul> 
+                                    <input class="" ng-show="other && content=='Other'" type="text" autocomplete="off"/>
+                                </li>                
+                                </ul> 
+                            </div> 
+                        </li>                  
+                    
+                      <li>
+                            <div class="question">
+                                <h3>What is your name?</h3>
+                                <span><input type="text" placeholder="First name"></span>
+                                <span><input type="text" placeholder="Last name"></span>
+                            </div>
+                        </li>                        
+                        <li>
+                            <div class="question">
+                                <h3>What is your email?</h3>
+                                <span><input type="text" ></span>
+                            </div>
+                        </li>
+                    </ol>                    
+                </form>
+            </div>
+        </div>
+    </div>
+</section> -->
+<section class="roi-calc-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+            <form id="mktoForm_1170" data-href="{{entry.link}}"></form>        
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="/static/js/roi-calculator.js"></script>
+<script> 
+    MktoForms2.loadForm("//app-sj21.marketo.com", "489-WNI-383", 1170,function(form){     
+         //  $(".mktoFormRow").each(function(i) {
+         //    if(i == 0){
+         //     $(this).addClass('active firstload');
+         //    }
+         // });        
+        $('.mktoRadioList').change(function(){         
+        var nextQuestion = $(this).parent().parent().parent().next().addClass('active');   
+         if($("input[name='OtherProperties']:checked").val() == "Other") { 
+           $('input[name=AdditionalProperties]').change(function(){ 
+             var nextQuestion1 = $(this).parent().parent().parent().next().addClass('active');
+                $('html, body').animate({
+                scrollTop: nextQuestion1.offset().top-150
+                }, 1000);
+                $("input[name='OtherProperties']:checked").val("")
+                  $(this).parent().parent().parent().next().prev().addClass('addmargin');
+             });                  
+          }else if($("input[name='HeadlessCMSKnowledge']:checked").val() == "Very familiar"        ||
+                $("input[name='HeadlessCMSKnowledge']:checked").val() == "Moderately familiar" ||
+                $("input[name='HeadlessCMSKnowledge']:checked").val() == "Not familiar at all"){
+                   $('html, body').animate({
+                scrollTop: nextQuestion.offset().top-60
+                }, 1000);
+                 $(this).parent().parent().parent().next().prev().addClass('addmargin');  
+                   // $("input[name='HeadlessCMSKnowledge']:checked").val("")
+          }          
+         else{ 
+          if (nextQuestion.length !== 0) {
+                $('html, body').animate({
+                scrollTop: nextQuestion.offset().top - 150
+                }, 1000);                 
+            } 
+           $(this).parent().parent().parent().next().prev().addClass('addmargin');  
+         } 
+       
+        });
+        // $("input[name='HeadlessCMSKnowledge']:checked").change(function(){            
+        // var nextQuestion =  $(this).parent().parent().parent().next().addClass('active');
+        //        $('html, body').animate({
+        //         scrollTop: nextQuestion.offset().top-100
+        //         }, 1000);
+        //  });        
+        $('.mktoCheckboxList').change(function(){
+               $(".mktoFormRow").each(function(keys) {               
+               if(keys == 1){                      
+                 var nextQuestion = $(this).addClass('active');
+                   if (nextQuestion.length !== 0) {
+                        $('html, body').animate({
+                            scrollTop: nextQuestion.offset().top - 150
+                        }, 1000);
+                    } 
+                    $(this).prev().addClass('addmargin');             
+                 }
+            });
+        });
+        $('input[name=FirstName]').keyup(function(){
+         $(this).parent().parent().parent().next().addClass('active');
+          // if (nextQuestion.length !== 0) {
+          //               $('html, body').animate({
+          //                   scrollTop: nextQuestion.offset().top
+          //               }, 1000);
+          //           } 
+        });
+          $('input[name=LastName]').keyup(function(){
+          $(this).parent().parent().parent().next().addClass('active');
+          // if (nextQuestion.length !== 0) {
+          //               $('html, body').animate({
+          //                   scrollTop: nextQuestion.offset().top
+          //               }, 1000);
+          //           } 
+        });
+       
+       
+    localStorage.removeItem("result");    
+    form.onSubmit(function(){
+       roical();
+    });
+    form.onSuccess(function(values, followUpUrl){          
+        var redirectUrl = form.getFormElem().attr('data-href');      
+        location.href = redirectUrl; 
+     return false;
+    });
+});
+</script>
+{% include "partials/footer_global.html" %}
+{% endblock %}
+

@@ -1,0 +1,118 @@
+{% extends "layouts/default.html" %}
+{# display page values using the {{entry.field_id}} tag. #}
+{% block content %}
+<div class="main-wrapper orphan-page webinars">
+	<header role="navigation" class="header header-dark clearfix">
+		<div class="container">
+			<div class="navbar-header">
+				<div class="navbar-brand">
+					<a class ="inactiveLink" title="contentstack.com" href="">
+						<img alt="{{entry.header_section.logo.title}}" src="{{AssetUrl(entry.header_section.logo)}}"/>
+					</a>
+				</div>
+			</div>
+			<div class="casestudy-text">{{entry.header_section.text}}</div>
+		</div>
+	</header> <!--/header -->
+	{% include "partials/resources_casestudy_subheader.html" %}	
+<!-- 	<div class="secondary-hero-banner hero-banner-wrap">
+		<div class="banner-wrap text-center" title="{{entry.main_banner.background_image.title}}" style="background-image: url({{AssetUrl(entry.main_banner.background_image) }});">		
+			<div class="banner-content clearfix">		
+				<div class="container">
+					<div class="row">
+						<div class="center-img">
+							<img src="{{getAssetUrl(entry.main_banner.logo)}}">
+						</div>
+						<div class="banner-text">
+							{{entry.main_banner.title}}
+						</div>
+					</div>
+				</div>
+				<div class="logo-tags">
+						{% for logo in entry.main_banner.product_logo %}
+						<a title="{{logo.title}}" href="{{logo.link}}">					
+						<img src="{{getAssetUrl(logo.image)}}">
+					    </a>
+						{% endfor %}			
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<div class="secondary-pages-content fixed-sub-menu">
+		<div class="container">
+			<div class="row relative">
+				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 orphan-page-info">
+<!-- 					<div class="video-iframe">
+                        <span class="play-icon">
+                        	<img alt="play-icon" src="/assets/blt931b19ff311ccdfb/play-icon.png" />
+                        </span>
+                        <div class="video-bg" style="background-image:url({{AssetUrl(entry.webinar_details.background_image)}});">
+                            <div class="dark-overlay"></div>
+                        </div>
+                    </div> -->
+                    <div class="webinar-details">                    	
+	                    <h1>{{entry.webinar_details.title}}</h1>
+						{{entry.webinar_details.paragraph_section}}
+                    </div>
+                    <div class="row">
+					{% for img in entry.webinar_details.host_list %}
+						<div class="host-list col-md-6 col-sm-6 col-xs-12">
+							<div class="host-img">
+								<img alt="{{img.title}}" src="{{getAssetUrl(img.image)}}"/>
+							</div>
+							<div class="col-md-10 col-sm-10 col-xs-12">
+								<h4>{{img.title}}</h4>
+								<p>{{img.designation}}</p>
+							</div>
+						</div>
+					{% endfor %}
+					</div>
+					<div class="sticky-container">
+					    {% include "partials/social-sharing.html" %}
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					
+					<div class="orphan-page-form">
+						<div class="center-img">
+							<img alt="{{entry.main_banner.logo.title}}" src="{{AssetUrl(entry.main_banner.logo)}}"/>
+						</div>
+						<h3>{{entry.form_section.title}}</h3>						
+						<div class="resc-mkt-form">
+							<form id="mktoForm_1031" class="demo-mkt-form" data-href="{{entry.form_section.cta.link_2}}" data-pdf="{{SeoUrl(entry.form_section.cta.link)}}"></form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+<script>
+	MktoForms2.loadForm("//app-sj21.marketo.com", "489-WNI-383", 1031, function(form){
+			form.getFormElem().find('select').after('<i class="icon icon-down"></i>'); 
+			$('#Company_Size__c, #Industry').on('change', function() {
+				form.getFormElem().find('select').after('<i class="icon icon-down"></i>');        
+			});
+
+			form.onSubmit(function(){
+				form.getFormElem().find('select').after('<i class="icon icon-down"></i>');
+				visitorIDtrack();             
+			});
+			form.onSuccess(function(values, followUpUrl){
+	      	var redirectUrl = form.getFormElem().attr('data-href');
+	      	location.href = redirectUrl;  
+	      	//return false to prevent the submission handler continuing with its own processing  
+	      	return false;  
+    	});
+	});
+</script>
+{% include "partials/footer_cs_email_template.html" %} 
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.video-iframe').click(function(){
+	    $('.orphan-page-form #FirstName').focus();
+	});
+});
+</script>
+{% endblock %}

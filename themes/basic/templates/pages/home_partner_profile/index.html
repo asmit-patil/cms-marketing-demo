@@ -1,0 +1,82 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+{% include "partials/header_global_black.html" %}
+{% set sub = get('home_resources_case_studies_subheader')%}
+<div class="main-wrapper orphan-page">
+	<div class="col-md-12">
+    <div class="subnav-head subnav-scroll clearfix">
+        <!-- Nav tabs -->
+        <div class="sub-nav-wrapper">
+            <ul class="action-menu">
+                <li><a href="{{SeoUrl(sub.sub_nav_section.url)}}"><img alt="{{sub.sub_nav_section.logo.title}}" src="{{AssetUrl(sub.sub_nav_section.logo)}}"/></a></li>
+                <li><a href="{{SeoUrl('/our-partners')}}">Partners</a> <span class="breadcrum"></span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+	<div class="secondary-pages-content fixed-sub-menu partner-details-wrap">
+		<div class="container">
+			<div class="row relative">
+				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 partner-info">
+					{{entry.partner_details_section.details}}
+					<div class="partner-form">						
+						<p class="form-title">{{entry.form_section.title}}</p>
+						<h3>{{entry.form_section.form_title}}</h3>
+						<form id="get_form_partner" target="iframe" class="form-horizontal" action="https://builtio.activehosted.com/proc.php" method="POST">
+						 <input type="hidden" name="u" value="{{entry.form_section.form_value}}" />
+							  <input type="hidden" name="f" value="{{entry.form_section.form_value}}" />
+							  <input type="hidden" name="s" />
+							  <input type="hidden" name="c" value="0" />
+							  <input type="hidden" name="m" value="0" />
+							  <input type="hidden" name="act" value="sub" />
+							  <input type="hidden" name="v" value="2" />
+							<div class="form-group">
+								<input type="text" class="form-control" name="firstname" placeholder="first name" required>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" name="lastname" placeholder="last name" required>
+							</div>
+							<div class="form-group">
+								<input id="ayla-email" type="email" class="form-control" name="email" placeholder="work email" required>
+							</div>								
+							<div class="form-group">
+								<input type="text" class="form-control" name="organization" placeholder="company">
+							</div>		
+							
+							<button data-loading-text="<i class='icon-spinner spin'></i> Downloading..." data-href="{{entry.form_section.cta.link}}" title="{{entry.form_section.cta.title}}" class="cta cta-primary partner-thank" name="submit">get in touch</button>
+						</form>
+					</div>
+					<iframe id="getiframepartner" name="iframe" class="hidden"></iframe>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 partner-details">
+					<div class="center-img">
+						<img alt="{{entry.partner_details_section.partner_details.logo.title}}" src="{{ AssetUrl(entry.partner_details_section.partner_details.logo)}}"/>
+					</div>
+
+					<div class="level">
+					<p>Partner Level:</p>
+						{% if entry.partner_details_section.partner_details.partner_level == "1" %}
+						<span class="stars level-1">{{Astrick(entry.partner_details_section.partner_details.partner_level)}}</span>
+						{% endif %}	
+						{% if entry.partner_details_section.partner_details.partner_level == "2" %}
+						<span class="stars level-2">{{Astrick(entry.partner_details_section.partner_details.partner_level)}}</span>
+						{% endif %}
+						{% if entry.partner_details_section.partner_details.partner_level == "3" %}
+						<span class="stars level-3">{{Astrick(entry.partner_details_section.partner_details.partner_level)}}</span>
+						{% endif %}
+					</div>
+					<a class="comapany-link" target="_blank" href="{{entry.partner_details_section.partner_details.link}}">{{entry.partner_details_section.partner_details.link}}</a>
+					{{entry.partner_details_section.partner_details.address}}
+				</div>
+			</div>
+		</div>
+		<!-- <div class="disclaimer-para">
+			<div class="container">
+				{{entry.disclaimer_section.desc}}
+			</div>
+		</div> -->
+	</div>
+</div>	
+{% include "partials/footer_global.html" %}
+{% endblock %}
+

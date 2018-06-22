@@ -1,0 +1,156 @@
+{% extends "layouts/default.html" %} {% block content %} {% include "partials/header_global.html" %}
+<div class="main-wrapper transparent-header partner-benifit">
+    <section class="secondary-hero-banner" title="{{entry.banner_section.background_image.title}}" style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <div class="headers">                                
+                                <h1>{{entry.banner_section.title}}</h1>
+                            </div>
+                            <div class="header-desc">
+                                <p>{{entry.banner_section.desc}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="tab-section-wrap feature-pg-wrap fixed-sub-menu">
+        <section class="best-feature-section">
+            <div class="container">
+                <div class="col-md-12 section-row">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                            <h2 class="text-center">{{entry.partner_section.title}}</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="features-wrap clearfix">                            
+                            {% for feature in entry.partner_section.feature %}
+                            <div class="col-md-3 col-sm-3 col-xs-12 text-center">
+                                <div class="heading-icon">
+                                    <img alt="{{feature.image.title}}" src="{{AssetUrl(feature.image)}}">
+                                </div>
+                                <h3>{{feature.title}}</h3>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-row gray-bg solution-partner clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 key-info">
+                        <h2 class="text-center">{{entry.partner_benefits_section.title}}</h2>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
+                        {% for solutions in entry.partner_benefits_section.benefits %}
+                        <div class="row flex-parent feature-row">
+                            <div class="rigth col-md-6 col-sm-12 col-xs-12 flex-child graphic {{solutions.css_class}}">
+                                <img alt="{{solutions.file.title}}" class="img-responsive" src="{{AssetUrl(solutions.file)}}">
+                            </div>
+                            <div class="left col-md-6 col-sm-12 col-xs-12 text-left flex-child content {{solutions.css_class2}}">
+                                <h3>{{solutions.title}}</h3>
+                                <p class="info">{{solutions.desc}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-row portal-wrap clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                <h2>{{entry.partner_program_section.title}}</h2>
+                                <p class="text-center">{{entry.partner_program_section.desc}}</p>
+		                        <div class="action-link">
+			                        <a href="{{entry.partner_program_section.cta.link}}" class="cta cta-primary" alt="{{entry.partner_program_section.cta.title}}">{{entry.partner_program_section.cta.title}}</a>
+		                    	</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script type="text/javascript">
+    // $(window).scroll(function() {
+    //     if ($(window).scrollTop() >= ($('.secondary-hero-banner').height() + 130)) {
+    //         $('.subnav-scroll').css('position','fixed');
+    //     } else {
+    //         $('.subnav-scroll').css('position','absolute');
+    //     }
+    // });  
+    $(document).ready(function() {
+        subNavActiveMenu();
+    });
+    var subNavActiveMenu = function() {
+     //endblog 
+        $('.one-pager-anchor a').click(function() {
+            // $('.subnav-head').addClass('clicked');
+            $('.one-pager-anchor li').removeClass('active');
+            $(this).parent('li').addClass('active');
+            $('html, body').animate({
+                scrollTop: $($(this).attr('href')).offset().top
+            }, 800);
+            return false;
+        });
+    }
+
+    //sub fixed menu
+    var lastId,
+     topMenu = $(".one-pager-anchor"),
+     topMenuHeight = topMenu.outerHeight()+1,
+     // All list items
+     menuItems = topMenu.find("a"),
+     // Anchors corresponding to menu items
+     scrollItems = menuItems.map(function(){
+       var item = $($(this).attr("href"));
+        if (item.length) { return item; }
+     });
+    $( window ).scroll(function() {
+        var fromTop = $(this).scrollTop()+topMenuHeight;
+       
+       // get id of current scroll item
+       var cur = scrollItems.map(function(){
+         if ($(this).offset().top < fromTop)
+           return this;
+       });
+       // Get the id of the current element
+       cur = cur[cur.length-1];
+       var id = cur && cur.length ? cur[0].id : "";
+       
+       if (lastId !== id) {
+           lastId = id;
+           // Set/remove active class
+           menuItems
+             .parent().removeClass("active")
+             .end().filter("[href=#"+id+"]").parent().addClass("active");
+       }              
+    }); 
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+            $('.subnav-scroll').css('position','fixed');
+        // console.log('in');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    });
+</script>
+{% include "partials/footer_global.html" %} {% endblock %}

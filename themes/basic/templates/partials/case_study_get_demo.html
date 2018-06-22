@@ -1,0 +1,32 @@
+ {% set contact = get('home_contact_us_business')%} {% set entry = get('case_study_get_demo') %}
+<div class="col-md-8 col-md-offset-2 col-xs-12 text-center">
+    <h2 class="text-center head-text">{{entry.contact_us_section.title}}</h2>
+    <div class="action-links">
+        <button id="signup" title="Request a demo" class="cta cta-primary">{{entry.contact_us_section.button_text}}</button>
+        <span class="thank-you-new hidden">
+            <div class="col-md-12 text-center">
+                <div id="home-thank" class="thank-content-wrap">
+                    <p class="text-center icon-correct">
+                        <img alt="{{entry.contact_us_section.thank_you.image.title}}" src="{{AssetUrl(entry.contact_us_section.thank_you.image)}}">
+                    </p>
+                    <h2>{{entry.contact_us_section.thank_you.title}} <span class="uname"></span></h2>
+    </div>
+    <p>{{entry.contact_us_section.thank_you.text}}</p>
+</div>
+</span>
+<div id="contact-global" class="contact-us-form text-left" style="display: none">   
+    <form id="mktoForm_1030"></form>
+</div>
+<iframe id="iframe_contactus_new" name="iframe_contactus_new" class="hidden"></iframe>
+</div>
+<p class="text-center cta-text">{{entry.contact_us_section.contact_text.title}} <a href="{{SeoUrl(entry.contact_us_section.contact_text.cta.href)}}" class="action-links">{{entry.contact_us_section.contact_text.cta.title}}</a></p>
+</div>
+<script>MktoForms2.loadForm("//app-sj21.marketo.com", "489-WNI-383", 1030, function(form){    
+    form.onSuccess(function(values, followUpUrl){
+      form.getFormElem().hide();
+      var tyPagepaget = document.getElementsByClassName('thank-you-new');
+      tyPagepaget[0].classList.remove('hidden');
+      return false;
+    });
+  });
+</script>

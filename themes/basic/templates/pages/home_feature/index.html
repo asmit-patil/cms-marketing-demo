@@ -1,0 +1,315 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+{% include "partials/header_global.html" %}
+
+<div class="main-wrapper transparent-header">
+  <section class="secondary-hero-banner" title="{{entry.banner_section.background_image.title}}" style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">
+    <div class="banner-wrap text-center">
+      <div class="banner-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+              <div class="headers">                                
+                <h1>{{entry.banner_section.title}}</h1>
+              </div>
+              <div class="header-desc">
+                <p>{{entry.banner_section.desc}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="tab-section-wrap feature-pg-wrap fixed-sub-menu">
+    <div class="col-md-12">
+      <div class="subnav-head subnav-scroll clearfix">
+        <!-- Nav tabs -->
+        <div class="sub-nav-wrapper">
+          <ul class="action-menu">
+            <li><a href="{{SeoUrl(entry.sub_nav_section.link)}}"><img alt="{{entry.sub_nav_section.logo.title}}" src="{{AssetUrl(entry.sub_nav_section.logo)}}"/></a></li>
+            <li><a class="inactiveLink" href="">{{entry.sub_nav_section.title}}</a></li>
+          </ul>
+          <ul class="tab-sub-nav one-pager-anchor">
+            {% for sub in entry.sub_nav_section.sub_nav %}
+            <li {% if loop.index==1 %} class="active" {% endif %}><a href="{{sub.link}}">{{sub.title}}</a></li>
+            {% endfor %}
+          </ul>
+          <ul class="visible-xs visible-sm hidden-md hidden-lg">
+            <button type="button" class="navbar-toggle">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <section class="section-row feature-section" id="1">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+            <h2 class="text-center">{{entry.collaboration_section.title}}</h2>
+            <p class="text-center">{{entry.collaboration_section.desc}}</p>
+          </div>
+        </div>
+        <div class="features-section-tab">
+          <ul class="row nav nav-tabs nav-tabs-hover features-wrap">
+            {% for item in entry.collaboration_section.collaboration %}
+            <li  class="col-md-4 col-sm-6 col-xs-12 features-col {% if loop.index == 1 %} active {% endif %}">
+              <a class="features" data-toggle="tab" href="#features-tab-{{loop.index}}">{{item.title}}</a>
+            </li>
+            {% endfor %}                 
+          </ul>
+          <div class="tab-content slider-info-sec">
+            {% for item in entry.collaboration_section.collaboration %}
+            <div id="features-tab-{{loop.index}}" class="tab-pane  {% if loop.index == 1 %}  active {% endif %}">
+              <div class="row">
+                <div class="flexbox flex-vcenter flex-wrap">
+                  <div class="col-md-5 col-sm-12 col-xs-12 flex-item slide-desc">
+                    <p>{{item.desc}}</p>                            
+                  </div>
+                  <div class="col-md-7 col-sm-12 col-xs-12 flex-item">
+                    <img alt="{{item.image.title}}" class="img-responsive features-slide-img" src="{{AssetUrl(item.image)}}"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}                 
+          </div>
+          <!-- end tabcont -->            
+        </div>
+      </div>
+    </section> 
+    <section class="section-row gray-bg" id="2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 margin-bottom-lg">
+              <h2 class="text-center">{{entry.better_cms_section.title}}</h2>
+              <p class="text-center">{{entry.better_cms_section.desc}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          {% for dev in entry.better_cms_section.better_cms %}
+          <div class="col-md-4 col-sm-4 col-xs-12 features-sec-col">
+            <div class="heading-icon">
+              <img alt="{{dev.image.title}}" src="{{AssetUrl(dev.image)}}">
+            </div>
+            <h3>{{dev.title}}</h3>
+            <p>{{dev.desc}}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    <section class="section-row clearfix" id="3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 margin-bottom-lg">
+            <h2 class="text-center">{{entry.enterprise_section.title}}</h2>
+            <p class="text-center">{{entry.enterprise_section.desc}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            {% for ind in entry.enterprise_section.enterprise%}
+            <div class="feature-point clearfix col-md-6 ">
+              <div class="heading-icon col-md-3 col-sm-3 col-xs-12 text-right">
+                <img alt="{{ind.image.title}}" src="{{AssetUrl(ind.image)}}">
+              </div>
+              <div class="icon-info col-md-9 col-sm-9 col-xs-12">
+                <h3>{{ind.title}}</h3>
+                <p>{{ind.desc}}</p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <!-- <div class="col-md-4 col-sm-4 col-xs-12">
+              <img alt="{{entry.enterprise_section.alt_text}}" src="{{getAssetUrl(entry.enterprise_section.video_gif)}}">
+            </div> -->
+        </div>
+      </div>
+    </section>       
+    <section class="section-row gray-bg clearfix" id="4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 margin-bottom-lg">
+            <h2 class="text-center">{{entry.integrations_section.title}}</h2>
+            <p class="text-center">{{entry.integrations_section.desc}}</p>
+          </div>
+        </div>
+        <div class="row">
+          {% for ext in entry.integrations_section.integrations %}
+          <div class="col-md-4 col-sm-4 col-xs-12 features-sec-col">
+            <div class="heading-icon">
+              <img alt="{{ext.image.title}}" src="{{AssetUrl(ext.image)}}">
+            </div>
+            <h3>{{ext.title}}</h3>
+            <p>{{ext.desc}}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    <section class="section-row omni-channel clearfix" id="5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 margin-bottom-lg key-info">
+            <h2 class="text-center">{{entry.content_delivery_section.title}}</h2>
+            <p class="text-center">{{entry.content_delivery_section.desc}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">      
+            <div class="row feature-row features-tab">
+              <div class="flexbox flex-vcenter flex-wrap">                             
+                <div class="left col-md-5 col-sm-12 col-xs-12 text-left content">
+                  <ul class="nav nav-tabs nav-tabs-hover">
+                    {% for omni in entry.content_delivery_section.content_delivery %}
+                    <li {% if loop.index == 1 %} class="active" {% endif %}>
+                      <a data-toggle="tab" href="#featuretab-{{loop.index}}">
+                        <h3>{{omni.title}}</h3>
+                        <p class="info">{{omni.desc}}</p>
+                      </a>
+                    </li>
+                    {% endfor %}                       
+                  </ul>
+                </div>
+                <div class="rigth col-md-7 col-sm-12 col-xs-12 text-center tab-content">        
+                  {% for omni in entry.content_delivery_section.content_delivery %}
+                  <div id="featuretab-{{loop.index}}" class="tab-pane {% if loop.index == 1 %} active {% endif %}">
+                    <img alt="{{omni.file.title}}" class="img-responsive feature-graphic" src="{{AssetUrl(omni.file)}}">
+                  </div>
+                  {% endfor %}  
+                </div>
+              </div>
+            </div>                     
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-row dev-friendly" id="6">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 margin-bottom-lg">
+            <h2 class="text-center">{{entry.developer_friendly_section.title}}</h2>
+            <p class="text-center">{{entry.developer_friendly_section.desc}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="dev-wrap flexbox flex-wrap">                            
+            {% for col in entry.developer_friendly_section.developer_friendly %}
+            <div class="col-md-4 col-sm-4 col-xs-12 dev-service-col">
+              <div class="dev-services" style="">
+                <h3>{{col.title}}</h3>
+                <p>{{col.desc}}</p>
+                <span class="dev-services-icon" title="{{col.image.title}}" style="background-image:url({{AssetUrl(col.image)}}); display:block;"></span>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-row all-feature-wrap clearfix" id="7">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+            <h2 class="text-center">{{entry.all_features_section.title}}</h2>
+            <p class="text-center">{{entry.all_features_section.desc}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 all-features clearfix">
+            {% for ft in entry.all_features_section.all_features %}
+            <ul class="col-md-4 col-sm-6 col-xs-12">
+              <li>{{ft.title}}</li>
+            </ul>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-row contact-us clearfix">
+      <div class="container">
+        <div class="row"> 
+          {% include "partials/get_demo.html" %}
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<script type="text/javascript">
+  // $(window).scroll(function() {
+  //     if ($(window).scrollTop() >= ($('.secondary-hero-banner').height() + 130)) {
+  //         $('.subnav-scroll').css('position','fixed');
+  //     } else {
+  //         $('.subnav-scroll').css('position','absolute');
+  //     }
+  // });  
+  $(document).ready(function() {
+    subNavActiveMenu();
+    $(".content").hover(function(){
+      $('.flyout').removeClass('hidden');
+    },function(){
+      $('.flyout').addClass('hidden');
+    });
+  });
+  var subNavActiveMenu = function() {
+   //endblog 
+   $('.one-pager-anchor a').click(function() {
+          // $('.subnav-head').addClass('clicked');
+          $('.one-pager-anchor li').removeClass('active');
+          $(this).parent('li').addClass('active');
+          $('html, body').animate({
+            scrollTop: $($(this).attr('href')).offset().top
+          }, 800);
+          return false;
+        });
+ }
+
+  //sub fixed menu
+  var lastId,
+  topMenu = $(".one-pager-anchor"),
+  topMenuHeight = topMenu.outerHeight()+1,
+   // All list items
+   menuItems = topMenu.find("a"),
+   // Anchors corresponding to menu items
+   scrollItems = menuItems.map(function(){
+     var item = $($(this).attr("href"));
+     if (item.length) { return item; }
+   });
+   $( window ).scroll(function() {
+    var fromTop = $(this).scrollTop()+topMenuHeight;
+
+     // get id of current scroll item
+     var cur = scrollItems.map(function(){
+       if ($(this).offset().top < fromTop)
+         return this;
+     });
+     // Get the id of the current element
+     cur = cur[cur.length-1];
+     var id = cur && cur.length ? cur[0].id : "";
+     
+     if (lastId !== id) {
+       lastId = id;
+         // Set/remove active class
+         menuItems
+         .parent().removeClass("active")
+         .end().filter("[href=#"+id+"]").parent().addClass("active");
+       }              
+     }); 
+
+   $(window).scroll(function() {
+    if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+      $('.subnav-scroll').css('position','fixed');
+      // console.log('in');
+    } else {
+      $('.subnav-scroll').css('position','absolute');
+    }
+  });
+</script>
+{% include "partials/footer_global.html" %} {% endblock %}

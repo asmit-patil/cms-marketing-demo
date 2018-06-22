@@ -1,0 +1,548 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+{% include "partials/webinar_flag.html" %}
+{% include "partials/header_global.html" %}
+{% set contact = get('home_contact_us_business')%}
+<div class="main-wrapper transparent-header business-view">
+	<section class="business-hero-banner hero-banner" title="{{entry.banner_section.background_image.title}}" style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">    
+		<div class="container">  
+			<div class="hero-content">				
+		   {% for banner in entry.banner_section.banner %} 
+		   <div class="content-holder">
+		   	<div class="headers">
+			   	{% if loop.index == 3 %}			
+				<h1>{{banner.title}}</h1>
+				{% else %}
+				<h2>{{banner.title}}</h2>
+				{% endif %}
+			</div>
+			<div class="header-desc">
+	          	<p>{{banner.desc}}</p>
+	            <div class="action-links">
+					<a title="{{banner.cta.title}}" href="{{SeoUrl(banner.cta.href)}}" class="cta cta-primary" tabindex="0">{{banner.cta.title}}</a>
+	    		</div>
+	    	</div>
+	    	</div>	
+	    	{% endfor %}
+	    	</div>
+			<div class="hero-graphic-img">
+				<img class="mobile-animation" alt="{{entry.banner_section.mobile_view_image.title}}" src="{{AssetUrl(entry.banner_section.mobile_view_image)}}" style="display: none">
+			</div>
+			<div class="hero-graphic hidden-md hidden-sm hidden-xs">
+				<div class="animation-holder">
+					<div class="device-wrap device-wrap-1">
+					<img class="smart-watch" alt="{{entry.banner_section.animation_section.smart_watch.title}}" src="{{AssetUrl(entry.banner_section.animation_section.smart_watch)}}">
+					 <img class="vr" alt="{{entry.banner_section.animation_section.vr.title}}" src="{{AssetUrl(entry.banner_section.animation_section.vr)}}">
+					</div>
+					<div class="device-wrap device-wrap-2">
+						<img class="mobile" alt="{{entry.banner_section.animation_section.mobile.title}}" src="{{AssetUrl(entry.banner_section.animation_section.mobile)}}">
+					    <img class="mobile-code" alt="{{entry.banner_section.animation_section.mobile_code.title}}" src="{{AssetUrl(entry.banner_section.animation_section.mobile_code)}}">
+					    <img class="mobile-apps" alt="{{entry.banner_section.animation_section.mobile_app.title}}" src="{{AssetUrl(entry.banner_section.animation_section.mobile_app)}}">
+					</div>
+					<div class="device-wrap device-wrap-3">
+						<img class="ipad" alt="{{entry.banner_section.animation_section.ipad.title}}" src="{{AssetUrl(entry.banner_section.animation_section.ipad)}}">
+					    <img class="ipad-code" alt="{{entry.banner_section.animation_section.ipad_code.title}}" src="{{AssetUrl(entry.banner_section.animation_section.ipad_code)}}">
+					    <img class="ipad-apps" alt="{{entry.banner_section.animation_section.ipad_apps.title}}" src="{{AssetUrl(entry.banner_section.animation_section.ipad_apps)}}">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section-row clearfix">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="text-center">{{entry.trusted_section.title}}</h2>
+					<div class="logo-row">
+					{% for logo in entry.trusted_section.logo_section -%} 
+						<div class="logo-row-item"> 
+							<img class="img-responsive" alt="{{logo.logo.title}}" src="{{AssetUrl(logo.logo)}}">
+						</div>	
+				    {% endfor %}						
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="stats-wrap">
+					    <div class="communitystats">
+					    	{% for com in entry.trusted_section.community_stats %}
+					        <a href="javascript:void(0)" class="summarylink">
+					            <div class="circle bg-{{com.title}}">
+					                <span class="info-head">{{com.sub_title}}</span>
+					                <span class="info-text">{{com.text}}</span>
+					            </div>
+					            <div class="summarylink-btn">
+					                <p class="col-md-12">{{com.desc}}</p>
+					            </div>
+					        </a>
+					        {% endfor %}					      
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section-row gray-bg clearfix">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<h2 class="text-center">{{entry.audience_section.title}}</h2>
+					<p class="text-center">{{entry.audience_section.desc}}</p>
+				</div>
+			</div>
+            <img class="mobile-play" alt="{{entry.audience_section.mobile_view_image.title}}" style="display: none" src="{{AssetUrl(entry.audience_section.mobile_view_image)}}"/>
+			<div class="cs-playground">
+			    <div class="row">
+			        <div class="col-md-6">
+			            <div class="form">
+			                <div class="form-top">
+			                    <img class="cms-logo" src="../../static/images/business/contentstack-small-logo.svg" alt="Contentstack logo" width="139px" height="24px">
+			                </div>
+			                <form class="playground" enctype="multipart/form-data">
+			                    <div class="form-contents">
+			                        <div class="form-title" >Title
+			                            <input type="text" id="text" class="title-input" name="firstname" value="Steve Jobs" >
+			                        </div>
+			                        <div class="form-description" >
+			                            Description
+			                            <br>
+			                            <textarea type="text" class="description-input" name="lastname" value="">"Simple can be harder than complex; you have to work hard to get your thinking clean to make it simple."</textarea>
+			                        </div>
+			                        <div class="form-file">
+			                            <span class="img-text">Image</span>
+			                            <br>
+			                            <input name="fileToUpload" type="file" accept="image/*"  class="hidden" id="fileToUpload" value ="" >
+			                            <div class="browseFile">Browse File</div>
+			                            <div class="clearfix file-uploaded alert-info-2">
+			                                <!--  <a href="" target="_blank"><span class="auto-scale-img in-entry" id="preview" style="background-image: url('')"></span></a> -->
+			                                <img id="preview2" src="../../static/images/business/steve-jobs.jpg" alt="Steve Jobs">
+			                                <span class="pre-name" style="font-family:'Open Sans',Arial,Helvetica,sans-serif;">steve-jobs.jpg</span>
+			                                <span class="pre-size" style="font-family:'Open Sans',Arial,Helvetica,sans-serif;">16kb</span>
+			                                <div class="close-icon close-icon1" style="font-family:'Open Sans',Arial,Helvetica,sans-serif;"><img class="close-icon-img" src="../../static/images/business/cross.png" alt="Cross Icon"></div>
+			                                <i class="icon icon-remove remove"></i>
+			                            </div>
+			                            <div class="clearfix file-uploaded alert-info">
+			                                <!--  <a href="" target="_blank"><span class="auto-scale-img in-entry" id="preview" style="background-image: url('')"></span></a> -->
+			                                <img id="preview" src="">
+			                                <span class="pre-name"></span>
+			                                <span class="pre-size"></span>
+			                                <div class="close-icon"><img class="close-icon-img" src="../../static/images/business/cross.png" alt="Cross Icon"></div>
+			                                <i class="icon icon-remove remove"></i>
+			                            </div>
+			                        </div>
+			                    </div>
+			                    <div class="form-bottom clearfix text-right">
+			                        <button class="publish-btn" type="submit"><span class="publish-text"><img class="publish-globe" src="../../static/images/business/globe.svg" width="12px" height="12px" alt="Globe Icon">Publish</span></button>
+
+			                    </div>
+			                </form>
+			            </div>
+			        </div>
+					<span class="static-tooltip-wrap">
+						<img src="assets/bltafc43137fc400627/try-it-arrow.svg" alt="Try It">
+					</span>
+			       <!--  <a style="position: absolute;top: 110px;left: 383px" id="tooltip" href="#" data-toggle="tooltip" data-placement="right" title="Editing content is a breeze.Change something and hit PUBLISH"></a> -->
+			       <a class="moveUp1" id="tooltip" href="#" data-toggle="tooltip" data-html="true" title='Editing content is a breeze. Change something and hit "<span class="green-text">PUBLISH</span>" ' data-placement="right"></a>
+			       
+			       <script type="text/javascript"></script>
+					<!-- Generated markup by the plugin -->
+					<div class="tooltip moveUp1 top" role="tooltip">
+					  <div class="tooltip-arrow moveUp1"></div>
+					  <div class="tooltip-inner moveUp1">
+					    
+					  </div>
+					</div>
+
+			        
+
+			        <div class="progress-holder">
+			            <div class="path">
+			                <img src="../../static/images/business/grey-dots.svg" width="230px" height="28px">
+			            </div>
+			            <div class="path dots">
+			                <img class='1 one dot' src="../../static/images/business/yellow_dot.png">
+			                <img class='2 two dot' src="../../static/images/business/yellow_dot.png">
+			                <img class='3 three dot' src="../../static/images/business/yellow_dot.png">
+			                <img class='4 four dot' src="../../static/images/business/yellow_dot.png">
+			                <img class='5 five dot' src="../../static/images/business/yellow_dot.png">
+			                <img class='6 six dot' src="../../static/images/business/yellow_dot.png">
+			                <img class='7 seven dot' src="../../static/images/business/yellow_dot.png">
+			                <img class='8 eight dot' src="../../static/images/business/yellow_dot.png">
+			                <img class='9 nine dot' src="../../static/images/business/yellow_dot.png">
+			                <img class='10 ten dot' src="../../static/images/business/yellow_dot.png">
+			            </div>
+			            <div class="yellow-circle"></div>
+			            <img class="logo" src="../../static/images/business/logo.png">
+			        </div>
+			        <div class="col-md-6">
+			            <?xml version="1.0" encoding="utf-8"?>
+			            <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+			            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-30 124.9 534.7 592" style="enable-background:new -30 124.9 534.7 592;margin-top: -50px;font-family:'Open Sans',Arial,Helvetica,sans-serif; xml:space="preserve">
+			                <style type="text/css">
+			                .st0 {
+			                    fill: #EDEDED;
+			                }
+			                .st1 {
+			                    fill: none;
+			                    stroke: #C6C8CA;
+			                    stroke-width: 0.9852;
+			                    stroke-miterlimit: 10;
+			                }
+			                .st2 {
+			                    fill: #C6C8CA;
+			                }
+			                .st3 {
+			                    fill: #FFFFFF;
+			                }
+			                .st4 {
+			                    fill: #25c2a3;
+			                }
+			                .st5 {
+			                    fill: #FFF;
+			                }
+			                .st6 {
+			                    fill: none;
+			                    stroke-miterlimit: 10;
+			                }
+			                .st7 {
+			                    fill: #EEF1F2;
+			                }
+			                .st8 {
+			                    fill: none;
+			                }
+			                .st9 {
+			                    fill: #201F24;
+			                }
+			                .st10 {
+			                    font-family: "Open Sans",Arial,Helvetica,sans-serif;
+			                }
+			                .st11 {
+			                    font-size: 19.8447px;
+			                }
+			                .st12 {
+			                    font-family: "Open Sans",Arial,Helvetica,sans-serif;
+			                }
+			                .st13 {
+			                    font-size: 14px;
+			                }
+			                .st14 {
+			                    font-size: 17.3641px;
+			                }
+			                .st15 {
+			                    font-size: 11px;
+			                }
+			                .st16 {
+			                    font-size: 13.1525px;
+			                }
+			                .st17 {
+			                    fill: #EDEDED;
+			                    stroke: #C6C8CA;
+			                    stroke-miterlimit: 10;
+			                }
+			                .st18 {
+			                    fill: #EDEDED;
+			                    stroke: #C6C8CA;
+			                    stroke-width: 0.9852;
+			                    stroke-miterlimit: 10;
+			                }
+			                .st19 {
+			                    font-size: 8px;
+			                }
+			                .st20 {
+			                    font-size: 5px;
+			                }
+			                .st21 {
+			                    stroke: none;
+			                }
+			                .publish-heading {
+			                    font-weight: bold;
+			                }
+			                </style>
+			                <g id="XMLID_4720_">
+			                    <g id="desktop_1_">
+			                        <g id="desktop">
+			                            <g id="XMLID_4758_">
+			                                <g id="XMLID_4770_">	              
+			                                    <g id="XMLID_66_">
+			                                        <path id="XMLID_73_" class="st0" d="M435,449.2c5.3,0,9.5-4.3,9.5-9.5V179.5c0-4-3.5-7.3-7.8-7.3H36.6c-4.3,0-7.8,3.3-7.8,7.3
+			                            v260.2c0,5.3,4.3,9.5,9.5,9.5L435,449.2L435,449.2z" />
+			                                        <path id="XMLID_72_" class="st1" d="M435,449.2c5.3,0,9.5-4.3,9.5-9.5V179.5c0-4-3.5-7.3-7.8-7.3H36.6c-4.3,0-7.8,3.3-7.8,7.3
+			                            v260.2c0,5.3,4.3,9.5,9.5,9.5L435,449.2L435,449.2z" />
+			                                    </g>
+			                                </g>
+			                                <g id="XMLID_4763_">
+			                                    <g id="XMLID_4767_">
+			                                        <circle id="XMLID_4769_" class="st2" cx="43.8" cy="191.6" r="4.3" />
+			                                        <circle id="XMLID_4768_" class="st2" cx="72.9" cy="191.6" r="4.3" />
+			                                    </g>
+			                                    <circle id="XMLID_4764_" class="st2" cx="58.4" cy="191.6" r="4.3" />
+			                                </g>
+			                                <path id="XMLID_4762_" class="st2" d="M397.9,196.6H94c-1.7,0-3.1-1.4-3.1-3.1v-3.7c0-1.7,1.4-3.1,3.1-3.1h303.9
+			                    c1.7,0,3.1,1.4,3.1,3.1v3.7C401,195.2,399.6,196.6,397.9,196.6z" />
+			                                <path id="XMLID_771_" class="st3" d="M426.3,441.5H47.1c-5.1,0-9.1-4.1-9.1-9.1V215.6c0-5.1,4.1-9.1,9.1-9.1h379.2
+			                    c5.1,0,9.1,4.1,9.1,9.1v216.7C435.5,437.4,431.4,441.5,426.3,441.5z" />
+			                                <path id="XMLID_753_" class="st4" d="M435.5,241.5H37.9v-25.9c0-5.1,4.1-9.1,9.1-9.1h379.2c5.1,0,9.1,4.1,9.1,9.1v25.9H435.5z"></path>
+			                                <rect id="XMLID_1080_" x="37.9" y="241.4" class="st5" width="397.5" height="154" />
+			                                <path id="XMLID_4759_" class="st6 st21" d="M426.3,441.5H47.1c-5.1,0-9.1-4.1-9.1-9.1V215.6c0-5.1,4.1-9.1,9.1-9.1h379.2
+			                    c5.1,0,9.1,4.1,9.1,9.1v216.7C435.5,437.4,431.4,441.5,426.3,441.5z" />
+			                                <g id="XMLID_1035_">
+			                                    <circle id="XMLID_1059_" class="st3" cx="60.4" cy="224.4" r="6.7" />
+			                                    <path id="XMLID_1037_" class="st3" d="M99.2,226.2H72.6c-1,0-1.8-0.8-1.8-1.8v-0.1c0-1,0.8-1.8,1.8-1.8h26.6
+			                        c1,0,1.8,0.8,1.8,1.8v0.1C100.9,225.4,100.2,226.2,99.2,226.2z" />
+			                                </g>
+			                                <path id="XMLID_1040_" class="st7 " d="M417.6,221.8h-11c-0.5,0-1-0.4-1-1l0,0c0-0.5,0.5-1,1-1h11c0.6,0,1,0.5,1,1l0,0
+			                    C418.6,221.4,418.2,221.8,417.6,221.8z M418.6,224.3L418.6,224.3c0-0.5-0.4-1-1-1h-11c-0.5,0-1,0.5-1,1l0,0c0,0.6,0.5,1,1,1h11
+			                    C418.2,225.3,418.6,224.9,418.6,224.3z M418.6,228.1L418.6,228.1c0-0.5-0.4-1-1-1h-11c-0.5,0-1,0.5-1,1l0,0c0,0.6,0.5,1,1,1h11
+			                    C418.2,229.1,418.6,228.6,418.6,228.1z" />
+			                            </g>
+			                        </g>
+			                        <rect id="XMLID_197_" x="53" y="260.4" class="st8" width="200.1" height="63" />
+			                        <text id="rectWrap-1" transform="matrix(1 0 0 1 53.0072 305.4657)" class="st9 st10 st11 publish-heading viewport-desktop" style="font-family:'Open Sans',Arial,Helvetica,sans-serif;color:red;">Steve Jobs</text>
+			                        <rect id="XMLID_197_" x="53" y="290.4" class="st8" width="220.1" height="63" />
+			                        <text id="rectWrap-2" transform="matrix(1 0 0 1 53.0072 333.4657)" class="st9 st12 st13 publish-description viewport-desktop" style="font-family:'Open Sans',Arial,Helvetica,sans-serif;">"Simple can be harder than complex; you have to work hard to get your thinking clean to make it simple."</text>
+			                        <image style="overflow:visible;enable-background:new    ;" class="publish-image x" width="230" height="153" id="image" xlink:href="../../static/images/business/steve-jobs.jpg" transform="matrix(0.5991 0 0 0.5991 281.0533 276.8893)">
+			                        </image>
+			                    </g>
+			                    <g id="tab_1_">
+			                        <g id="tab">
+			                            <g id="XMLID_4753_">
+			                                <g id="XMLID_51_">
+			                                    <path id="XMLID_61_" class="st0" d="M191.3,593.3c-7.1,0-12.8-5.6-12.8-12.5V400.9c0-6.9,5.7-12.5,12.8-12.5h265.5
+			                        c7.1,0,12.8,5.6,12.8,12.5v179.9c0,6.9-5.7,12.5-12.8,12.5H191.3z" />
+			                                    <path id="XMLID_60_" class="st1" d="M191.3,593.3c-7.1,0-12.8-5.6-12.8-12.5V400.9c0-6.9,5.7-12.5,12.8-12.5h265.5
+			                        c7.1,0,12.8,5.6,12.8,12.5v179.9c0,6.9-5.7,12.5-12.8,12.5H191.3z" />
+			                                </g>
+			                            </g>
+			                            <circle id="XMLID_4752_" class="st2" cx="460.9" cy="490.8" r="3.1" />
+			                            <circle id="XMLID_4751_" class="st2" cx="189.9" cy="490.8" r="7.9" />
+			                            <rect id="XMLID_4748_" x="202" y="400.5" class="st3 st21" width="250.8" height="180.7" />
+			                            <rect id="XMLID_8118_" x="202" y="400.5" class="st5 st6 " width="250.8" height="154.4" />
+			                            <rect id="XMLID_4664_" x="202" y="400.5" class="st4" width="250.8" height="19.6" />
+			                            <g id="XMLID_8018_">
+			                                <circle id="XMLID_8111_" class="st3" cx="221.1" cy="410.4" r="5.2" />
+			                                <path id="XMLID_8044_" class="st3" d="M251.4,411.8h-20.8c-0.8,0-1.4-0.6-1.4-1.4v-0.1c0-0.8,0.6-1.4,1.4-1.4h20.8
+			                    c0.8,0,1.4,0.6,1.4,1.4v0.1C252.8,411.2,252.2,411.8,251.4,411.8z" />
+			                            </g>
+			                            <path id="XMLID_8116_" class="st7" d="M435.6,408.4h-10.2c-0.5,0-0.9-0.4-0.9-0.9l0,0c0-0.5,0.4-0.9,0.9-0.9h10.2
+			                c0.5,0,0.9,0.4,0.9,0.9l0,0C436.5,408,436.1,408.4,435.6,408.4z M436.5,410.8L436.5,410.8c0-0.5-0.4-0.9-0.9-0.9h-10.2
+			                c-0.5,0-0.9,0.4-0.9,0.9l0,0c0,0.5,0.4,0.9,0.9,0.9h10.2C436.1,411.7,436.5,411.3,436.5,410.8z M436.5,414.2L436.5,414.2
+			                c0-0.5-0.4-0.9-0.9-0.9h-10.2c-0.5,0-0.9,0.4-0.9,0.9l0,0c0,0.5,0.4,0.9,0.9,0.9h10.2C436.1,415.1,436.5,414.7,436.5,414.2z" />
+			                        </g>
+			                        <image style="overflow:visible;enable-background:new    ;" class="publish-image y" width="230" height="153" id="image_1_" xlink:href="../../static/images/business/steve-jobs.jpg" transform="matrix(0.3984 0 0 0.3984 346.4036 449.6992)">
+			                        </image>
+			                        <g id="content_1_">
+			                            <rect id="XMLID_134_" x="214.5" y="436" class="st8" width="121.5" height="88.4" />
+			                            <text id="rectWrap-3" transform="matrix(1 0 0 1 214.4748 446.5988)" class="st9 st10 st13 publish-heading" style="font-family:'Open Sans',Arial,Helvetica,sans-serif;">Steve Jobs</text>
+			                            <rect id="XMLID_134_" x="214.5" y="466" class="st8" width="121.5" height="100.4" />
+			                            <text id="rectWrap-4" transform="matrix(1 0 0 1 214.4748 465.5987)" class="publish-description st9 st10 st13 " style="font-family:'Open Sans',Arial,Helvetica,sans-serif;">"Simple can be harder than complex; you have to work hard to get your thinking clean to make it simple."</text>
+			                        </g>
+			                    </g>
+			                    <g id="mobile_1_">
+			                        <g id="mobile">
+			                            <g id="XMLID_4743_">
+			                                <image style="overflow:visible;opacity:8.000000e-002;enable-background:new;" class="publish-image" width="713" height="1183" id="XMLID_77_" xlink:href="" transform="matrix(0.2392 0 0 0.2392 -14.0416 363.4313)">
+			                                </image>
+			                                <g id="XMLID_55_">
+			                                    <path id="XMLID_76_" class="st0" d="M137.3,614.8c0,7.4-6,13.4-13.4,13.4H18.4c-7.4,0-13.4-6-13.4-13.4V395
+			                        c0-7.4,6-13.4,13.4-13.4h105.4c7.4,0,13.4,6,13.4,13.4v219.8H137.3z" />
+			                                    <path id="XMLID_74_" class="st1" d="M137.3,614.8c0,7.4-6,13.4-13.4,13.4H18.4c-7.4,0-13.4-6-13.4-13.4V395
+			                        c0-7.4,6-13.4,13.4-13.4h105.4c7.4,0,13.4,6,13.4,13.4v219.8H137.3z" />
+			                                </g>
+			                            </g>
+			                            <circle id="XMLID_4735_" class="st2" cx="69" cy="615.3" r="7.9" />
+			                            <path id="XMLID_4742_" class="st2" d="M81.6,391.1c0,0.4-0.4,0.7-1,0.7H62.1c-0.5,0-1-0.3-1-0.7v-0.8c0-0.4,0.4-0.7,1-0.7h18.4
+			                c0.6,0,1,0.3,1,0.7L81.6,391.1L81.6,391.1z" />
+			                            <rect id="XMLID_4739_" x="8.6" y="399.9" class="st3 st21" width="125.1" height="199.1" />
+			                            <rect id="XMLID_4581_" x="8.6" y="418.9" class="st5 st6" width="125.1" height="180.1" />
+			                            <rect id="XMLID_1085_" x="8.6" y="399.9" class="st4" width="125.1" height="19.1" />
+			                            <g id="XMLID_2114_">
+			                                <circle id="XMLID_4635_" class="st3" cx="24.1" cy="409.4" r="5.2" />
+			                                <path id="XMLID_2381_" class="st3" d="M54.4,410.8H33.6c-0.8,0-1.4-0.6-1.4-1.4v-0.1c0-0.8,0.6-1.4,1.4-1.4h20.8
+			                    c0.8,0,1.4,0.6,1.4,1.4v0.1C55.8,410.2,55.2,410.8,54.4,410.8z" />
+			                            </g>
+			                            <path id="XMLID_2433_" class="st7" d="M122.7,407.4h-8.5c-0.4,0-0.8-0.3-0.8-0.8l0,0c0-0.4,0.3-0.8,0.8-0.8h8.5
+			                c0.4,0,0.8,0.3,0.8,0.8l0,0C123.5,407.1,123.1,407.4,122.7,407.4z M123.5,409.4L123.5,409.4c0-0.4-0.3-0.8-0.8-0.8h-8.5
+			                c-0.4,0-0.8,0.3-0.8,0.8l0,0c0,0.4,0.3,0.8,0.8,0.8h8.5C123.1,410.1,123.5,409.8,123.5,409.4z M123.5,412.2L123.5,412.2
+			                c0-0.4-0.3-0.8-0.8-0.8h-8.5c-0.4,0-0.8,0.3-0.8,0.8l0,0c0,0.4,0.3,0.8,0.8,0.8h8.5C123.1,413,123.5,412.6,123.5,412.2z" />
+			                        </g>
+			                        <image style="overflow:visible;enable-background:new;" class="publish-image z" width="230" height="153" id="image_2_" xlink:href="../../static/images/business/steve-jobs.jpg" transform="matrix(0.3984 0 0 0.3984 25.3339 422.7322)">
+			                        </image>
+			                        <rect id="XMLID_102_" x="18.1" y="490.2" class="st8" width="106.5" height="89.7"  />
+			                        <text id="rectWrap-5" transform="matrix(1 0 0 1 28.1754 516.8317)" class="st9 st10 st13 publish-heading" style="font-family:'Open Sans',Arial,Helvetica,sans-serif;">Steve Jobs</text>
+			                        <rect id="XMLID_102_" x="18.1" y="510.2" class="st8" width="106.5" height="89.7" />
+			                        <text id="rectWrap-6" transform="matrix(1 0 0 1 24.1754 555.8317)" class="st9 st12 st15 publish-description" style="font-family:'Open Sans',Arial,Helvetica,sans-serif;">"Simple can be harder than complex; you have to work hard to get your thinking clean to make it simple."</text>
+			                    </g>
+			                    <g id="watch">
+			                        <g id="watch_1_">
+			                            <g id="XMLID_5181_">
+			                                <image style="overflow:visible;opacity:8.000000e-002;enable-background:new;" width="954" height="504" id="XMLID_26_" xlink:href="" transform="matrix(0.2391 0 0 0.2391 142.7901 588.7572)">
+			                                </image>
+			                                <g id="XMLID_17_">
+			                                    <path id="XMLID_25_" class="st0" d="M350.6,625.2l-41.9-0.2l-9-1v-7.9c0-5.4-4.1-9.3-9.6-9.3h-64.8c-5.4,0-10.7,3.8-10.7,9.3
+			                        v8.1l-9,1.7h-42.2c-1.2,0-2.8,0.3-2.8,1.5v42c0,1.2,1.3,2.2,2.5,2.2l41.5,0.2l10,1.2v7.7c0,5.4,5.2,10.2,10.7,10.2h64.8
+			                        c5.4,0,9.6-4.7,9.6-10.2v-7.4l10.1-0.4h41.6c1.6,0,1.4-2.5,1.4-4.1V628C352.7,626.5,352.2,625.2,350.6,625.2z" />
+			                                </g>
+			                            </g>
+			                            <path id="XMLID_4733_" class="st17" d="M205.7,625.4h-42.2c-1.2,0-2.3,0.8-2.3,2v42c0,1.2,1,2.2,2.3,2.2l41.8,0.2l44,4.9v-56.5
+			                L205.7,625.4z" />
+			                            <path id="XMLID_4732_" class="st17" d="M350.9,625.2L309,625l-44.7-4.9v56.5l45.6-4.2h41.6c1.6,0,1.9-2,1.9-3.6V628
+			                C353.2,626.5,352.4,625.2,350.9,625.2z" />
+			                            <path id="XMLID_4731_" class="st18" d="M290.1,606.3c5.4,0,9.9,4.4,9.9,9.9v64.5c0,5.4-4.4,9.9-9.9,9.9h-64.8
+			                c-5.4,0-9.9-4.4-9.9-9.9v-64.5c0-5.4,4.4-9.9,9.9-9.9H290.1z" />
+			                            <path id="XMLID_4730_" class="st2" d="M320.6,642.7c1.3,0,2.3,1,2.3,2.3v5.6c0,1.3-1,2.3-2.3,2.3l0,0c-1.3,0-2.3-1-2.3-2.3V645
+			                C318.3,643.7,319.3,642.7,320.6,642.7L320.6,642.7z" />
+			                            <path id="XMLID_4729_" class="st2" d="M332,643.1c1.2,0,2.1,0.9,2.1,2.1v5.1c0,1.2-0.9,2.1-2.1,2.1l0,0c-1.2,0-2.1-0.9-2.1-2.1
+			                v-5.1C329.9,644.1,330.8,643.1,332,643.1L332,643.1z" />
+			                            <path id="XMLID_4728_" class="st2" d="M343.8,644.3c0.9,0,1.6,0.7,1.6,1.6v3.9c0,0.9-0.7,1.6-1.6,1.6l0,0c-0.9,0-1.6-0.7-1.6-1.6
+			                v-3.9C342.2,645,343,644.3,343.8,644.3L343.8,644.3z" />
+			                            <rect id="XMLID_4725_" x="223.8" y="614.4" class="st5 st21" width="68" height="68" />
+			                            <rect id="XMLID_8129_" x="223.8" y="614.4" class="st4 " width="68" height="16" />
+			                            <g id="XMLID_8130_">
+			                                <circle id="XMLID_10181_" class="st3" cx="231.1" cy="624.5" r="3.3" />
+			                                <path id="XMLID_8143_" class="st3" d="M250.4,625.4h-13.2c-0.5,0-0.9-0.4-0.9-0.9l0,0c0-0.5,0.4-0.9,0.9-0.9h13.2
+			                    c0.5,0,0.9,0.4,0.9,0.9l0,0C251.3,625,250.9,625.4,250.4,625.4z" />
+			                            </g>
+			                            <path id="XMLID_639_" class="st7 " d="M286.1,622.9h-6.8c-0.3,0-0.6-0.3-0.6-0.6l0,0c0-0.3,0.3-0.6,0.6-0.6h6.8
+			                c0.3,0,0.6,0.3,0.6,0.6l0,0C286.7,622.6,286.4,622.9,286.1,622.9z M286.7,624.5L286.7,624.5c0-0.3-0.3-0.6-0.6-0.6h-6.8
+			                c-0.3,0-0.6,0.3-0.6,0.6l0,0c0,0.3,0.3,0.6,0.6,0.6h6.8C286.4,625.1,286.7,624.8,286.7,624.5z M286.7,626.7L286.7,626.7
+			                c0-0.3-0.3-0.6-0.6-0.6h-6.8c-0.3,0-0.6,0.3-0.6,0.6l0,0c0,0.3,0.3,0.6,0.6,0.6h6.8C286.4,627.4,286.7,627.1,286.7,626.7z"  />
+			                        </g>
+			                        <rect id="XMLID_49_" x="228.7" y="632.8" class="st8" width="58.1" height="42.6" />
+			                        <text id="rectWrap-7" transform="matrix(1 0 0 1 233.0767 645.8656)" class="st9 st10 st19 publish-heading" style="font-family:'Open Sans',Arial,Helvetica,sans-serif;">Steve Jobs</text>
+			                        <rect id="XMLID_49_" x="228.7" y="642.8" class="st8" width="58.1" height="42.6" />
+			                        <text id="rectWrap-8" transform="matrix(1 0 0 1 233.0767 665.8656)" class="st9 st12 st20 publish-description" style="font-family:'Open Sans',Arial,Helvetica,sans-serif;">"Simple can be harder than complex; you have to work hard to get your thinking clean to make it simple."</text>
+			                    </g>
+			                </g>
+			            </svg>
+			        </div>
+			    </div>
+			    <div class="output"></div>
+			    <img id="preview" class="hidden">
+			</div>
+		</div>			
+	</section>
+	<!-- <section class="section-row clearfix">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<h2 class="text-center">{{entry.content_creation_section.title}}</h2>
+					<p class="text-center">{{entry.content_creation_section.desc}}</p>
+				</div>
+			</div>
+			<div class="row features-wrap">
+				{% for content in entry.content_creation_section.content %}
+				<div class="col-md-4">
+					<div class="heading-icon">
+				           <img src="{{getAssetUrl(content.image)}}">
+				    </div>
+					<h3>{{content.title}}</h3>
+					<p>{{content.desc}}</p>
+				</div>	
+				{% endfor %}		
+			</div>
+		</div>
+	</section>
+	<section class="section-row gray-bg clearfix">
+		<div class="col-md-8 col-md-offset-2 flex-parent">
+			<div class="col-md-9 col-sm-9 col-xs-12 flex-child">				
+				<h2>{{entry.demo_section.title}}</h2>
+				<p>{{entry.demo_section.desc}}</p>
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-12 flex-child">
+				<div class="action-links">
+					<a title="{{entry.demo_section.cta.title}}" href="{{entry.demo_section.cta.href}}" class="cta cta-primary" tabindex="0">{{entry.demo_section.cta.title}}</a>
+		    	</div>
+			</div>
+		</div>
+	</section>
+	<section class="section-row clearfix">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<h2 class="text-center">{{entry.collaboration_section.title}}</h2>
+					<p class="text-center">{{entry.collaboration_section.desc}}</p>
+				</div>
+			</div>
+			<div class="row features-wrap">
+				<div class="col-md-10 col-md-offset-1">
+						{% for col in entry.collaboration_section.collaborator %}
+						<div class="feature-point clearfix col-md-8">							
+								<div class="icon col-md-2 text-center">
+									<img src="{{getAssetUrl(col.image)}}"/>
+								</div>
+								<div class="icon-info col-md-10">
+									<h3>{{col.title}}</h3>
+									<p>{{col.desc}}</p>
+								</div>
+						</div>
+						{% endfor %}
+					<div class="col-md-4">
+						<img src="{{getAssetUrl(entry.collaboration_section.video_gif)}}">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section> -->
+	<section class="section-row gray-bg position-relative pbz clearfix" style="background-image: linear-gradient(to top, rgba(238,241,246,0.5), #fff 100%);">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<h2 class="text-center">{{entry.integrate_section.title}}</h2>
+					<p class="text-center">{{entry.integrate_section.desc}}</p>
+				</div>
+			</div>
+			<div class="col-md-10 col-md-offset-1 orbit-wrap">	
+	<img class="mobile-orbit" alt="{{entry.integrate_section.mobile_view_image.title}}" src="{{AssetUrl(entry.integrate_section.mobile_view_image)}}" style="display: none">
+				<div class="orbit-graphic" style="background-image:url({{AssetUrl(entry.integrate_section.background_image)}});">
+					{% for animate in entry.integrate_section.integrate_animation %}
+					<div class="{{animate.title}} circles"><img alt="{{animate.logo.title}}" class="{{animate.title}}-logo" src="{{AssetUrl(animate.logo)}}"></div>		
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section-row bus-contact-us contact-us clearfix">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<h2 class="text-center head-text">{{entry.contact_us_section.title}}</h2>
+				    {% include "partials/get_demo_business.html" %}
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<script type="text/javascript" src="/static/js/vendor/d3.js"></script>
+ <script type="text/javascript" src="/static/js/vendor/d3plus.js"></script>
+<script type="text/javascript" src="/static/uncomp/js/home-cms-animation.js"></script>
+<script type="text/javascript">
+	if (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) || (typeof $.browser !== "undefined" && $.browser.msie == 1))
+	{
+		$('.cs-playground').hide();
+	  $('.mobile-play').show();
+	}
+	// $("#text").focus();
+ 	//    $(":focus").css("background-color", "yellow");
+	//code for home page mobile view image 
+	var windowSize = $(window).width();
+	if (windowSize < 1170) 
+	{
+	    $('.business-hero-banner .hero-graphic,.orbit-graphic,.cs-playground').hide();
+	    $('.mobile-animation,.mobile-orbit,.mobile-play').show()
+	}	
+	$(window).resize(function() {  
+	   var windowSize = $(window).width();
+	    if (windowSize < 1170) 
+	    {
+	        $('.business-hero-banner .hero-graphic,.orbit-graphic,.cs-playground').hide();
+	        $('.mobile-animation,.mobile-orbit,.mobile-play').show()
+	    }
+	    else{
+	        $('.business-hero-banner .hero-graphic,.orbit-graphic,.cs-playground').show();
+	        $('.mobile-animation,.mobile-orbit,.mobile-play').hide()
+	    }
+	});   
+</script>
+{% include "partials/footer_global.html" %}
+{% endblock %}
+

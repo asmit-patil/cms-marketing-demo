@@ -1,0 +1,43 @@
+{% extends "layouts/default.html" %} 
+{% block content %}
+{% include "partials/header_global.html" %}
+<div class="main-wrapper transparent-header">
+    <section class="secondary-hero-banner" style="background:url({{getAssetUrl(entry.banner_section.background_image)}}) #015584;">
+      <div class="banner-wrap text-center">
+          <div class="banner-content">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                        <div class="headers">
+                          <h1>{{entry.banner_section.title}}</h1>
+                        </div>
+                        <div class="header-desc">
+                          <p>{{entry.banner_section.desc}}</p>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>
+  {% include "partials/news_partial.html" %} 
+</div>
+<script type="text/javascript">
+    // $(window).scroll(function() {
+    //     if ($(window).scrollTop() >= ($('.secondary-hero-banner').height()+ 130)) {
+    //         $('.subnav-scroll').css('position','fixed');
+    //     } else {
+    //         $('.subnav-scroll').css('position','absolute');
+    //     }
+    // });
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+            $('.subnav-scroll').css('position','fixed');
+        // console.log('in');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    });
+</script>
+{% include "partials/footer_global.html" %}
+{% endblock %}

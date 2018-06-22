@@ -1,0 +1,128 @@
+/* Safari 9 specific styles */
+.main-wrapper.safari-9 {
+   	.business-hero-banner { 
+       padding-top: 180px;
+       min-height: 550px;
+    }
+    &.business-view {    	
+	    .hero-graphic {
+	    	top: 20px;
+	    }
+    }
+    .developer-hero-banner {
+    	padding-top: 120px;
+    }
+    .secondary-hero-banner {
+    	.banner-content {
+			// padding-top: 150px;
+		}
+    }
+    &.casestudy-landing.transparent-header {
+		margin: -170px 0 0;
+    }
+    &.orphan-page {
+    	.secondary-hero-banner {
+			padding-top: 0;
+	    }
+    }
+}
+@media screen and (min-width: 0) and (max-width: 1024px) {
+	.main-wrapper.safari-9 {
+		.business-hero-banner { 
+       		// padding-top: 200px;
+       	}
+		&.business-view {   
+			.hero-content {
+				width: 60%;
+			}	
+		    .hero-graphic {
+		    	top: 80px;
+		    	right: -105px;
+		    }
+	    }
+	    .developer-hero-banner {
+	    	padding-top: 180px;
+	    }
+	}
+}
+@media screen and (min-width: 0) and (max-width: 991px) {
+	.main-wrapper {
+		&.safari-9 {
+			&.business-view {
+				.hero-content {
+	    			width: 42%;
+	    		}
+	    	}
+	    }
+	}
+}
+@media screen and (min-width: 0) and (max-width: 768px) {
+	.main-wrapper.safari-9 {
+		.business-hero-banner {
+			// padding-top: 150px;
+			min-height: 470px;
+		}
+		&.business-view {
+		    .hero-graphic {
+		    	top: 15px;		    	
+		    }
+	    }
+	    .secondary-hero-banner {
+	    	// padding-top: 160px;
+			.banner-content {
+				// padding: 100px 0 0;
+			}
+	    }
+	    &.casestudy-landing .hero-banner-wrap {
+	    	padding-top: 50px;
+	    }
+	}
+}
+@media screen and (min-width: 0) and (max-width: 640px) {
+	.main-wrapper.safari-9 {
+		.business-hero-banner {
+			padding-top: 100px;
+		}
+		&.business-view {
+		    .hero-graphic {
+		    	top: 120px;
+		    	right: -30px;
+		    	width: 70%;
+		    }
+		    .hero-content {
+		    	width: 100%;
+		    }
+	    }
+	    .secondary-hero-banner {
+	    	min-height: 400px;
+	    	padding-top: 100px;
+	    }
+	    .developer-hero-banner {
+	    	padding-top: 110px;
+	    }
+	}
+}
+@media screen and (min-width: 0) and (max-width: 414px) {
+	.main-wrapper.safari-9 {
+		.business-hero-banner {
+			padding-top: 130px;
+			min-height: 450px;
+		}
+		&.business-view {
+		    .hero-graphic {
+		    	top: 215px;
+		    	right: -115px;
+		    	width: 100%;
+		    	img {
+		    		max-width: 75%;
+		    	}
+		    }
+		    .hero-graphic-img {
+		    	bottom: -90px;
+		    }
+	    }
+	    .developer-hero-banner {
+	    	padding-top: 90px;
+	    }
+	}
+}

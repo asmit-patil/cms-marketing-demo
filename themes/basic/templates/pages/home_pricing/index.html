@@ -1,0 +1,60 @@
+{% extends "layouts/default.html" %}
+{% block content %} 
+{% include "partials/header_global_black.html" %}
+<div class="main-wrapper pricing-wrap">
+	<div class="container">
+	    <div class="pricing-hero">
+	        <div class="row">
+	            <div class="col-md-12 text-center">
+	                <h1>{{entry.header_section.title}}</h1>
+	            </div>
+	        </div>
+	        <div class="row box-wrap">
+	        	{% for plans in entry.plans.plan_type %}
+	            <div class="col-md-4 col-sm-12 col-xs-12 pricing-item text-center">
+	                <div class="pricing-inner">
+	                    <div class="pricing-info">
+	                        <h3 class="pricing-title">{{plans.title}}</h3>
+	                        <p class="pricing-desc">{{plans.desc}}</p>
+	                        {{plans.pricing_cost}}
+	                    </div>
+	                    <div class="pricing-action">
+	                        <a href="{{plans.cta.link}}" class="cta cta-primary">{{plans.cta.title}}</a>
+	                        <p class="pricing-footnote">{{plans.cta.note}}</p>
+	                    </div>
+	                </div>
+	            </div>
+	            {% endfor %}
+	        </div>
+	    </div>
+	</div>
+</div>   
+<script type="text/javascript">
+	var highest = null;
+	var hi = 0;
+	$(".pricing-info .pricing-desc").each(function(){
+	var h = $(this).height();
+	if(h > hi){
+	hi = h;
+	highest = $(this);
+	}
+
+	});
+	//highest now contains the div with the highest so lets highlight it
+	$(".pricing-info .pricing-desc").height(highest.height());
+
+	var high = null;
+	var hight = 0;
+	$(".pricing-info").each(function(){
+	var h1 = $(this).height();
+	if(h1 > hight){
+	hight = h1;
+	high = $(this);
+	}
+
+	});
+	//highest now contains the div with the highest so lets highlight it
+	$(".pricing-info").height(high.height());
+</script>
+{% include "partials/footer_global.html" %}
+{% endblock %}

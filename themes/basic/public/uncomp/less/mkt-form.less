@@ -1,0 +1,232 @@
+.features-demo-form{
+	.demo-mkt-form {
+		::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+		  opacity: 1;
+		}
+		::-moz-placeholder { /* Firefox 19+ */
+		  opacity: 1;
+		}
+		:-ms-input-placeholder { /* IE 10+ */
+		  opacity: 1;
+		}
+		:-moz-placeholder { /* Firefox 18- */
+		  opacity: 1;
+		}
+		&, &.mktoForm{
+			> .mktoFieldDescriptor:nth-of-type(1){
+				margin-right: 30px;
+			}
+				position: relative;
+				width: 100%;
+				@media screen and (max-width: 991px){
+					padding-right: 0 !important;
+					padding-left: 0;
+				}
+				.mktoFormCol{
+					width: 100%;					
+					&.selectcol-wrapper{
+						@media screen and (min-width: 768px){
+							width: 50%;
+							&:nth-of-type(1){
+								padding-right: 10px;
+							}
+							&:nth-of-type(2){
+								padding-left: 10px;
+							}
+						}
+					}
+					.mktoFieldWrap{
+						width:100%;
+					}
+				}
+				legend{
+					font-size: 18px;
+				  font-weight: 300;
+				  color: #fff;
+				  margin: 0 0 18px;
+				}				
+			@media screen and (min-width: 992px){
+				&{fieldset 
+					padding-top: 40px;
+				}
+				> .mktoFormRow:nth-of-type(1){
+					width: 33%;
+					float: left;
+					clear: none;
+					fieldset{
+						padding-right:15px !important;
+					}
+				}
+				> .mktoFormRow:nth-of-type(2){
+					width: 67%;
+					float: left;
+					clear: none;
+					fieldset{
+						border-left: 2px solid #fff;
+						width: ~"calc(100% - 15px)";
+						margin-left: 15px;
+						padding-left: 30px;
+						padding-right:0px !important;
+					}
+				}
+			} 
+		}
+	}
+}
+.demo-mkt-form {
+	&, &.mktoForm{
+		font-family: "Open Sans",Arial,Helvetica,sans-serif !important;
+		margin:0 auto;
+		width: 100% !important;
+		.mktoFormRow .mktoFormCol{
+			margin-bottom: 15px !important;
+		}
+		.mktoFormRow {
+			.textareacol-wrapper {
+				// width: 99%;
+			}
+		}
+		fieldset {
+			legend{
+			font-size: 18px;
+		  font-weight: 300;
+		  color: #fff;
+		  margin: 0;
+			}			
+		}
+
+		.mktoFieldWrap{
+			.mktoLabel {
+				display: none;
+			}			
+		}
+		.mktoTextField, .mktoEmailField, .textarea.mktoField, .mktoField{
+			background: #fff;
+			font-size: 15px;
+		  	line-height: 1.42857143;
+		  	color: #201e24;
+		  	letter-spacing: normal;
+		  border: 2px solid #bcbcbe;
+		  height: 40px;
+		  padding: 6px 12px;
+		  border-radius: 4px;
+		  width: 100% !important;
+		  & + .mktoError{
+				display: none !important; 
+		  }
+		  &.mktoInvalid{
+		    border-color: @cs-red;
+		    background: #fff4f3;
+			  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+			  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+		  }
+		  &:focus{
+		  	background: #FAFCFF;
+			  border: 2px solid #015c94;
+			  box-shadow: none;
+		  }
+		}
+		textarea.mktoField{		
+		  padding: 6px 12px;
+			height: 140px !important;
+		  border-radius: 4px;
+	  	resize: none;	
+	  	width: 100% !important;
+	  	font-size: 15px;
+	  	& + .mktoError{
+				display: none !important; 
+		  }
+		  &.mktoInvalid{
+		   border-color: @cs-red;
+			  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+			  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+		  }
+		}	
+		select.mktoField{		
+		  border-radius: 4px;
+		  height: 40px;
+		  padding: 6px 25px 6px 10px;
+		  width:100% !important;
+		  & +i.icon{
+		  	margin-right:10px;
+		  }
+		}	
+		.mktoGutter, .mktoFieldDescriptor .mktoOffset{
+			display: none;
+		}
+		.mktoButtonRow{
+			width: 100%;
+		}
+		.mktoButtonWrap.mktoSimple{
+			margin: 0 !important;
+			width: 100%;
+			display: block;
+			text-align: right;
+			button.mktoButton{
+		  border: 0;
+		  display: inline-block;
+		  box-shadow: 0 2px 3px 0 rgba(32,32,37,.2);
+		  line-height: 20px;
+		  padding: 12px 14px;
+		  font-size: 15px;
+		  border-radius: 4px;
+		  text-transform: uppercase;
+		  background: #25c2a3;
+		  color: #fff;
+			}			
+		}
+		//texarea
+		.textareacol-wrapper, .textareacol-wrapper .mktoFieldWrap{
+			float: none;
+		}
+	}
+}
+
+.contact-us.bus-contact-us, .feature-pg-wrap .contact-us{
+	.demo-mkt-form, .demo-mkt-form.mktoForm{
+		.mktoTextField, .mktoEmailField, .textarea.mktoField, .mktoField{
+			border: 1px solid #bcbcbe;
+		  &.mktoInvalid{
+		    border-color:red;
+		    background: #ffe5e2;			  
+		  }
+		  &:focus{
+		  	background: #FAFCFF;
+			  border-color:  #015c94;
+		  }
+		}
+	}
+}
+
+.resc-mkt-form{
+	span.mktoButtonWrap.mktoSimple{
+		text-align: left !important;
+	}
+	.mktoFieldDescriptor, .mktoFieldWrap{
+		width: 100%;
+		.mktoTextField, .mktoEmailField, .textarea.mktoField, .mktoField{
+			&.mktoInvalid{
+				// background: #fff4f3;
+			}
+			&:focus{
+				// border-color:#015c94;
+				// background: #fff;
+			}
+		}
+	}
+}
+
+.cms-comparsion-wrap, .contact-us-wrap, .bs-cms-comparsion-wrap .contact-us-form{
+	.features-demo-form .demo-mkt-form, .features-demo-form .mktoForm{
+		fieldset legend, fieldset legend{
+			color: #4d4d52;
+		}
+		@media screen and (min-width: 992px){			
+			> .mktoFormRow:nth-of-type(2){			
+				fieldset{
+					border-left-color: #ccc;					
+				}
+			}
+		} 	
+	}
+}

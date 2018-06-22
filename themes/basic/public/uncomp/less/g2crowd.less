@@ -1,0 +1,162 @@
+.orphan-g2crowd-wrapper {
+	font-family: 'Lato', sans-serif;
+	.mt {
+		margin-top: 35px;
+	}
+	h1 {
+	    color: #ec5646;
+	    font-size: 35px;
+	    line-height: 48px;
+	    margin-top: 0px;
+	    font-weight: 700;
+	}
+	h2 {
+	    color: #201e24;
+	    font-weight: 700;
+	    font-size: 30px;
+	    margin: 10px 0;
+	}
+	h3 {
+		color: #201e24;
+	    font-size: 18px;
+	    font-weight: 700;
+	    margin: 10px 0;
+	}
+	p {
+		padding: 0;
+		margin-bottom: 12px;
+		font-weight: 300;
+		font-size: 20px;
+		line-height: 30px;
+		color: #666;
+	}
+	.btn {
+		padding: 10px 16px;
+	}
+	.btn-trans {
+		background: transparent;
+		color: #636c6c;
+		font-weight: 700;
+		border: 3px solid #ccc;
+		border-radius: 30px;
+		font-size: 16px;
+		&:hover {
+		    background: @white;
+		    color: #444;
+		}
+	}
+	section {
+		padding: 65px 0;
+		background: #F8FAFC;
+		&:nth-child(even) {
+			background: @white;
+		}
+	}
+	.header-wrap {
+		padding: 0 0 75px;
+		.logo-section {
+			padding: 40px 0;
+			img {
+				height: 49px;
+			}
+		}
+		hr {
+		    width: 20%;
+		    border-bottom: 3px solid #ccc;
+		    margin: 20px 0;
+		}
+		h2 { 
+			font-size: 28px;
+		}
+	}
+	.feature-wrap {
+		img {
+			width: 90px;
+			margin: 0 auto;
+		}
+	}	
+    .form-section {
+    	.mktoForm {
+    		width: 100%!important;
+    		span {
+		        margin-left: 0!important;
+		    }
+    		input[type=text], input[type=url], input[type=email],
+    		input[type=tel], input[type=number], input[type=date], select {
+		      	background:#fff;
+		        width: 100%!important;
+		        padding: 8px 15px;
+		        border-radius: 5px;
+		        border: 1px solid #ccc;
+		        min-height: 35px;
+    		}
+    		select {
+				 -webkit-appearance:none; 
+				-moz-appearance:none;
+				-o-appearance:none;
+				appearance: none;
+				& + i.icon {
+				    margin-top: -24px;
+				}
+    		}
+		    .mktoFormCol {
+		        float: none;
+		    }
+		    .mktoLabel {
+		        display: none;
+		    }
+		   	.mktoFieldWrap {
+		        float: none;
+		    }
+		    .mktoButtonWrap {
+		    	&.mktoSimple  {
+		    		.mktoButton {
+		        		border: 0;
+				        display: inline-block;
+				        box-shadow: 0 2px 3px 0 rgba(32, 32, 37, .2);
+				        line-height: 20px;
+				        padding: 12px 14px;
+				        font-size: 15px;
+				        border-radius: 4px;
+				        text-transform: uppercase;
+				        background: #25c2a3;
+				        color: #fff;
+				        margin-top: 15px;
+				    }
+				}
+			}
+			.mktoButtonRow {
+			    float: right;
+			}
+    	}
+    }
+}
+
+@media only screen and (max-width: 991px) {
+	.orphan-g2crowd-wrapper {
+		.header-wrap {
+			.cta-action {
+				margin-bottom: 35px;
+			}
+		}
+		.discover-wrap {
+			img {
+				margin-bottom: 35px;
+			}
+		}
+	    .form-section {
+	    	.mktoForm {
+	    		input[type=text], input[type=url], input[type=email],
+	    		input[type=tel], input[type=number], input[type=date], select {
+			      	background:#fff;
+			        width: 100%!important;
+			        padding: 8px 15px;
+			        border-radius: 5px;
+			        border: 1px solid #ccc;
+			        font-size: 13px;
+			        min-height: 35px;
+	    		}
+	    	}
+	    }
+	}
+}

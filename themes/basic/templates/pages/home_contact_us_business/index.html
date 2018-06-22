@@ -1,0 +1,104 @@
+{% extends "layouts/default.html" %} 
+{% block content %}
+{% include "partials/header_global_black.html" %}
+<div class="main-wrapper">
+    <section class="contact-us-wrap">
+        <div class="container">
+        	<div class="row">
+        		<div class="col-md-8 col-md-offset-2">        			
+		          <h2>{{entry.form_section.title}}</h2>
+		            <p>{{entry.form_section.desc}}</p>
+		            <div>
+	                    <div id="contact-business" class="contact-us-form text-left">	                       
+	                        <div class="features-demo-form">
+				                <form id="mktoForm_1035" class="demo-mkt-form" data-href="{{entry.cta.link}}"></form>              
+			              </div>
+	                    </div>
+	                    <iframe id="iframe_contactus_business" name="iframe_contactus_business" class="hidden"></iframe>
+	                </div>
+        		</div>
+        	</div>
+        </div>
+    </section>
+</div>
+<script>
+	MktoForms2.loadForm("//app-sj21.marketo.com", "489-WNI-383", 1035, function(form){
+    form.getFormElem().find('select').closest('.mktoFormCol').addClass('selectcol-wrapper');
+    form.getFormElem().find('select').after('<i class="icon icon-down"></i>');
+    form.getFormElem().find('textarea').closest('.mktoFieldDescriptor').addClass('textareacol-wrapper');
+    form.getFormElem().find('legend').css({'color':'#201e24','font-weight':'700'});
+     function jsUcfirst(string) 
+   {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    //contact us subject value select   
+    function getQueryParams() {
+        if (window.location.search) {
+            var searchText = window.location.search;
+            var queryParamsString = searchText.split("?")[1]
+            var individualParams = queryParamsString.split('&')
+            var keyVal ={}
+            individualParams.forEach(function(param) {
+                var paramArray = param.split('=')
+                keyVal[paramArray[0]] = decodeURIComponent(jsUcfirst(paramArray[1]))
+            })
+            return keyVal
+            // console.log(keyVal)
+        } else {
+            return {}
+        }
+    }
+
+    var paramsKeyValue = getQueryParams()
+    var array = ['General information','Get a demo','Free trial','Partnerships','Careers']
+     if(array.includes(paramsKeyValue.subject)){
+        $('#Contact_Us_Subject__c').val(paramsKeyValue.subject)  
+     }
+    //for hide txet area
+    var value = $('#Contact_Us_Subject__c').val();
+    if (value == 'Free trial') {
+        $('#Contact_Us__c').hide();
+    }
+    if (value == '') {
+        $('.mktoButtonWrap .mktoButton').text('submit')
+    }
+       $('#Industry').on('change',function(){
+           form.getFormElem().find('select').after('<i class="icon icon-down"></i>');
+        });
+      $('#Contact_Us_Subject__c').on('change', function() {
+        form.getFormElem().find('select').after('<i class="icon icon-down"></i>');
+        var newvalue = $(this).val();
+        if (newvalue == 'Free trial') {
+            $('#Contact_Us__c').hide();
+            $('.mktoButtonWrap .mktoButton').text('get started')
+        } else {
+            $('#Contact_Us__c').show();
+            $('.mktoButtonWrap .mktoButton').text('submit')
+        }
+    });
+      //for hide txet area  
+    form.onSubmit(function(){
+      form.getFormElem().find('select').after('<i class="icon icon-down"></i>');
+          var newvalue = $('#Contact_Us_Subject__c').val();
+          localStorage.setItem("newname",newvalue);
+          var setFirstName = form.getFormElem().find('input[name=FirstName]').val() + "!";
+          var setFirstNameHome = function() {
+          localStorage.setItem("name",setFirstName);
+         };
+         setFirstNameHome();    
+         visitorIDtrack(); 
+        });
+    form.onSuccess(function(values, followUpUrl){
+      var redirectUrl = form.getFormElem().attr('data-href');      
+      location.href = redirectUrl;        
+         if (location.pathname.indexOf("thank-you") !== -1) {
+			        $('#thank').find('span.uname').text(localStorage.getItem("name") || "");
+			        localStorage.removeItem("name");
+			    }     
+      return false;  
+    });
+    
+	});
+</script>
+{% include "partials/footer_global.html" %}
+{% endblock %}

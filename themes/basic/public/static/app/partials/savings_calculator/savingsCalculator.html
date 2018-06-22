@@ -1,0 +1,209 @@
+<div class="site-values-wrapper calculator">
+    <!-- <div class="cost-comparison visible-sm visible-xs" id="value-saver" ng-class="{'sticky-pricing-header':stickyShow}" waypoint-helper> -->
+    <div class="cost-comparison cost-comparison-header visible-sm visible-xs" id="value-saver">
+        <div class="cost-box saving-box">
+            <div class="header-section">
+                <h2>{{savingCalCms.saving_section.title}}</h2>
+                <p class="saving-cost">$<span class="dollor-cost">{{ savingCost | number : 0 }}</span></p>
+            </div>
+            <!--  <div class="launch-time-wrapper">               
+               <div class="product-saving-values">
+                    
+                 <ul>
+                        <li>
+                            <span class="product">{{savingCalCms.saving_section.cms_type.contenstack}}</span>
+                            <p class="cost-value">$<span class="saving-value">{{total_cost_cs | number : 2}}</span></p>
+                        </li>
+                        <li>
+                            <span class="product">{{savingCalCms.saving_section.cms_type.drupal}}</span>
+                            <p class="cost-value">$<span class="saving-value">{{total_cost_drupal | number : 2}}</span></p>
+                        </li>
+                        <li>
+                            <span class="product">{{savingCalCms.saving_section.cms_type.wordpress}}</span>
+                            <p class="cost-value">$<span class="saving-value">{{total_cost_wordpress | number : 2}}</span></p>
+                        </li>
+                    </ul> 
+                </div>
+            </div> -->
+        </div>
+        <div class="cost-box text-center value-note">
+            <p>{{savingCalCms.saving_section.desc}}</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <div class="value-slider-wrap clearfix">
+                    <h3>{{savingCalCms.features_section.page_size}} <span class="pull-right reset-value"><a ng-click="initializeCal()">{{savingCalCms.features_section.button_text}}</a></span></h3>
+                    <div class="col-lg-9 col-md-12 padding-zero">
+                        <div id="pageSizeSlider" slider ng-model="model.pageSize.currentIndex" start=0 end=4 step="{{model.pageSize.step}}" ticks="true" increment="24" startpointer="1.1"></div>
+                    </div>
+                    <div class="col-lg-3 col-md-12 padding-zero">
+                        <div class="final-values"><span class="big-site-value" ng-bind="model.pageSize.values[model.pageSize.currentIndex]"></span>{{savingCalCms.features_section.text}}</div>
+                    </div>
+                </div>
+                <div class="value-slider-wrap clearfix">
+                    <h3>{{savingCalCms.features_section.page_view}}</h3>
+                    <div class="col-lg-9 col-md-12 padding-zero">
+                        <!-- <div id="pageViewsSlider" slider ng-model="model.pageViews.currentIndex" start=0 end=11 step="{{model.pageViews.step}}" ticks="true" increment="8.5" startpointer="1.4"></div> -->
+                        <div id="pageViewsSlider" slider ng-model="model.pageViews.currentIndex" start=0 end=7 step="{{model.pageViews.step}}" ticks="true" increment="13.6" startpointer="1"></div>
+                    </div>
+                    <div class="col-lg-2 col-lg-offset-1 col-md-12 padding-zero">
+                        <div class="final-values"><span class="big-site-value">{{ model.pageViews.values[model.pageViews.currentIndex] | megaNumber }}</span>{{savingCalCms.features_section.view_text}}</div>
+                    </div>
+                </div>
+                <script>
+                </script>
+                <div class="site-features-wrapper">
+                    <h3>{{savingCalCms.features_section.site_features.title}}</h3>
+                    <div class="col-lg-12 padding-zero" ng-repeat="chunkedFeatures in savingCalSiteFeatures track by $index">
+                    <!-- <div class="col-lg-12 padding-zero" ng-repeat="(key, value) in model.siteFeaturesCost track by $index"> -->
+                        <div class="features-selection">
+                            <div class="feature-box" ng-repeat="value in chunkedFeatures track by $index">
+                                <input type="checkbox" id="check{{$parent.$index}}{{$index}}" ng-model="value.display">
+                                <label class="fe-chkbox-custom" for="check{{$parent.$index}}{{$index}}">
+                                    <div class="check-elem"><i class="icon-tick"></i></div> {{value.name}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 padding-zero">
+                        <div class="features-selection">
+                            <div class="feature-box">
+                                <input type="checkbox" id="check91" ng-model="model.siteFeaturesCost.multilingual.display">
+                                <label for="check91">
+                                    <div class="check-elem"><i class="icon-tick"></i></div>{{model.siteFeaturesCost.multilingual.name}}
+                                </label>
+                            </div>
+                            <div class="feature-box search-box">
+                                <input type="text" placeholder="Enter number of languages" id="lang" class="form-control" ng-model="lang_count" ng-change="langChanged(lang_count)" ng-disabled="!model.siteFeaturesCost.multilingual.display" onkeypress=" return isNumber(event)" maxlength="2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Value sidebar content  -->
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <div class="cost-comparison">
+                    <div class="cost-box saving-box hidden-sm hidden-xs">
+                        <div class="header-section">
+                            <h2>{{savingCalCms.saving_section.title}}</h2>
+                            <p class="saving-cost">$<span class="dollor-cost">{{ savingCost | number : 0  }}</span></p>
+                        </div>
+                        <!--  <div class="launch-time-wrapper">                             
+                        <div class="product-saving-values">                              
+                              <ul>
+                                    <li>
+                                        <span class="product">{{savingCalCms.saving_section.cms_type.contenstack}}</span>
+                                        <p class="cost-value">$<span class="saving-value">{{total_cost_cs | number : 2}}</span></p>
+                                    </li>
+                                    <li>
+                                        <span class="product">{{savingCalCms.saving_section.cms_type.drupal}}</span>
+                                        <p class="cost-value">$<span class="saving-value">{{total_cost_drupal | number : 2}}</span></p>
+                                    </li>
+                                    <li>
+                                        <span class="product">{{savingCalCms.saving_section.cms_type.wordpress}}</span>
+                                        <p class="cost-value">$<span class="saving-value">{{total_cost_wordpress | number : 2}}</span></p>
+                                    </li>
+                                </ul> 
+                            </div> 
+                        </div> -->
+                    </div>
+                    <div class="cost-box text-center value-note hidden-sm hidden-xs">
+                        <p>{{savingCalCms.saving_section.desc}}</p>
+                    </div>
+                    <div class="cost-box comparison-box">
+                        <div class="header-section">
+                            <h2>{{savingCalCms.cost_comparison.title}}</h2>
+                        </div>
+                        <div class="launch-time-wrapper">
+                            <div class="product-saving-values">
+                                <p class="text-center value-subtitle">{{savingCalCms.cost_comparison.sub_title}}</p>
+                                <ul>
+                                    <li>
+                                        <span class="product">{{savingCalCms.cost_comparison.cms_type.contenstack}}</span>
+                                        <p class="cost-value">
+                                            <span class="time-elem">
+                                                        {{ total_weeks_cs | number : 0 }}<span class="launch-time">weeks</span>
+                                            </span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <span class="product">{{savingCalCms.cost_comparison.cms_type.drupal}}</span>
+                                        <p class="cost-value">
+                                            <span class="time-elem">
+                                                        {{ total_weeks_drupal | number : 0 }}<span class="launch-time">weeks</span>
+                                            </span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <span class="product">{{savingCalCms.cost_comparison.cms_type.wordpress}}</span>
+                                        <p class="cost-value">
+                                            <span class="time-elem">
+                                                        {{ total_weeks_wordpress | number : 0 }}<span class="launch-time">weeks</span>
+                                            </span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product-saving-values">
+                                <!--  <p class="text-center value-subtitle">{{savingCalCms.cost_comparison.launch_cost.title}}</p> -->
+                                <div id="launchCostGraph" style="height: 400px; margin-top:-25px; width:100%;"></div>
+                               <!--  <div class="graph-indicators-row">
+                                    <p><span class="indicator develop"></span>{{savingCalCms.cost_comparison.launch_cost.development}}</p>
+                                    <p><span class="indicator server"></span>{{savingCalCms.cost_comparison.launch_cost.server}}</p>
+                                </div> -->
+                                <div class="graph-indicators-row row">
+                                    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 padding-zero saveupto">
+                                        <span class="save-text">Save up to</span>
+                                        <span class="save-value">{{ perc_saving_initial_cost | number: 0 }}</span>
+                                        <span class="percentage">%</span>
+                                    </div>
+                                    <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8 padding-zero indicators-wrap">
+                                        <p><span class="indicator develop"></span>{{savingCalCms.cost_comparison.launch_cost.development}}</p>
+                                        <p><span class="indicator server"></span>{{savingCalCms.cost_comparison.launch_cost.server}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- launch cost section -->
+                            <div class="product-saving-values">
+                                <!-- <p class="text-center value-subtitle">{{savingCalCms.annual_section.title}}</p> -->
+                                <div id="annualTcoGraph" style="height: 400px; margin-top:-25px; width:100%;"></div>
+                                <!-- <div class="graph-indicators-row annual-tco">
+                                    <p><span class="indicator licence"></span>{{savingCalCms.annual_section.licence}}</p>
+                                    <p><span class="indicator develop"></span>{{savingCalCms.annual_section.development}}</p>
+                                    <p><span class="indicator server"></span>{{savingCalCms.annual_section.server}}</p>
+                                </div> -->
+                                <div class="graph-indicators-row annual-tco row">
+                                    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 padding-zero saveupto">
+                                        <span class="save-text">Save up to</span>
+                                        <span class="save-value">{{ perc_saving_annual_ownership_cost | number: 0 }}</span>
+                                        <span class="percentage">%</span>
+                                    </div>
+                                    <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8 padding-zero indicators-wrap">
+                                        <p><span class="indicator licence"></span>{{savingCalCms.annual_section.licence}}</p>
+                                        <p><span class="indicator develop"></span>{{savingCalCms.annual_section.development}}</p>
+                                        <p><span class="indicator server"></span>{{savingCalCms.annual_section.server}}</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="action-links multiple-sm-btns">
+                                        <a id="Contentstack_Saving_Request_a_Demo" ng-repeat="call in savingCalCms.annual_section.cta" title="{{call.alt_text}}" ng-init="new_tab=checkTarget(call.open_in_a_new_tab)" target="{{new_tab}}" href="{{call.href}}" class="btn btn-secondary">{{call.title}}</a>
+                                    </p>
+                                    <!-- <p class="action-links multiple-sm-btns">
+                                        {% for call in entry.annual_section.cta %} {% set new_tab = helpers.checkTarget(call.open_in_a_new_tab) %}
+                                        <a title="{{call.alt_text}}" target="{{new_tab}}" href="{{call.link}}" class="btn btn-secondary">{{call.title}}</a> {% endfor %}
+                                    </p> -->
+                                </div>
+                            </div>
+                            <!-- Annual TCO section -->
+                        </div>
+                    </div>
+                </div>
+                <!--cost-comparison -->
+            </div>
+            <!---sidebar content -->
+        </div>
+    </div>
+</div>
+<!--site-vales-wrapper -->

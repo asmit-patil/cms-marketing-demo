@@ -1,0 +1,74 @@
+ {% set modal = get("home_company_news_post") %}
+ {% set banner = get('home_news')%}
+<section class="tab-section-wrap fixed-sub-menu">
+    <div class="col-md-12">
+        <div class="subnav-head clearfix subnav-scroll">
+            <!-- Nav tabs -->
+            <div class="sub-nav-wrapper">
+                <ul class="action-menu">
+                    <li><a href="{{SeoUrl(banner.news_subnav_section.link)}}"><img alt="{{banner.news_subnav_section.logo.title}}" src="{{AssetUrl(banner.news_subnav_section.logo)}}"></a></li>
+                    <li><a class="inactiveLink" href="">{{banner.news_subnav_section.title}}</a></li>                      
+                </ul>                     
+                <ul class="tab-sub-nav">
+                    {% for item in data %} {% set outerIndex = loop.index %}
+                        <li role="presentation" {% if loop.index==1 %} class="active" {% endif %}>
+                            {% for year,date in item %}
+                            <a href="#news-{{outerIndex}}" aria-controls="home" role="tab" data-toggle="tab">{{year}}</a> {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <ul class="search-wrap">
+                  <li class="search-input">                      
+                    <form class="search-form" action="javascript:void(0)">  
+                        <span class="search-icon">
+                            <i class="icon-search-icon"></i>
+                        </span>                    
+                        <input id="searchnews" class="form-control" type="text" placeholder="search all news">
+                    </form>
+                  </li>
+                </ul>
+                <ul class="visible-xs visible-sm hidden-md hidden-lg">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Tab panes -->
+                <div class="tab-content news-tab-content">
+                    {% for item in data %}
+                    <div role="tabpanel" class="tab-pane {% if loop.index == 1 %} active {% endif %}" id="news-{{loop.index}}">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                {% for year,month in item %} 
+                                {% for news in month %}      
+                                {% set new_tab = helpers.checkTarget(news.open_in_a_new_tab)%}                                  
+                                <div class="question-wrap {#{% if (loop.index0 > 4) %} hidden{% endif %}#}">   
+                                    <h3 class="question"><a href="{{news.link}}" {{new_tab}}>{{news.title}}</a></h3>
+                                    <p class="source">{{news.news_source}} - {{moment(news.date).format("MMMM D")}}, {{moment(news.date).format("YYYY")}}</p>
+                                    <p>{{news.post | truncate(80, true, "...")}}</p>
+                                </div>                                                                   
+                                {% endfor %} 
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>     
+                                             
+                    {% endfor %}   
+                   <!--    <div class="load-more-wrap text-center">
+                    <button class="news-loadmore cta cta-primary">Load more news</button>
+                </div> -->  
+                
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</section>

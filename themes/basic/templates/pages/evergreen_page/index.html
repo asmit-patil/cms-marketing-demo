@@ -1,0 +1,33 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+{% include "partials/header_global.html" %}
+<div class="main-wrapper transparent-header">
+    <section class="secondary-hero-banner" title="{{entry.banner_section.background_image.title}}" style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <h1>{{entry.banner_section.title}}</h1>
+                            <p>{{entry.banner_section.desc}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="secondary-pages-content evergreen-wrap"> 
+        <div class="content-textblock">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h2>{{entry.introduction_paragraph.title}}</h2>
+                        {{entry.introduction_paragraph.desc}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> 
+{% include "partials/footer_global.html" %} 
+{% endblock %}

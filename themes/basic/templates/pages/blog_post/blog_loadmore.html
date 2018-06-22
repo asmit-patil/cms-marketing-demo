@@ -1,0 +1,37 @@
+{% set arr_len = helpers.MathCeil(allpost.length) %}
+<div class="row">
+    {% for post in allpost %}
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <article class="item blog-post clearfix">
+            <div class="col-lg-5 col-md-5 col-sm-5">
+                <div class="post-content">
+                    <div class="lazy-loader">
+                        <a href={{SeoUrl(post.url)}}>
+                            <img alt={{post.image.title}} src="{{(AssetUrl(post.image))}}" class="grid-thumbnail img-responsive">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7">
+                <div class="post-content">
+                    <h3 class="post-title">
+                        <a title="{{post.title}}" href={{SeoUrl(post.url)}} class="title-refer">
+                            <span>{{post.title}}</span></a>
+                    </h3>
+                    <p class="post-data">
+                        <span class="post-date"><time datetime="{{moment(post.date).format('MM/DD/YYYY')}}">{{moment(post.date).format('MMM Do YYYY')}}</time></span>, {% for author in post.author %}<span class="post-author"><a title="{{author.title}}" href={{appendBlogUrl("/author/"+replacespace(author.title))}} rel="author"><span itemprop="name">{{author.title}}</span></a></span>
+                        {% if not loop.last %},{% endif %} {% endfor%}
+                        <p>{{post.body | truncate(140,false,'...')}}
+                            <span class="read-more"><a href={{SeoUrl(post.url)}}>Read More</a></span>
+                        </p>
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+    {% if (loop.index < arr_len) and loop.index % 1==0 %} 
+</div>
+<div class="row">
+    {% endif %} 
+    {% endfor %}
+</div>

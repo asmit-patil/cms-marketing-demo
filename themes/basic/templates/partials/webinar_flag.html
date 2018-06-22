@@ -1,0 +1,12 @@
+{% set entry = get("webinar_flag")%}
+{% if entry.webinar_flag_section.enable %}
+   <div class="webinar-flag-wrap text-center clearfix">
+      <div class="container"> 
+         <p>{{entry.webinar_flag_section.title}}
+           {% set new_tab = helpers.checkTarget(entry.webinar_flag_section.cta.open_in_a_new_tab) %}
+            <a {{new_tab}} title="{{entry.webinar_flag_section.cta.title}}" href="{{entry.webinar_flag_section.cta.link}}" class="cta cta-primary-outline" id="webevent" type="button">{{entry.webinar_flag_section.cta.title}}</a>
+            <a class="close-icon" href="javascript:void(0)"><i class="icon-cancel"></i></a>
+         </p>
+      </div>
+   </div>
+{% endif %}

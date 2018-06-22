@@ -1,0 +1,122 @@
+{% extends "layouts/default.html" %} {% block content %} {% include "partials/header_global.html" %}
+<div class="main-wrapper transparent-header">
+    <section class="secondary-hero-banner" title="{{entry.banner_section.background_image.title}}" style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <div class="headers">
+                                <h1>{{entry.banner_section.title}}</h1>
+                            </div>
+                            <div class="headers-desc">
+                                <p>{{entry.banner_section.desc}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="tab-section-wrap fixed-sub-menu">
+        <div class="col-md-12">
+            <div class="subnav-head subnav-scroll clearfix">
+                <!-- Nav tabs -->
+                <div class="sub-nav-wrapper resource-nav">
+                    <ul class="action-menu">
+                        <li><a href="{{SeoUrl(entry.resources_subnav_section.link)}}"><img alt="{{entry.resources_subnav_section.logo.title}}" src="{{AssetUrl(entry.resources_subnav_section.logo)}}"/></a></li>
+                        <li><a class="inactiveLink" href="">{{entry.resources_subnav_section.title}}</a></li>
+                    </ul>   
+                    <ul class="search-wrap">
+                        <li class="search-input">                      
+                            <form class="search-form-resources" action="javascript:void(0)">
+                                <span class="search-icon">
+                                    <i class="icon-search-icon"></i>
+                                </span> 
+                                <input id="searchfilter" class="form-control" type="text" placeholder="search all resources">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="resources-wrap clearfix">
+                    <div id="nmf" class="hidden">
+                        <h3>No Match Found.</h3>
+                    </div>
+                    {% for resources in entry.resources_section.resources %}
+                    <div class="views-row col-md-4 col-sm-4 col-xs-12 search">
+                            <div class="card-front">
+                                <div class="banner-thumbnail" title="{{resources.image.title}}" style="background-image:url({{AssetUrl(resources.image)}});">
+                                </div>
+                                <div class="field-text">                                
+                                    <h4>{{resources.title}}</h4>
+                                    <p class="resource-tag">{{resources.resources_tag}}</p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h4>{{resources.title}}</h4>    
+                                <p>{{helpers.truncateString(resources.desc,195,'...')}}</p>
+                                <div class="action-link text-center">                                
+                                    <a href="{{SeoUrl(resources.cta.link)}}" class="cta cta-primary">{{resources.cta.title}}</a>
+                                </div>
+                            </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .ellip {
+      display: block;
+      height: 100%;
+    }
+
+    .ellip-line {
+      display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-wrap: normal;
+      max-width: 100%;
+    }
+
+    .ellip,
+    .ellip-line {
+      position: relative;
+      overflow: hidden;
+    }
+</style>
+<script type="text/javascript">
+    // $(window).scroll(function() {
+    //     if ($(window).scrollTop() >= ($('.secondary-hero-banner').height()+ 130)) {
+    //         $('.subnav-scroll').css('position','fixed');
+    //     } else {
+    //         $('.subnav-scroll').css('position','absolute');
+    //     }
+    // });
+    // $( document ).ready(function() {
+    //     $('.resources-wrap .views-row .card-back p').trunc(180);
+    // });    
+    // $( document ).ready(function() {
+    //     // $('.resources-wrap .views-row .card-back p').truncate();
+    //     var title = $(".resources-wrap .views-row .card-back p").text();
+    //     var shortText = jQuery.trim(title).substring(100, 1000).split(" ")
+    //         .slice(0, -1).join(" ") + "...";
+    // });
+
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+            $('.subnav-scroll').css('position','fixed');
+        // console.log('in');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    });
+</script>
+{% include "partials/footer_global.html" %} 
+{% endblock %}

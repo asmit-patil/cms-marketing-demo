@@ -1,0 +1,180 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+{% include "partials/header_global.html" %}
+<div class="main-wrapper transparent-header">
+  <section class="secondary-hero-banner" title={{entry.banner_section.background_image.title}} style="background:url({{AssetUrl(entry.banner_section.background_image)}}) #015584;;">
+      <div class="banner-wrap text-center">
+          <div class="banner-content">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                          <div class="headers">
+                            <h1>{{entry.banner_section.title}}</h1>
+                          </div>
+                          <div class="header-desc">
+                            <p>{{entry.banner_section.desc}}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <section class="tab-section-wrap fixed-sub-menu">
+      <div class="col-md-12">
+        <!-- Nav tabs -->
+        <div class="subnav-head subnav-scroll clearfix">
+          <div class="sub-nav-wrapper">
+            <ul class="action-menu">
+              <li><a href="{{SeoUrl(entry.sub_nav_section.link)}}"><img alt="{{entry.sub_nav_section.logo.title}}" src="{{AssetUrl(entry.sub_nav_section.logo)}}"></a></li>
+              <li><a class="inactiveLink" href=" ">{{entry.sub_nav_section.title}}</a></li>              
+            </ul>                     
+            <ul class="tab-sub-nav one-pager-anchor">
+              {% for nav in entry.sub_nav_section.sub_nav %}                        
+              <li data-id="news" {% if loop.index==1 %} class="active" {% endif %}><a href="#{{loop.index}}">{{nav.title}}</a></li>
+              {% endfor %}
+            </ul>
+            <ul class="search-wrap">
+              <li class="search-input">                      
+                <form class="search-form" action="javascript:void(0)">  
+                    <span class="search-icon">
+                        <i class="icon-search-icon"></i>
+                    </span>                    
+                    <input class="form-control" type="text" placeholder="search all faqs">
+                </form>
+              </li>
+            </ul>
+            <ul class="visible-xs visible-sm hidden-md hidden-lg">
+              <button type="button" class="navbar-toggle">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">    
+          <div class="col-md-12">    
+                <!-- Tab panes -->
+                <div class="tab-content news-holder" ng-app ="app" ng-controller="x">
+                   {# {% for qa in entry.q_a_section %}#}
+                    <div class="news-article" id="[[$index+1]]" ng-repeat="qs in items">
+                        <div class="row search" >
+                          <div class="col-md-8 col-md-offset-2">
+                            <h3 class="text-center">[[qs.title]]</h3> 
+                            <div  class="question-wrap"  ng-repeat="q in qs.q_a">                         
+                              <h4 class="question">[[q.question]]</h4>
+                              <p>[[strip(q.answer)]]</p>                           
+                              <p ng-show="q.see_also.title.length"><b>See also:</b>
+                                  <a ng-show="q.see_also.open_in_a_new_tab == true" target="_target" href="[[q.see_also.link]]">[[q.see_also.title]]</a>
+                                  <a ng-show="q.see_also.open_in_a_new_tab == false" href="[[q.see_also.link]]">[[q.see_also.title]]</a>
+                              </p>            
+                            </div>
+                         <!--    <div class="action-link text-center">
+                              <a href="" class="cta cta-primary" ng-show="qs.q_a.length > 5" ng-hide="limit >= qs.q_a.length " ng-click="loadMore()">See More</a>
+                            </div> -->
+                          </div>
+                        </div>
+                    </div>
+                    {#{% endfor %}#}
+                </div>
+            </div>
+        </div>
+      </div>
+  </section>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.one-pager-anchor a').click(function() {
+        // $('.subnav-head').addClass('clicked');
+        $('.one-pager-anchor li').removeClass('active');
+        $(this).parent('li').addClass('active');
+        $('html, body').animate({
+            scrollTop: $($(this).attr('href')).offset().top
+        }, 800);
+        return false;
+    });
+
+    //sub fixed menu
+    var lastId,
+     topMenu = $(".one-pager-anchor"),
+     topMenuHeight = topMenu.outerHeight()+1,
+     // All list items
+     menuItems = topMenu.find("a"),
+     // Anchors corresponding to menu items
+     scrollItems = menuItems.map(function(){
+       var item = $($(this).attr("href"));
+
+        if (item.length) { return item;  }
+     });
+     // console.log("before scroll menuItems",menuItems)
+     // console.log("before scroll scrollItems",scrollItems)
+
+
+    $( window ).scroll(function() {
+        var fromTop = $(this).scrollTop()+topMenuHeight;
+        // console.log("fromtop",fromTop);
+        // console.log("scrollItems",scrollItems);
+       // get id of current scroll item
+       var cur = scrollItems.map(function(){
+         if ($(this).offset().top < fromTop)
+           return this;
+       });
+        // console.log("cur",cur);
+
+       // Get the id of the current element
+       cur = cur[cur.length-1];
+       console.log("cur after getting id",cur);
+       var id = cur && cur.length ? cur[0].id : "";
+       // console.log("id",id);
+
+       // console.log("lastid",lastId);
+       if (lastId !== id) {
+        // console.log("if main aaya")
+           lastId = id;
+           // Set/remove active class
+           menuItems
+             .parent().removeClass("active")
+             .end().filter("[href=#"+id+"]").parent().addClass("active");
+       }              
+    });
+
+    $(window).scroll(function() {
+        //sticky sub nav
+        if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+            $('.subnav-scroll').css('position','fixed');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    }).scroll();
+  });
+
+  var data =  {{entry.q_a_section | json }}
+  var app= angular.module('app',[]);
+  app.config(function($interpolateProvider) {
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+  })
+  app.controller('x', function ($scope) {
+    $scope.items = data;
+    // set the default amount of items being displayed
+    // $scope.limit = 3;
+
+    // loadMore function
+    // $scope.loadMore = function() {
+    //   $scope.limit = $scope.limit + 3;
+    // } 
+
+    $scope.strip = function(html) {
+     var tmp = document.createElement("DIV");
+     tmp.innerHTML = html;
+     return tmp.textContent || tmp.innerText || "";
+    } 
+  });    
+</script>
+{% include "partials/footer_global.html" %}
+{% endblock %}

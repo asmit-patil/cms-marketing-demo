@@ -1,0 +1,28 @@
+{% set footer = get("home_case_study_email_template_footer")%}
+<footer class="footer-section cs-footer">
+		<div class="container">
+			   	<div class="row">
+					<div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 logo">
+						<a class ="inactiveLink" title="Contentstack" href="">
+						<img alt="{{footer.footer_section.logo.title}}" src="{{AssetUrl(footer.footer_section.logo)}}">
+						</a>
+					</div>
+					<div class="col-lg-10 col-md-9 col-sm-8 col-xs-8 text-right copyright-text">
+						<div class="copyright">
+							{{footer.footer_section.copyrights_text}}
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-12">
+						<div class="footer-links social">
+							<ul>
+								{% for link in footer.footer_section.social_media %}
+									<li>
+										<a target="_blank" title="{{link.title}}" class="{{link.title}}" href="{{link.link}}"><span><i class="icon-{{link.title}}"></i></span></a>
+									</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+		</div>
+	</footer>

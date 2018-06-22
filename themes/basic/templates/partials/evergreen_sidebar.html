@@ -1,0 +1,42 @@
+{% set entry = get('evergreen_siderbar')%}
+<header class="header clearfix">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{{entry.header.logo.link}}"><img alt="{{entry.header.logo.title}}" src="{{AssetUrl(entry.header.logo)}}"></a>
+        </div>
+      </div>
+    </nav>
+</header>
+<div class="main-wrapper row transparent-header new-evergreen-wrap ">   
+   <section class="secondary-hero-banner" title="{{entry.banner_section.background_image.title}}" style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <h1>{{entry.banner_section.title}}</h1>
+                            <p>{{entry.banner_section.desc}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="evergreen-container">
+        <div class="evergreen-innerwrap clearfix">
+            <section class="evergreen-sidebar">
+                <ul>
+                    {% for list in entry.sidebar_section %}
+                    <li class="menu"><a class="menu-option" href="{{list.link}}">{{list.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+<script type="text/javascript">        
+    //add active class to sidebar active menu
+    $(".evergreen-sidebar .menu a").each(function(){
+        if ($(this).attr("href") == window.location.pathname){
+            $(this).addClass("active");
+        }
+    });    
+</script>

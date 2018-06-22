@@ -1,0 +1,30 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+			   	{% include "partials/evergreen_sidebar.html" %}
+			    <section id="evergreen-content" class="secondary-pages-content"> 
+			        <div class="content-textblock">
+			            <h2>{{entry.introduction_paragraph.title}}</h2>
+			            {{entry.introduction_paragraph.desc}}
+			        </div>
+			    </section>
+			</div>
+		</div>
+	</div> 
+</div>
+<script type="text/javascript">
+	$( document ).ready(function() {
+			var waypoint = new Waypoint({
+			element: document.getElementById('evergreen-content'),
+			handler: function(direction) {
+				if (direction === 'down') {
+					$('.evergreen-sidebar').addClass('fixed-sidebar')
+					this.element.style.top = 0
+				}
+				else {
+					$('.evergreen-sidebar').removeClass('fixed-sidebar')
+				}
+			}
+		})
+	})
+</script>
+{% endblock %}

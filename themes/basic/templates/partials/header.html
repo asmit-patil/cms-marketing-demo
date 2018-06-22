@@ -1,0 +1,36 @@
+{# If you have a "Content Type" for header in Built.io Contentstack then use get() view helper to retrieve header entry. #} {% set header = get("header") %} {# And then render header values using the {{header.field_name}} #}
+<header class="business-header">
+    <nav class="navbar navbar-default nav-item">
+    	<div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{header.logo_section.link}}"><img src="{{getAssetUrl(header.logo_section.logo)}}" alt="{{header.logo_section.logo.title}}"></a><span class="drop-down-text">{{header.logo_section.text}}</span>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav bus">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{header.customer_section.title}}<i class="arrow down"></i></a>
+                        <ul class="dropdown-menu">
+                            {% for cust in header.customer_section.customer %}
+                            <li><a href="{{cust.link}}">{{cust.title}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% for nav in header.nav_section.nav_menu %}
+                    <li><a href="{{nav.link}}">{{nav.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+    	</div>
+    </nav>
+</header>

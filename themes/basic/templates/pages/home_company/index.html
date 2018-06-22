@@ -1,0 +1,153 @@
+{% extends "layouts/default.html" %} 
+{% block content %} 
+{% include "partials/header_global.html" %}
+<div class="main-wrapper company-overview transparent-header">
+    <section class="secondary-hero-banner" title="{{entry.banner_section.background_image.title}}" style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <div class="headers">
+                                <h1>{{entry.banner_section.title}}</h1>
+                            </div>
+                            <div class="header-desc">
+                                <p>{{entry.banner_section.desc}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="tab-section-wrap fixed-sub-menu">
+        <div class="subnav-head subnav-scroll clearfix">
+            <!-- Nav tabs -->
+            <div class="container">                
+                <div class="sub-nav-wrapper about-nav">
+                    <ul class="action-menu">
+                        <li><a href="{{SeoUrl(entry.sub_nav_section.link)}}"><img alt="{{entry.sub_nav_section.logo.title}}" src="{{AssetUrl(entry.sub_nav_section.logo)}}"></a></li>
+                        <li><a class="inactiveLink" href=" ">{{entry.sub_nav_section.title}}</a></li>               
+                    </ul>                     
+                    <ul class="tab-sub-nav one-pager-anchor">
+                        {% for sub in entry.sub_nav_section.sub_nav %}
+                        {% if sub.title == "Contact us" %}                     
+                                <li><a  title="{{sub.title}}" href="{{SeoUrl(sub.link)}}" class="cta cta-teal-outline">{{sub.title}}</a></li>
+                                {% else %}
+                            {% if sub.title == "News" or sub.title == "Press" %}   
+                            <li {% if loop.index==1 %} class="active" {% endif %}><a href="{{SeoUrl(sub.link)}}">{{sub.title}}</a></li>
+                            {% else %}
+                             <li {% if loop.index==1 %} class="active" {% endif %}><a href="{{sub.link}}">{{sub.title}}</a></li>
+                            {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <!-- <ul class="contact-us">
+                        <li><a href="{{entry.sub_nav_section.sub_nav_right.link}}">{{entry.sub_nav_section.sub_nav_right.title}}</a></li>
+                    </ul> -->
+                    <ul class="visible-xs visible-sm hidden-md hidden-lg">
+                        <button type="button" class="navbar-toggle">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="about-content">
+            <div id="1" class="content-section">
+                <div class="container">
+                    <div class="row">
+                        <h2 class="text-center">{{entry.about_section.title}}</h2>
+                        <div class="col-md-7">
+                            <p>{{entry.about_section.desc}}</p>
+                        </div>
+                        <div class="col-md-5 text-center">
+                            <img alt="{{entry.about_section.image.title}}" src="{{AssetUrl(entry.about_section.image)}}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div id="leadership" class="content-section">
+                <div class="container">
+                        <h2 class="text-center">{{entry.leadership_section.title}}</h2> 
+                        <div class="leader-holder">                                
+                        {% for leader in entry.leadership_section.leadership %}
+                            <div class="col-md-6 text-center">
+                                <div class="leader-wrap">                                    
+                                    <p><img src="{{getAssetUrl(leader.image)}}"></p>
+                                    <div class="leaders-detail">                                    
+                                        <h3>{{leader.title}}</h3>
+                                        <h5>{{leader.designation}}</h5>
+                                        <p>{{leader.desc}}</p>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                </div>
+            </div> -->
+            <div id="2" class="content-section">
+                <div class="container">
+                    <div class="row">
+                        <h2 class="text-center">{{entry.office_location_section.title}}</h2> {% for office in entry.office_location_section.office_location %}
+                        <div class="col-md-6 text-center">
+                            <p><img alt="{{office.office_image.title}}" src="{{AssetUrl(office.office_image)}}"></p>
+                            <div class="location">                                
+                                <h3>{{office.title}}</h3>
+                                <p>{{office.office_address}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+    // $(window).scroll(function() {
+    //     if ($(window).scrollTop() >= ($('.secondary-hero-banner').height()+ 130)) {
+    //         $('.subnav-scroll').css('position','fixed');
+    //     } else {
+    //         $('.subnav-scroll').css('position','absolute');
+    //     }
+    // });
+    $(document).ready(function() {
+        $('a[href*=#]').bind('click', function(e) {
+            e.preventDefault(); // prevent hard jump, the default behavior
+
+            var target = $(this).attr("href"); // Set the target as variable
+            // console.log(target);
+            // perform animated scrolling by getting top-position of target-element and set it as scroll target
+            $('html, body').stop().animate({
+                scrollTop: $(target).offset().top
+            }, 600, function() {
+                // location.hash = target; //attach the hash (#jumptarget) to the pageurl
+            });
+
+            return false;
+        });
+    });
+    $(window).scroll(function() {
+        var scrollDistance = $(window).scrollTop();
+        // Assign active class to nav links while scolling
+        $('.content-section').each(function(i) {
+            if ($(this).position().top <= scrollDistance-350) {
+                $('.tab-sub-nav.one-pager-anchor li.active').removeClass('active');
+                $('.tab-sub-nav.one-pager-anchor li').eq(i).addClass('active');
+            }
+        });
+        
+        if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+            $('.subnav-scroll').css('position','fixed');
+        // console.log('in');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    }).scroll();
+</script>
+{% include "partials/footer_global.html" %} 
+{% endblock %}

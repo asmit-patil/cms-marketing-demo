@@ -1,0 +1,95 @@
+{% extends "layouts/default.html" %} {% block content %} {% include "partials/header_global.html" %}
+<div class="main-wrapper transparent-header">
+    <section class="secondary-hero-banner" style="background:url({{AssetUrl(entry.banner_section.background_image)}}) #015584;">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <div class="headers">
+                                <h1>{{entry.banner_section.title}}</h1>
+                            </div>
+                            <div class="header-desc">
+                                <p>{{entry.banner_section.desc}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="tab-section-wrap fixed-sub-menu">
+        <div class="col-md-12">
+            <div class="subnav-head clearfix subnav-scroll">
+                <!-- Nav tabs -->
+                <div class="sub-nav-wrapper">
+                    <ul class="action-menu">
+                        <li><a href="{{SeoUrl(entry.press_subnav_section.link)}}"><img alt="{{entry.press_subnav_section.logo.title}}" src="{{AssetUrl(entry.press_subnav_section.logo)}}"></a></li>
+                        <li><a class="inactiveLink" href=" ">{{entry.press_subnav_section.title}}</a></li>                      
+                    </ul>                     
+                    <ul class="tab-sub-nav">
+                        {% for item in data %} {% set outerIndex = loop.index %}
+                            <li role="presentation" {% if loop.index==1 %} class="active" {% endif %}>
+                                {% for year,date in item %}
+                                <a href="#news-{{outerIndex}}" aria-controls="home" role="tab" data-toggle="tab">{{year}}</a> {% endfor %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <ul class="search-wrap">
+                      <li class="search-input">                      
+                        <form class="search-form" action="javascript:void(0)">  
+                            <span class="search-icon">
+                                <i class="icon-search-icon"></i>
+                            </span>                    
+                            <input id="searchfilter" class="form-control" type="text" placeholder="search all press">
+                        </form>
+                      </li>
+                    </ul>
+                    <ul class="visible-xs visible-sm hidden-md hidden-lg">
+                        <button type="button" class="navbar-toggle">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Tab panes -->
+                    <div class="tab-content news-tab-content">
+                        {% for item in data %}
+                        <div role="tabpanel" class="tab-pane {% if loop.index == 1 %} active {% endif %}" id="news-{{loop.index}}">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    {% for year,month in item %} {% for press in month %}
+                                    <div class="question-wrap">
+                                        <h3 class="question"><a href="{{SeoUrl(press.url)}}">{{press.title}}</a></h3>
+                                        <p class="source">{{moment(press.date).format("MMMM D")}}, {{moment(press.date).format("YYYY")}}</p>
+                                        <p>{{press.post | truncate(80, true, "...")}}</p>
+                                    </div>
+                                    {% endfor %} {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+            $('.subnav-scroll').css('position','fixed');
+        // console.log('in');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    });
+</script>
+{% include "partials/footer_global.html" %} {% endblock %}

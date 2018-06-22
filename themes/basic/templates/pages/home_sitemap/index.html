@@ -1,0 +1,29 @@
+ {% extends "layouts/default.html" %} {% block content %} {% include "partials/header_global_black.html" %}
+<div class="main-wrapper sitemap-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+                <div class="headers">
+                    <h1>{{entry.sitemap_section.title}}</h1>
+                </div>
+                <div class="footer-wrap clearfix">
+                    <ul class="footer-menu-wrap">
+                        {% for nav in entry.sitemap_section.nav %} {% if nav.sub_nav.length > 0 %}
+                        <li>
+                            <a href="javascript:void(0)" class="isActiveLink" title="{{nav.title}}">{{nav.title}}</a>
+                            <ul>
+                                {% for sub in nav.sub_nav %}
+                                <li><a href="{{SeoUrl(sub.link)}}">{{sub.title}} </a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li class=""><a class="" href="{{SeoUrl(nav.link)}}">{{nav.title}}</a></li>
+                        {% endif %} {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "partials/footer_global.html" %} {% endblock %}

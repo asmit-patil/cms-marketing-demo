@@ -1,0 +1,35 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+<div class="main-wrapper orphan-page">
+    <header role="navigation" class="header header-dark clearfix">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    <a class ="inactiveLink" title="contentstack.com" href="">
+                        <img alt="{{entry.header_section.logo.title}}" src="{{AssetUrl(entry.header_section.logo)}}"/>
+                    </a>
+                </div>
+            </div>
+            <div class="casestudy-text">{{entry.header_section.text}}</div>
+        </div>
+    </header> <!--/header -->
+    
+    <div class="webinar-thankyou text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1>
+                        {{entry.webinar_section.title}}
+                    </h1>
+                    <!-- <h1>{{entry.webinar_section.add_webinar[0].webinar_details.title}}</h1> -->
+                    <div class="thank-content">
+                        {{entry.webinar_section.thank_you_message}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+{% include "partials/footer_cs_email_template.html" %} 
+{% endblock %}
+

@@ -1,0 +1,37 @@
+{% set business = get("header_business_subpage")%}
+<section class="integration-section">
+  <div class="container text-center">
+      <p class="section-title">{{business.integration_section.title}}</p>
+      <h2 class="section-heading">{{business.integration_section.sub_title}}</h2>
+      <div class="row">
+          <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+              <p>{{business.integration_section.desc}}</p>
+          </div>
+      </div>
+      <div class="img-gallery row">
+          {% for int in business.integration_section.integrations_logo %}
+          <div class="col-md-2 col-sm-2 col-xs-12">
+              <div class="service-logos">
+                  <img class="img-responsive" src="{{getAssetUrl(int.logo)}}">
+              </div>
+              <!-- <p class="text-center">{{int.title}}</p> -->
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+</section>
+<section class="sign-up">
+  <div class="container text-center">
+      <div class="text-block row">
+          <div class="col-md-offset-2 col-md-8">
+              <h2 class="section-heading">{{business.try_free_section.title}}</h2>
+              <p>{{business.try_free_section.desc}}</p>
+              <div class="action-links text-center">
+                  {% for cta in business.try_free_section.cta %}
+                  <a href="{{cta.link}}" class="cta cta-primary">{{cta.title}}</a> 
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

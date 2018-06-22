@@ -1,0 +1,119 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+{% include "partials/header_global.html" %}
+<div class="dev-home-wrap">
+  <section class="hero-banner">
+    {% for ban in entry.banner_section.banners %}
+    <div class="banner-wrap text-left" style="background-image:url({{getAssetUrl(ban.background_image)}});">
+      <div class="banner-content">      
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">                    
+              <h1>{{ban.title}}</h1>
+              <p>{{ban.desc}}</p>
+              <div class="action-links">
+              {% for cta in ban.cta %}
+                <a title="{{cta.title}}" href="{{cta.href}}" class="cta cta-secondary">{{cta.title}}</a>
+              {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+  <section class="testimonial-section">
+    <div class="container">    
+      <div class="text-block row">
+        <h2>{{entry.developer_section.title}}</h2>
+      </div>
+      <div class="flexslider text-center">
+        <ul class="slides">
+        {% for dev in entry.developer_section.developer_quotes %}
+          <li data-thumb="{{getAssetUrl(dev.company_logo)}}">
+              <div class="customer-img">                
+                <img alt="{{dev.developer_image.title}}" class="img-responsive" src="{{getAssetUrl(dev.developer_image)}}" />
+              </div>
+              <div class="testimonial-wrap">            
+                  <h4>{{dev.name}}</h4>
+                  <p>{{dev.text}}</p>
+              </div>
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>    
+  <section class="overview-section">
+    <div class="container">      
+      <div class="text-block row">
+        <div class="col-md-offset-2 col-md-8">
+          <h2>{{entry.content_section.title}}</h2>
+          <p>{{entry.content_section.desc}}</p>
+        </div>
+        <div class="col-md-12">
+          <img alt="{{entry.content_section.image.title}}" class="img-responsive" src="{{getAssetUrl(entry.content_section.image)}}">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cms-types">
+    <div class="container">      
+      <div class="text-block row">
+        <h2>{{entry.stack_section.title}}</h2>
+        <div class="toggle-cta-wrap clearfix">
+          {% for stack in entry.stack_section.stack %}
+            <div class="toggle-option {{stack.css_class}} {% if loop.index == 1 %}active{% endif %}"><span>{{stack.title}}</span>
+            </div>
+            <!-- <div class="toggle-option traditional-cta"><span>Traditional</span></div> -->
+          {% endfor %}
+        </div>
+        {% for stack in entry.stack_section.stack %}
+        <div class="toggle-content clearfix {% if loop.index > 1 %}hide{% endif %}"><img data-image="{{getAssetUrl(stack.mobile_image)}}" class="img-responsive stack" src="{{getAssetUrl(stack.image)}}" alt="{{stack.image.title}}"></div>
+        {% endfor %}
+      <!-- <div class="toggle-content hide" id="traditional">2<img src="http://via.placeholder.com/650x150"></div> -->
+      </div>
+    </div>
+  </section>
+  <section class="integration-section-wrap">
+    <div class="container">      
+      <h2>{{entry.integration_section.title}}</h2>
+      <div class="row">
+      {% for int in entry.integration_section.integration %}
+        <div class="col-md-4 text-left integration-section">
+        <h4>{{int.title}}</h4>
+          <img alt="{{int.image.title}}" class="img-responsive" src="{{getAssetUrl(int.image)}}">
+          {% for point in int.points %}
+          <h5>{{point.title}}</h5>
+          <ul>
+          {% for sub in point.desc %}
+          <li>{{sub}}</li>
+          {% endfor %}  
+          </ul>
+          {% endfor %}     
+        </div>
+        {% endfor %}      
+      </div>
+    </div>
+  </section>
+  <section class="features-section">
+    <div class="container text-center">
+      <p class="section-title">{{entry.performance_section.title}}</p>
+      <h2>{{entry.performance_section.sub_title}}</h2>
+      {% for per in entry.performance_section.performance %}
+      <div class="row flex-parent feature-row">
+        <div class="col-md-7 col-sm-12 col-xs-12 flex-child graphic">
+          <img alt="{{per.image.title}}" class="img-responsive" src="{{getAssetUrl(per.image)}}">
+        </div>
+        <div class="col-md-5 col-sm-12 col-xs-12 text-left flex-child content">
+          <h3 class="info-heading">{{per.title}}</h3>
+          <p class="info">{{per.desc}}</p>
+        </div>
+      </div>   
+      {% endfor %} 
+    </div>
+  </section>
+{% include "pages/home_developer/developer.html" %}
+{% include "partials/footer_global.html" %}
+{% endblock %}

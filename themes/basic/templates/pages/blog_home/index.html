@@ -1,0 +1,96 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+{% include "partials/blog_header.html" %} 
+<div class="main-wrapper transparent-header">
+    <section class="secondary-hero-banner" title="{{entry.banner_section.background_image.title}}"  style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">
+      <div class="banner-wrap text-center">
+          <div class="banner-content">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                        <div class="headers">
+                          <h1>{{entry.banner_section.title}}</h1>
+                        </div>
+                        <div class="header-desc">
+                          <p>{{entry.banner_section.desc}}</p>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>
+
+    <div class="blog-container clearfix fixed-sub-menu">
+   {% include "partials/category.html" %}
+    </div>
+
+    <div class="tab-content-wrap blog-content">
+        <div class="container">
+            <div id="{{entry.categories_section.categories[0].category[0].title | replace(" ","- ")}}" class="tab-content current">
+                <div class="article-wrap latestpost">
+                    <div class="container">
+                        {% set arr_len = helpers.MathCeil(allpost.length) %}
+                            {% for post in allpost %} 
+                            {% if (loop.index0 < 10) %} 
+                        <div class="row blog-item">
+                            <article class="item blog-post clearfix">
+                                <div class="col-lg-5 col-md-5 col-sm-5">
+                                    <div class="post-content">                  
+                                        <div class="lazy-loader">
+                                            <a href={{(post.url)}}>
+                                                <img alt="{{post.image.title}}" src="{{(AssetUrl(post.image))}}" class="grid-thumbnail img-responsive">
+                                            </a>                                               
+                                        </div> 
+                                    </div>          
+                                </div>
+                                <div class="col-lg-7 col-md-7 col-sm-7">
+                                    <div class="post-content">
+                                        <h3 class="post-title"><a title="{{post.title}}" href={{SeoUrl(post.url)}} class="title-refer">
+                                            <span>{{post.title}}</span></a></h3>
+                                        <!-- <span>{{post.title | truncate(60,false,'...')}}</span></a></h3> -->
+                                        <p class="post-data">
+                                            <span class="post-date"><time datetime="{{moment(post.date).format('MM/DD/YYYY')}}">{{moment(post.date).format('MMM Do YYYY')}}, </time></span>{% for author in post.author %}<span class="post-author"><a title="{{author.title}}" href={{appendBlogUrl("/author/"+replacespace(author.title))}} rel="author"><span itemprop="name">{{author.title}}</span></a></span>
+                                        {% if not loop.last %},{% endif %} {% endfor%}
+                                        <p>{{post.body | truncate(140,false,'...')}}
+                                            <span class="read-more"><a href={{SeoUrl(post.url)}}>Read More</a></span>                               
+                                        </p>
+                                    </div> 
+                                </div>
+                            </article>
+                        </div>
+                            {% endif %} 
+                            {% endfor %} 
+                    </div>
+                    <div class="load-more-wrap text-center">
+                        <button class="latest-loadmore cta cta-primary">Load more posts</button>
+                    </div>
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </div>                
+            </div>
+            <!--container -->
+        </div>
+        <!--blog -->
+    </div>
+</div>
+<script type="text/javascript">
+    if(location.pathname.indexOf('/blog') !== -1){
+      $('.bloglink').removeAttr("href").addClass('inactiveLink');
+    }
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.secondary-hero-banner').height() + 130)) {
+            $('.subnav-scroll').css('position','fixed');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    });
+</script>
+{% include "partials/footer_global.html" %}
+{% endblock %}
+

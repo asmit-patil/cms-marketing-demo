@@ -1,0 +1,66 @@
+{% extends "layouts/default.html" %}
+{# display page values using the {{entry.field_id}} tag. #}
+{% block content %}
+<div class="main-wrapper orphan-page">
+	<header role="navigation" class="header header-dark clearfix">
+		<div class="container">
+			<div class="navbar-header">
+				<div class="navbar-brand">
+					<a class ="inactiveLink" href="">
+						<img alt="{{entry.header_section.logo.title}}" src="{{AssetUrl(entry.header_section.logo)}}"/>
+					</a>
+				</div>
+			</div>
+			<div class="casestudy-text">{{entry.header_section.text}}</div>
+		</div>
+	</header> <!--/header -->
+	{% include "partials/resources_casestudy_subheader.html" %}	
+	<div class="secondary-pages-content fixed-sub-menu">
+		<div class="container">
+			<div class="row relative">
+				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 orphan-page-info">
+					{{entry.paragraph_section}}
+					<div class="sticky-container">
+					    {% include "partials/social-sharing.html" %}
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					
+					<div class="orphan-page-form">
+						<div class="center-img">
+							<img alt="{{entry.main_banner.logo.title}}" src="{{ AssetUrl(entry.main_banner.logo)}}"/>
+						</div>
+						<h3>{{entry.form_section.title}}</h3>						
+						<div class="resc-mkt-form">
+							<form id="mktoForm_1030" class="demo-mkt-form" data-href="{{entry.form_section.cta.link_2}}" data-pdf="{{SeoUrl(entry.form_section.cta.link)}}"></form>
+						</div>
+					</div>
+					<!-- <iframe id="getformiframe" name="iframe" class="hidden"></iframe> -->
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+<script>
+    MktoForms2.loadForm("//app-sj21.marketo.com", "489-WNI-383", 1030, function(form) {
+	form.getFormElem().find('select').after('<i class="icon icon-down"></i>'); 
+	$('#Company_Size__c, #Industry').on('change', function() {
+		form.getFormElem().find('select').after('<i class="icon icon-down"></i>');        
+	});
+
+	form.onSubmit(function(){
+		form.getFormElem().find('select').after('<i class="icon icon-down"></i>');   
+		 visitorIDtrack();          
+	});
+    form.onSuccess(function(values, followUpUrl) {
+        var redirectUrl = form.getFormElem().attr('data-href');
+        // var linkPdf = form.getFormElem().attr('data-pdf');
+        // window.open(linkPdf, '_blank');
+        location.href = redirectUrl;
+        //return false to prevent the submission handler continuing with its own processing  
+        return false;
+    });
+});
+</script>
+{% include "partials/footer_cs_email_template.html" %} 
+{% endblock %}

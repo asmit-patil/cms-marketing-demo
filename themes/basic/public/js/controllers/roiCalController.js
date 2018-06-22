@@ -1,0 +1,1 @@
+var roi_app=angular.module("roiCalculator",[]);roi_app.config(function(o){o.startSymbol("[["),o.endSymbol("]]")}),roi_app.controller("roiController",function(o){});

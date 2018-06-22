@@ -1,0 +1,44 @@
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+{%- if entry.seo %}
+  {%- if entry.seo.title %}
+    <meta name="title" content="{{entry.seo.title}}">
+  {% endif -%}
+  {%- if entry.seo.description -%}
+    <meta name="description" content="{{entry.seo.description}}">
+  {%- endif -%}   
+  {%- if entry.seo.canonical -%}
+    <link rel="canonical" href="{{SeoUrl(entry.seo.canonical)}}"/>
+    {%- elif canonical == null -%}
+    {%- else -%}
+     <link rel="canonical" href="{{SeoUrl(canonical)}}"/>
+    {%- endif -%}
+{%- endif -%}
+<!-- Schema.Org -->
+{%- if entry.url == "/blog" or entry.url == null %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebPage",
+      "name": "Blog",
+      "url": "https://www.contentstack.com/blog",
+      "thumbnailUrl": "https://www.contentstack.com/static/images/contentstack-logo-200.png"
+    }
+  </script>
+{% elif entry.url.indexOf('/blog') == 0 %}
+{% include "partials/schema_blog.html" %}
+{% else %}
+  <script type="application/ld+json">  
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name" : "Contentstack",
+      "url": "https://www.Contentstack.com/",
+      "logo": "https://www.contentstack.com/static/images/contentstack-logo-200.png",
+      "description":"Contentstack is an API-first, headless CMS giving developers development freedom and marketers a way to engage audiences in realtime, across multiple channels.",
+      "sameAs" : [ "https://www.facebook.com/contentstack","https://twitter.com/contentstack","https://www.linkedin.com/company/contentstack","https://github.com/builtio-contentstack" ]        
+    }
+  </script>
+{% endif -%}
+ 

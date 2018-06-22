@@ -1,0 +1,277 @@
+{% extends "layouts/default.html" %} {% block content %} {% include "partials/header_global.html" %}
+<div class="main-wrapper transparent-header partners" ng-app="app" ng-controller="x">
+    <section class="secondary-hero-banner" title="{{entry.banner_section.background_image.title}}" style="background-image:url({{AssetUrl(entry.banner_section.background_image)}});">
+        <div class="banner-wrap text-center">
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+                            <h1>{{entry.banner_section.title}}</h1>
+                            <p>{{entry.banner_section.desc}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="tab-section-wrap fixed-sub-menu">
+        <div class="col-md-12">
+            <div class="subnav-head subnav-scroll clearfix">
+                <!-- Nav tabs -->
+                <!-- <div class="sub-nav-wrapper">
+          <ul class="action-menu">
+              <li><a href="{{SeoUrl(entry.sub_nav_section.link)}}"><img alt="{{entry.sub_nav_section.logo.title}}" src="{{AssetUrl(entry.sub_nav_section.logo)}}"/></a></li>
+              <li><a class="inactiveLink" href="">{{entry.sub_nav_section.title}}</a></li>
+          </ul>
+          <ul class="tab-sub-nav one-pager-anchor">
+            <li>Filter By:</li>
+            <li>
+              <select class="form-control" ng-model="level_sort" ng-change="levelChange()">
+                <option value="all" disabled>[[level_filter.title]]</option>
+                <option  ng-repeat="rating in level_filter.level" value="[[rating.title]]">[[asterisk.repeat(rating.title)]]</option>                          
+              </select>
+              <span class="caret"></span>
+            </li>
+            <li>
+              <select class="form-control" ng-model="industry_sort" ng-change="industryChange()">
+                <option value="all" disabled selected>[[industry_filter.title]]</option>
+                <option ng-repeat="industry in industry_filter.industry">[[industry.title]]</option>
+              </select>
+              <span class="caret"></span>
+            </li>
+            <li>
+              <a href="javascript:void(0)" ng-click="reset()">Reset</a>
+            </li>
+          </ul>
+          <ul class="search-wrap">
+            <li class="search-input">                      
+              <form class="search-form" action="javascript:void(0)">  
+                  <span class="search-icon">
+                      <i class="icon-search-icon"></i>
+                  </span>                    
+                  <input  ng-model="searchString" class="form-control" type="text" placeholder="Search all partners">
+              </form>
+            </li>
+          </ul>
+          <ul class="visible-xs visible-sm hidden-md hidden-lg">
+              <button type="button" class="navbar-toggle">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+          </ul>
+        </div> -->
+                <!--      <div ng-show="filter_object"><span class="star-label level-[[filter_object.rating]]">[[filter_object.rating]]</span><span>[[filter_object.industry]]</span></div> -->
+                <div class="sub-nav-wrapper">
+                    <ul class="action-menu">
+                        <li><a href="{{SeoUrl(entry.sub_nav_section.link)}}"><img alt="{{entry.sub_nav_section.logo.title}}" src="{{AssetUrl(entry.sub_nav_section.logo)}}"/></a></li>
+                        <li><a class="inactiveLink" href="">{{entry.sub_nav_section.title}}</a></li>
+                    </ul>
+                    <ul class="tab-sub-nav one-pager-anchor">
+                        <li>Filter By:</li>
+                        <li>
+                            <div class="dropdown-wrap">
+                                <!-- <a id="byLevel" ng-hide="level_filter_label" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Partner Level<span class="caret"></span></a> -->
+                                <a id="byLevel" class="dropdown-toggle star-label level-[[partner_level_label]]" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Partner Level<span class="caret"></span></a>
+                                <ul class="dropdown-menu" data-filter-group="level" aria-labelledby="byLevel">
+                                    <li ng-repeat="rating in level_filter.level" data-rating="[[rating.title]]" class="dropdown-item stars level-[[rating.title]]" data-mixitup-control="" data-filter=".level-[[rating.title]]">[[asterisk.repeat(rating.title)]]</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-wrap show ">
+                                <a id="byLevel" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Industry <span class="caret"></span></a>
+                                <ul class="dropdown-menu" data-filter-group="level" aria-labelledby="byLevel">
+                                    <li ng-repeat="industry in industry_filter.industry" data-industry="[[industry.title]]" class="dropdown-item industry">[[industry.title]]</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" ng-click="reset()">Reset</a>
+                        </li>
+                    </ul>
+                    <ul class="search-wrap">
+                        <li class="search-input">
+                            <form class="search-form" action="javascript:void(0)">
+                                <span class="search-icon">
+                      <i class="icon-search-icon"></i>
+                  </span>
+                                <input ng-model="searchString" class="form-control" type="text" placeholder="Search all partners">
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="visible-xs visible-sm hidden-md hidden-lg">
+                        <button type="button" class="navbar-toggle">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="partner-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-12 text-center" ng-repeat="partner in array = (items | filter:searchString) | orderBy :'-star_rating'">
+                    <a href="[[partner.link]]">
+                        <div class="partner-box">
+                            <h3>[[partner.title]]</h3>
+                            <div class="partner-logo">
+                                <img alt="partner.logo.title" src="[[partner.logo._internal_url]]">
+                            </div>
+                            <div class="star-rating">
+                                <div ng-class="{'stars level-1':partner.star_rating
+                  ==1,'stars level-2':partner.star_rating==2,'stars level-3':partner.star_rating==3}">[[asterisk.repeat(partner.star_ratings)]]
+                                </div>
+                            </div>
+                            <div class="hidden">[[partner.industry[0].title]]</div>
+                        </div>
+                        <!-- <div ng-show=" searchString.length == 0">No results found</div> -->
+                    </a>
+                </div>
+                <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12" ng-show="items.length==0 || array.length==0">No results found</div>
+            </div>
+        </div>
+    </section>
+</div> 
+
+<script>
+ var data1 =  {{entry.sub_nav_section.fliter_section.partner_level | json }}  
+ var data2 =  {{entry.sub_nav_section.fliter_section.industry_section | json }}
+ var data =  {{entry.partners_section.partners | json }}
+  var app= angular.module('app',[]);
+  app.config(function($interpolateProvider) {
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+  })
+  app.controller('x', function ($scope) {
+    $scope.items = data;
+    $scope.newArray = angular.copy(data);
+    $scope.level_filter = data1;
+    $scope.industry_filter = data2;
+    $scope.asterisk  = "*";
+    $scope.level_sort = "all";
+    $scope.industry_sort = "all"; 
+    $scope.partner_level_label = 'Partner Level';
+    $scope.level_filter_label = false;
+    $scope.filter_object = {};
+
+    $(document).ready(function() {
+    	$('.stars').click(function(e) {
+    		var rating = $(this).attr('data-rating');
+    		var array = [];
+    		for (var i = 0; i < $scope.newArray.length; i++) {
+    			if ($scope.industry_sort != "all") {
+    				if (rating == $scope.newArray[i].star_rating && $scope.industry_sort == $scope.newArray[i].industry[0].title) {
+    					array.push($scope.newArray[i]);
+    				}
+    			} else {
+    				if (rating == $scope.newArray[i].star_rating) {
+    					array.push($scope.newArray[i]);
+    				}
+
+    			}
+    		}
+			$scope.$apply(function() {
+				$scope.items = array;
+        $scope.filter_object.rating = rating;
+				// $scope.partner_level_label = rating
+				// $scope.level_filter_label = true;
+			});
+    	})
+
+	$('.industry').click(function(e) {
+		var industry = $(this).attr('data-industry');
+		var iarray = [];
+		for (var i = 0; i < $scope.newArray.length; i++) {
+			if ($scope.level_sort != "all") {
+				if (industry == $scope.newArray[i].industry[0].title && $scope.level_sort == $scope.newArray[i].star_rating) {
+					iarray.push($scope.newArray[i]);
+				}
+			} else {
+				if (industry == $scope.newArray[i].industry[0].title) {
+					iarray.push($scope.newArray[i]);
+				}
+
+			}
+		}
+		$scope.$apply(function() {
+			$scope.items = iarray;
+      $scope.filter_object.industry = industry;
+		});
+
+	})
+    })
+   
+    // $scope.levelChange = function(){
+    //   var array = [];
+    //   for (var i = 0; i < $scope.newArray.length; i++) {
+    //     if($scope.industry_sort != "all"){
+    //     if($scope.level_sort == $scope.newArray[i].star_rating && $scope.industry_sort == $scope.newArray[i].industry[0].title){
+    //             array.push($scope.newArray[i]);
+    //     }
+    //     }
+    //     else{
+    //       if($scope.level_sort == $scope.newArray[i].star_rating){
+    //          array.push($scope.newArray[i]);
+    //       }
+
+    //     }
+    //   }
+    //   $scope.items = array;
+    // }
+    
+    // $scope.industryChange = function(){
+    //   var iarray = [];
+    //     for (var i = 0; i < $scope.newArray.length; i++) {
+    //             if($scope.level_sort != "all"){
+    //     if($scope.industry_sort == $scope.newArray[i].industry[0].title && $scope.level_sort == $scope.newArray[i].star_rating){
+    //             iarray.push($scope.newArray[i]);
+    //     }
+    //     }
+    //     else{
+    //       if($scope.industry_sort == $scope.newArray[i].industry[0].title){
+    //          iarray.push($scope.newArray[i]);
+    //       }
+
+    //     }
+    //   }
+    //    $scope.items = iarray;
+    // }
+    $scope.reset = function(){
+       $scope.items = data;
+       $scope.level_sort = "all";
+       $scope.industry_sort = "all";
+       $scope.searchString = "";
+       $scope.partner_level_label = 'Partner Level';
+       $scope.level_filter_label = false;
+       $scope.filter_object={}
+
+    }
+   
+  });
+  //search filter
+  app.filter('searchFor', function(){
+  return function(arr, searchString){
+    if(!searchString){
+      return arr;
+    }
+    var result = [];
+    searchString = searchString.toLowerCase();
+    angular.forEach(arr, function(item){
+      if(item.title.toLowerCase().indexOf(searchString) !== -1){
+        result.push(item);
+      }
+
+
+    });
+    return result;
+  };  
+});
+ //search filter 
+</script>   
+{% include "partials/footer_global.html" %} {% endblock %}

@@ -1,0 +1,22 @@
+ {% set sub = get('home_resources_case_studies_subheader')%}
+<div class="col-md-12">
+    <div class="subnav-head subnav-scroll clearfix">
+        <!-- Nav tabs -->
+        <div class="sub-nav-wrapper">
+            <ul class="action-menu">
+                <li><a href="{{sub.sub_nav_section.url}}"><img alt="{{sub.sub_nav_section.logo.title}}" src="{{AssetUrl(sub.sub_nav_section.logo)}}"/></a></li>
+                <li><a href="{{sub.sub_nav_section.link}}">{{sub.sub_nav_section.title}}</a> <span class="breadcrum"></span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">    
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= ($('.fixed-sub-menu').offset().top)) {
+            $('.subnav-scroll').css('position','fixed');
+        console.log('in');
+        } else {
+            $('.subnav-scroll').css('position','absolute');
+        }
+    });
+</script>

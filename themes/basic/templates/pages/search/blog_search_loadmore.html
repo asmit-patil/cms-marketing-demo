@@ -1,0 +1,15 @@
+{% if posts.length %} {% for post in posts %}
+<article class="post">
+    <h3 class="post-title"><a href={{post.url}} class="title-refer">{{post.title}}</a></h3>
+    <p class="post-data">
+        <span class="post-date"><time datetime="{{moment(post.date).format('MM/DD/YYYY')}}">{{moment(post.date).format('MMM Do YYYY')}}</time></span>, {% for author in post.author %}
+        <span class="post-author"><a href={{appendBlogUrl("/author/"+replacespace(author.title))}} rel="author"><span itemprop="name">{{author.title}}</span></a>
+        </span>
+        {% if not loop.last %},{% endif %} {% endfor%}
+    </p>
+    <div class="post-content">
+        <span>{{post.body | truncate(140,true,'...')}}</span>
+        <span class="read-more"><a href={{post.url}}>Read More</a></span>
+    </div>
+</article>
+{% endfor %} {% endif %}
